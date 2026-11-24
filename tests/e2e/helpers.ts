@@ -71,10 +71,11 @@ export async function answer(page: Page, q: Q, opts: { wrong?: boolean } = {}) {
  * (they get re-queued and are then answered correctly). Calls `onScreen` with
  * each screen so callers can take screenshots.
  */
-export async function playSession(page: Page, opts: { wrongIds?: string[]; wrongCount?: number; onScreen?: (info: { kind: string; qid?: string; fb?: boolean; i: number }) => Promise<void> } = {}) {
+export async function playSession(page: Page, opts: { stopAfter?: number; wrongIds?: string[]; wrongCount?: number; onScreen?: (info: { kind: string; qid?: string; fb?: boolean; i: number }) => Promise<void> } = {}) {
   const wrongOnce = new Set(opts.wrongIds ?? []);
   let wrongLeft = opts.wrongCount ?? 0;
   for (let i = 0; i < 80; i++) {
+    if (opts.stopAfter !== undefined && i >= opts.stopAfter) return;
     const session = page.getByTestId('session');
     if (!(await session.isVisible().catch(() => false))) return;
     const kind = await session.getAttribute('data-kind');
@@ -123,9 +124,10 @@ export async function readNum(page: Page, id: string) {
   return Number((await page.getByTestId(id).first().textContent())?.replace(/[^0-9]/g, ''));
 }
 
-/** Any uncaught page error fails the test. */
+/** Any uncaught page error or console error fails the test. */
 export function failOnErrors(page: Page) {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
+  page.on('console', (m) => m.type() === 'error' && errors.push(`console: ${m.text()}`));
   return () => expect(errors, 'uncaught page errors').toEqual([]);
 }

@@ -74,7 +74,8 @@ export function recordSession(s0: StreakState, today: Day): StreakState {
   // keep only the last 120 days of session counts
   for (const d of Object.keys(s.sessions)) if (diffDays(d, today) > 120) delete s.sessions[d];
 
-  if (s.lastDay === today) return s;
+  // Already counted, or the clock moved backwards (timezone travel, clock fix): keep the streak.
+  if (s.lastDay && s.lastDay >= today) return s;
 
   if (s.repair) {
     if (s.sessions[today] >= REPAIR_SESSIONS) {
@@ -104,7 +105,7 @@ function bump(s: StreakState, by: number, today: Day) {
 
 /** What the UI should say about today. */
 export function streakStatus(s: StreakState, today: Day): 'done-today' | 'repair' | 'keep-going' | 'start' {
-  if (s.lastDay === today) return 'done-today';
+  if (s.lastDay && s.lastDay >= today) return 'done-today';
   if (s.repair) return 'repair';
   if (s.current > 0) return 'keep-going';
   return 'start';

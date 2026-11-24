@@ -69,7 +69,7 @@ export function Onboarding() {
     <div className="page onboard" data-testid="onboarding">
       <header className="session-top">
         <button type="button" className="icon-btn" aria-label="Back" onClick={() => setStep((s) => Math.max(0, s - 1))}>
-          <Icon name="ArrowCounterClockwise" size={22} />
+          <Icon name="ArrowLeft" size={22} />
         </button>
         <ProgressBar value={step / total} label="Setup progress" />
       </header>
@@ -109,9 +109,9 @@ export function Onboarding() {
         <section className="onboard-body enter">
           <h1 className="title">What brings you here?</h1>
           <p className="muted">We'll use it to point you at the right units. Nothing gets locked.</p>
-          <div className="choice-list" role="radiogroup">
+          <div className="choice-list" role="group" aria-label="Your goal">
             {GOALS.map((g) => (
-              <button key={g.id} type="button" role="radio" aria-checked={goal === g.id} className={`choice ${goal === g.id ? 'choice-on' : ''}`} onClick={() => { play('tap', 0.35); setGoal(g.id); }} data-goal={g.id}>
+              <button key={g.id} type="button" aria-pressed={goal === g.id} className={`choice ${goal === g.id ? 'choice-on' : ''}`} onClick={() => { play('tap', 0.35); setGoal(g.id); }} data-goal={g.id}>
                 <Badge icon={g.icon} tone="brand" size={44} />
                 <span>{g.title}</span>
               </button>
@@ -126,14 +126,14 @@ export function Onboarding() {
       {step === 3 && (
         <section className="onboard-body enter">
           <h1 className="title">How much do you know?</h1>
-          <div className="choice-list" role="radiogroup">
+          <div className="choice-list" role="group" aria-label="Your level">
             {(
               [
                 ['new', 'Plant', 'New to this', 'Start at Unit 1, Money foundations.'],
-                ['basics', 'Leaf', 'I know the basics', 'Unit 1 moves fast. Skip ahead by passing its check.'],
+                ['basics', 'Leaf', 'I know the basics', 'Unit 1 will feel quick: short lessons, mostly questions.'],
               ] as const
             ).map(([id, icon, t, sub]) => (
-              <button key={id} type="button" role="radio" aria-checked={level === id} className={`choice ${level === id ? 'choice-on' : ''}`} onClick={() => setLevel(id)} data-level={id}>
+              <button key={id} type="button" aria-pressed={level === id} className={`choice ${level === id ? 'choice-on' : ''}`} onClick={() => setLevel(id)} data-level={id}>
                 <Badge icon={icon} tone="brand" size={44} />
                 <span>
                   {t}
@@ -144,10 +144,10 @@ export function Onboarding() {
             ))}
           </div>
           <h2 className="h3 mt">Daily goal</h2>
-          <div className="seg seg-wide" role="radiogroup" aria-label="Daily goal">
+          <div className="seg seg-wide" role="group" aria-label="Daily goal">
             {DAILY_GOALS.map((g) => (
-              <button key={g.xp} type="button" role="radio" aria-checked={daily === g.xp} className={`seg-btn ${daily === g.xp ? 'seg-on' : ''}`} onClick={() => setDaily(g.xp)}>
-                {g.minutes} min
+              <button key={g.xp} type="button" aria-pressed={daily === g.xp} className={`seg-btn ${daily === g.xp ? 'seg-on' : ''}`} onClick={() => setDaily(g.xp)}>
+                {g.minutes} min · {g.xp} XP
               </button>
             ))}
           </div>

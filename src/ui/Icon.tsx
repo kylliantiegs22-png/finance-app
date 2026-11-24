@@ -4,7 +4,7 @@ import {
   SpeakerHigh, SpeakerSlash, Moon, Sun, Bank, ShieldCheck, Coins, Lightbulb, ListChecks, Trophy, Sparkle, CalendarPlus,
   DownloadSimple, UploadSimple, Info, Question, Timer, Brain, ShoppingCart, Bell, Clock, Path, Vault, Handshake, Storefront,
   MagnifyingGlass, Crown, Medal, HandCoins, Calculator, Briefcase, Scroll, Rocket, ArrowCounterClockwise, CaretRight, Check,
-  Lifebuoy, Leaf, TrendUp, Calendar, Barbell, SealCheck, Hourglass, Flag, Plant,
+  Lifebuoy, Leaf, TrendUp, Calendar, Barbell, SealCheck, Hourglass, Flag, Plant, ArrowLeft,
   type IconProps,
 } from '@phosphor-icons/react';
 
@@ -14,7 +14,7 @@ const MAP = {
   SpeakerHigh, SpeakerSlash, Moon, Sun, Bank, ShieldCheck, Coins, Lightbulb, ListChecks, Trophy, Sparkle, CalendarPlus,
   DownloadSimple, UploadSimple, Info, Question, Timer, Brain, ShoppingCart, Bell, Clock, Path, Vault, Handshake, Storefront,
   MagnifyingGlass, Crown, Medal, HandCoins, Calculator, Briefcase, Scroll, Rocket, ArrowCounterClockwise, CaretRight, Check,
-  Lifebuoy, Leaf, TrendUp, Calendar, Barbell, SealCheck, Hourglass, Flag, Plant,
+  Lifebuoy, Leaf, TrendUp, Calendar, Barbell, SealCheck, Hourglass, Flag, Plant, ArrowLeft,
 } as const;
 export type IconName = keyof typeof MAP;
 

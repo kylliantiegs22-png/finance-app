@@ -10,13 +10,23 @@ export function Button({ variant = 'primary', className = '', children, ref, ...
   );
 }
 
-export function Chip({ icon, value, label, tone, onClick }: { icon: string; value: ReactNode; label: string; tone: 'streak' | 'xp' | 'freeze' | 'goal' | 'frozen'; onClick?: () => void }) {
-  const Tag = onClick ? 'button' : 'div';
-  return (
-    <Tag className={`chip chip-${tone}`} aria-label={`${label}: ${typeof value === 'number' ? value : ''}`} onClick={onClick} type={onClick ? 'button' : undefined}>
+export function Chip({ icon, value, label, tone, onClick, expanded }: { icon: string; value: ReactNode; label: string; tone: 'streak' | 'xp' | 'freeze' | 'goal' | 'frozen'; onClick?: () => void; expanded?: boolean }) {
+  const inner = (
+    <>
       <Icon name={icon} weight="fill" size={20} className="chip-icon" />
       <span className="num">{value}</span>
-    </Tag>
+    </>
+  );
+  if (onClick)
+    return (
+      <button type="button" className={`chip chip-${tone}`} aria-label={label} aria-expanded={expanded} onClick={onClick}>
+        {inner}
+      </button>
+    );
+  return (
+    <div className={`chip chip-${tone}`} role="img" aria-label={label}>
+      {inner}
+    </div>
   );
 }
 

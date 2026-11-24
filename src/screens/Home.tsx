@@ -41,14 +41,35 @@ export function nextAction(s: AppState) {
   return null;
 }
 
+const CHIP_HELP = {
+  streak: (n: number) => `Your streak: ${n} day${n === 1 ? '' : 's'} in a row with a lesson or review. A 2-minute practice counts.`,
+  freeze: (n: number) => `Streak freezes: ${n} of 2. You earn one every 7 days, and it covers a day you miss automatically.`,
+  xp: (n: number) => `${n} XP earned. You get XP for correct answers and finished sessions.`,
+};
+
 export function StatusChips() {
   const s = useApp((x) => x);
+  const [open, setOpen] = useState<null | keyof typeof CHIP_HELP>(null);
   const st = streakStatus(s.streak, today());
+  const toggle = (k: keyof typeof CHIP_HELP) => setOpen((o) => (o === k ? null : k));
+  const value = open === 'streak' ? s.streak.current : open === 'freeze' ? s.streak.freezes : s.xp;
   return (
-    <div className="chips" data-testid="chips">
-      <Chip icon="Flame" tone={st === 'repair' ? 'frozen' : 'streak'} value={<span data-testid="streak">{s.streak.current}</span>} label="Day streak" onClick={() => go('/progress')} />
-      <Chip icon="Snowflake" tone="freeze" value={<span data-testid="freezes">{s.streak.freezes}</span>} label="Streak freezes" />
-      <Chip icon="Lightning" tone="xp" value={<span data-testid="xp">{s.xp}</span>} label="Total XP" />
+    <div className="chips-wrap">
+      <div className="chips" data-testid="chips">
+        <Chip icon="Flame" tone={st === 'repair' ? 'frozen' : 'streak'} value={<span data-testid="streak">{s.streak.current}</span>} label={`Day streak ${s.streak.current}`} expanded={open === 'streak'} onClick={() => toggle('streak')} />
+        <Chip icon="Snowflake" tone="freeze" value={<span data-testid="freezes">{s.streak.freezes}</span>} label={`Streak freezes ${s.streak.freezes}`} expanded={open === 'freeze'} onClick={() => toggle('freeze')} />
+        <Chip icon="Lightning" tone="xp" value={<span data-testid="xp">{s.xp}</span>} label={`Total XP ${s.xp}`} expanded={open === 'xp'} onClick={() => toggle('xp')} />
+      </div>
+      {open && (
+        <div className="chip-help" role="status" data-testid="chip-help">
+          <p>{CHIP_HELP[open](value)}</p>
+          {open === 'streak' && (
+            <button type="button" className="link-btn" onClick={() => go('/progress')}>
+              See your habit grid
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -65,6 +86,7 @@ export function Home() {
   return (
     <div className="page home">
       <div className="home-mesh" aria-hidden="true" />
+      <h1 className="sr-only">Your learning path</h1>
       <header className="home-head">
         <div className="brand">
           <img src={`${import.meta.env.BASE_URL}icons/logo.svg`} alt="" width={32} height={32} />
@@ -201,7 +223,16 @@ function PathNodeView({ n, state, x, y, unitTitle, open, setOpen }: { n: PathNod
       </button>
       {state === 'current' && !open && <span className="node-tip">{n.kind === 'lesson' ? 'Start' : n.kind === 'review' ? 'Review' : 'Check'}</span>}
       {open && (
-        <div className="node-card" role="dialog" aria-label={title} style={{ left: `calc(50% - ${x}px)` }}>
+        <div
+          className="node-card"
+          role="dialog"
+          aria-label={title}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setOpen(null);
+              (e.currentTarget.previousElementSibling as HTMLElement | null)?.focus();
+            }
+          }} style={{ left: `calc(50% - ${x}px)` }}>
           <div className="node-card-kicker">{n.kind === 'lesson' ? `Lesson ${n.id}` : n.kind === 'review' ? 'Mixed review · 10 questions' : 'Unit check · 12 questions · pass at 80%'}</div>
           <div className="node-card-title">{title}</div>
           {lesson && <p className="node-card-sub">{lesson.objective}</p>}

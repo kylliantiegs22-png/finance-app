@@ -15,11 +15,19 @@ export function RichText({ text, className }: { text: string; className?: string
           <strong key={i}>{t.v}</strong>
         ) : (
           <span key={i} className="term-wrap">
-            <button type="button" className="term" aria-expanded={open === t.key + i} onClick={() => setOpen(open === t.key + i ? null : t.key + i)}>
+            <button
+              type="button"
+              className="term"
+              aria-expanded={open === t.key + i}
+              aria-describedby={open === t.key + i ? `term-${t.key.replace(/\W/g, '-')}-${i}` : undefined}
+              onClick={() => setOpen(open === t.key + i ? null : t.key + i)}
+              onKeyDown={(e) => e.key === 'Escape' && setOpen(null)}
+              onBlur={() => setOpen(null)}
+            >
               {t.v}
             </button>
             {open === t.key + i && (
-              <span role="tooltip" className="term-pop" onClick={() => setOpen(null)}>
+              <span role="tooltip" id={`term-${t.key.replace(/\W/g, '-')}-${i}`} className="term-pop">
                 <strong>{t.v}</strong> {glossary[t.key]}
               </span>
             )}

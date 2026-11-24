@@ -19,7 +19,7 @@ const tap = () => play('tap', 0.35);
 export function QuestionView({ q, a, set, revealed }: Props) {
   return (
     <div className="question">
-      <h2 className="q-prompt" id={`q-${q.id}`}>
+      <h2 className="q-prompt" id={`q-${q.id}`} tabIndex={-1}>
         <RichText text={q.prompt} />
       </h2>
       {q.visual && q.qtype !== 'tap' && <Visual v={q.visual} />}
@@ -81,13 +81,12 @@ function optClass(i: number, picked: number | null, answer: number, revealed: bo
 function Choice({ q, options, answer, a, set, revealed }: { q: Question; options: string[]; answer: number; a: { qtype: 'mcq'; v: number | null }; set: (a: Answer) => void; revealed: boolean }) {
   const order = useMemo(() => seededShuffle(options.map((_, i) => i), q.id), [q.id, options]);
   return (
-    <div className="opts" role="radiogroup" aria-labelledby={`q-${q.id}`}>
+    <div className="opts" role="group" aria-labelledby={`q-${q.id}`}>
       {order.map((i, k) => (
         <button
           key={i}
           type="button"
-          role="radio"
-          aria-checked={a.v === i}
+          aria-pressed={a.v === i}
           data-opt={i}
           disabled={revealed}
           className={optClass(i, a.v, answer, revealed)}
@@ -119,13 +118,12 @@ function Blank({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'blank' 
         <span className={`blank-slot ${filled ? 'filled' : ''} ${revealed ? (a.v === q.answer ? 'right' : 'wrong') : ''}`}>{filled ?? ' '}</span>
         <RichText text={after} />
       </p>
-      <div className="word-bank" role="radiogroup" aria-label="Word bank">
+      <div className="word-bank" role="group" aria-label="Word bank">
         {order.map((i) => (
           <button
             key={i}
             type="button"
-            role="radio"
-            aria-checked={a.v === i}
+            aria-pressed={a.v === i}
             data-opt={i}
             disabled={revealed}
             className={`word ${a.v === i ? 'word-sel' : ''} ${revealed && i === q.answer ? 'word-right' : ''}`}
@@ -144,7 +142,7 @@ function Blank({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'blank' 
 
 function TrueFalse({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'truefalse' }>; a: { qtype: 'truefalse'; v: boolean | null }; set: (a: Answer) => void; revealed: boolean }) {
   return (
-    <div className="tf" role="radiogroup" aria-labelledby={`q-${q.id}`}>
+    <div className="tf" role="group" aria-labelledby={`q-${q.id}`}>
       {[true, false].map((val) => {
         const idx = val ? 0 : 1;
         const ans = q.answer ? 0 : 1;
@@ -153,8 +151,7 @@ function TrueFalse({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'tru
           <button
             key={String(val)}
             type="button"
-            role="radio"
-            aria-checked={a.v === val}
+            aria-pressed={a.v === val}
             data-opt={String(val)}
             disabled={revealed}
             className={`${optClass(idx, picked, ans, revealed)} tf-opt`}
@@ -209,6 +206,7 @@ function Slider({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'slider
         value={v}
         disabled={revealed}
         aria-label="Your estimate"
+        aria-valuetext={fmtNum(v, q.prefix, q.suffix)}
         data-testid="slider-input"
         style={{ ['--pct' as string]: `${pct}%` }}
         onChange={(e) => set({ qtype: 'slider', v: Number(e.target.value) })}
@@ -226,7 +224,13 @@ function Match({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'match' 
   const [left, setLeft] = useState<number | null>(null);
   const rights = useMemo(() => seededShuffle(q.pairs.map((_, i) => i), q.id), [q]);
   const pairOfRight = (r: number) => Object.entries(a.v).find(([, rv]) => rv === r)?.[0];
-  const toneOfLeft = (l: number) => Object.keys(a.v).map(Number).sort().indexOf(l) % PAIR_TONES;
+  const pairIndex = (l: number) => Object.keys(a.v).map(Number).sort((x, y) => x - y).indexOf(l);
+  const toneOfLeft = (l: number) => pairIndex(l) % PAIR_TONES;
+  const badge = (l: number) => (
+    <span className={`pair-badge pair-${toneOfLeft(l)}`} aria-hidden="true">
+      {pairIndex(l) + 1}
+    </span>
+  );
 
   function pickRight(r: number) {
     if (left === null) return;
@@ -263,7 +267,9 @@ function Match({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'match' 
                   setLeft(left === i ? null : i);
                 }}
               >
+                {paired && badge(i)}
                 {p[0]}
+                <span className="sr-only">{`${paired ? `, matched with ${q.pairs[a.v[i]][1]}` : ''}${revealed ? (ok ? ', correct' : ', not correct') : ''}`}</span>
               </button>
             );
           })}
@@ -281,7 +287,9 @@ function Match({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'match' 
                 className={`mcell ${l !== undefined ? `mcell-paired pair-${toneOfLeft(+l)}` : ''} ${revealed ? (ok ? 'mcell-right' : 'mcell-wrong') : ''}`}
                 onClick={() => pickRight(r)}
               >
+                {l !== undefined && badge(+l)}
                 {q.pairs[r][1]}
+                <span className="sr-only">{l !== undefined ? `, matched with ${q.pairs[+l][0]}` : ''}</span>
               </button>
             );
           })}
@@ -354,13 +362,12 @@ function Sort({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'sort' }>
               {ok !== null && <Icon name={ok ? 'CheckCircle' : 'XCircle'} weight="fill" size={18} className="sort-mark" />}
               {it.text}
             </span>
-            <span className="seg" role="radiogroup" aria-label={it.text}>
+            <span className="seg" role="group" aria-label={it.text}>
               {q.buckets.map((b, bi) => (
                 <button
                   key={bi}
                   type="button"
-                  role="radio"
-                  aria-checked={picked === bi}
+                  aria-pressed={picked === bi}
                   data-sort={`${i}-${bi}`}
                   disabled={revealed}
                   className={`seg-btn ${picked === bi ? 'seg-on' : ''} ${revealed && it.bucket === bi ? 'seg-answer' : ''}`}

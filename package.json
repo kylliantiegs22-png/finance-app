@@ -11,7 +11,8 @@
     "validate": "tsx scripts/validate-content.ts",
     "test": "vitest run",
     "e2e": "playwright test --trace off",
-    "check": "npm run validate && npm run typecheck && npm run test && npm run build && npm run e2e"
+    "check": "npm run validate && npm run typecheck && npm run test && npm run build && npm run e2e && npm run sweep",
+    "sweep": "python3 .claude/skills/webapp-testing/scripts/with_server.py --server \"npm run preview\" --port 4173 -- python3 scripts/webapp-sweep.py"
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",

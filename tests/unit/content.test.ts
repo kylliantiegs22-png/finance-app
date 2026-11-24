@@ -42,3 +42,12 @@ describe('xp', () => {
     expect(lessonXp(8, 2, 10)).toBe(54);
   });
 });
+
+describe('ics reminder input safety', () => {
+  it('falls back to 08:00 and a default cue when the time or cue is cleared', () => {
+    const ics = buildIcs({ cue: '  ', time: '', now: new Date(2026, 4, 3, 10, 0) });
+    expect(ics).not.toContain('NaN');
+    expect(ics).toContain('DTSTART:20260503T080000');
+    expect(ics).toContain('SUMMARY:After my morning coffee\\, I do my Tally lesson');
+  });
+});

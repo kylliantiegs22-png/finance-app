@@ -6,6 +6,7 @@ import { Onboarding } from './screens/Onboarding';
 import { Play } from './screens/Play';
 import { ProfileTab, ProgressTab, ReviewTab } from './screens/Tabs';
 import { Icon } from './ui/Icon';
+import { StorageBanner } from './ui/StorageBanner';
 import { pickSession } from './logic/leitner';
 import { today } from './lib/store';
 
@@ -54,12 +55,27 @@ export function App() {
     return () => document.removeEventListener('visibilitychange', onVis);
   }, []);
 
-  if (!onboarded) return <Onboarding />;
-  if (route.startsWith('/play/')) return <Play key={route} path={route} />;
+  if (!onboarded) document.title = 'Welcome · Tally';
+  if (!onboarded)
+    return (
+      <>
+        <StorageBanner />
+        <Onboarding />
+      </>
+    );
+  if (route.startsWith('/play/'))
+    return (
+      <>
+        <StorageBanner />
+        <Play key={route} path={route} />
+      </>
+    );
 
   const tab = TABS.find((t) => t.path === route) ?? TABS[0];
+  document.title = `${tab.label} · Tally`;
   return (
     <div className="shell">
+      <StorageBanner />
       <div className="tab-page" key={tab.path}>
         {tab.path === '/' && <Home />}
         {tab.path === '/review' && <ReviewTab />}

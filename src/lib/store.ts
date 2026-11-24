@@ -1,90 +1,59 @@
 /** App state, persisted to localStorage. No backend: everything lives on the device. */
 import { useSyncExternalStore } from 'react';
 import { dayKey, type Day } from '../logic/dates';
-import { newStreak, reconcile, recordSession, type StreakState } from '../logic/streak';
-import { grade, introduce, type Cards } from '../logic/leitner';
+import { reconcile, recordSession } from '../logic/streak';
+import { grade, introduce } from '../logic/leitner';
 
-const KEY = 'tally.v1';
+export * from './state';
+import { initialState, type AppState, type DayLog } from './state';
+import { backup, getStorage, KEY, loadFrom, parseSaved, sanitize, saveTo, type LoadStatus } from './persistence';
 
-export interface DayLog {
-  xp: number;
-  lessons: number;
-  reviews: number; // review cards answered
-  sessions: number;
-  seconds: number;
+/** Storage health, shown to the learner when something is wrong (never blocks the app). */
+export interface StorageHealth {
+  /** Last write failed: progress lives only in this tab until it succeeds. */
+  saveFailed: null | 'quota' | 'unavailable';
+  /** What happened when saved data was read at start-up. */
+  loaded: LoadStatus;
+  backupKey: string | null;
+  noticeDismissed: boolean;
 }
 
-export interface NodeRecord {
-  at: string;
-  score: number; // 0..100
-  best: number;
-  runs: number;
-}
+const storage = getStorage();
+const first = loadFrom(storage);
+let state: AppState = first.state;
+let health: StorageHealth = {
+  saveFailed: storage ? null : 'unavailable',
+  loaded: first.status,
+  backupKey: null,
+  noticeDismissed: false,
+};
+// Keep a copy of anything we can't fully read before it is ever overwritten.
+if (first.backupRaw !== undefined) health.backupKey = backup(storage, first.backupRaw, new Date());
 
-export interface AppState {
-  v: 1;
-  onboarded: boolean;
-  profile: {
-    goal: string | null;
-    level: 'new' | 'basics';
-    cue: string;
-    time: string;
-    dailyGoal: number;
-  };
-  settings: {
-    theme: 'system' | 'light' | 'dark';
-    sound: boolean;
-    haptics: boolean;
-    motion: 'system' | 'reduced';
-  };
-  xp: number;
-  days: Record<Day, DayLog>;
-  completed: Record<string, NodeRecord>;
-  passedUnits: number[];
-  streak: StreakState;
-  cards: Cards;
-  missions: Record<string, 'planned' | 'done'>;
-  celebrated: string[];
-}
-
-export function initialState(): AppState {
-  return {
-    v: 1,
-    onboarded: false,
-    profile: { goal: null, level: 'new', cue: 'my morning coffee', time: '08:00', dailyGoal: 60 },
-    settings: { theme: 'system', sound: true, haptics: true, motion: 'system' },
-    xp: 0,
-    days: {},
-    completed: {},
-    passedUnits: [],
-    streak: newStreak(),
-    cards: {},
-    missions: {},
-    celebrated: [],
-  };
-}
-
-function load(): AppState {
-  try {
-    const raw = localStorage.getItem(KEY);
-    if (!raw) return initialState();
-    const s = JSON.parse(raw);
-    const base = initialState();
-    return { ...base, ...s, profile: { ...base.profile, ...s.profile }, settings: { ...base.settings, ...s.settings }, streak: { ...base.streak, ...s.streak } };
-  } catch {
-    return initialState();
-  }
-}
-
-let state: AppState = typeof localStorage !== 'undefined' ? load() : initialState();
 const listeners = new Set<() => void>();
+const healthListeners = new Set<() => void>();
+const emit = () => listeners.forEach((l) => l());
+const emitHealth = () => healthListeners.forEach((l) => l());
 
 function persist() {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(state));
-  } catch {
-    /* storage full or blocked: keep going in memory */
+  const r = saveTo(storage, state, dayKey(new Date()));
+  const next = r.ok ? null : r.reason;
+  if (next !== health.saveFailed) {
+    health = { ...health, saveFailed: next };
+    emitHealth();
   }
+}
+
+// Another tab (or the installed app and a browser tab) saved newer progress: adopt it
+// instead of later overwriting it with this tab's stale copy.
+if (typeof window !== 'undefined') {
+  window.addEventListener('storage', (e) => {
+    if (e.key !== KEY || e.newValue === null) return;
+    const r = parseSaved(e.newValue);
+    if (r.status === 'unreadable') return;
+    state = r.state;
+    emit();
+  });
 }
 
 export function getState() {
@@ -94,7 +63,31 @@ export function getState() {
 export function setState(fn: (s: AppState) => AppState) {
   state = fn(state);
   persist();
-  listeners.forEach((l) => l());
+  emit();
+}
+
+export function getHealth() {
+  return health;
+}
+
+export function useHealth(): StorageHealth {
+  return useSyncExternalStore(
+    (cb) => {
+      healthListeners.add(cb);
+      return () => healthListeners.delete(cb);
+    },
+    () => health,
+  );
+}
+
+export function dismissNotice() {
+  health = { ...health, noticeDismissed: true };
+  emitHealth();
+}
+
+/** Retry a failed save (e.g. after the learner frees space). */
+export function retrySave() {
+  persist();
 }
 
 export function useApp<T>(sel: (s: AppState) => T): T {
@@ -195,15 +188,13 @@ export function exportProgress(): string {
 }
 
 export function importProgress(json: string): boolean {
-  try {
-    const s = JSON.parse(json);
-    if (s?.v !== 1 || typeof s.xp !== 'number') return false;
-    setState(() => ({ ...initialState(), ...s }));
-    return true;
-  } catch {
-    return false;
-  }
+  const r = parseSaved(json);
+  if (r.status === 'unreadable' || r.status === 'empty' || r.repaired.includes('root')) return false;
+  setState(() => r.state);
+  return true;
 }
+
+export { sanitize };
 
 export function resetProgress() {
   setState(() => initialState());

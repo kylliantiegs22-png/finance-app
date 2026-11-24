@@ -98,4 +98,22 @@ describe('streak', () => {
     s = recordSession(recordSession(s, at('2026-03-10T08:00:00')), at('2026-03-10T09:00:00'));
     expect(s.current).toBe(9); // 7 + repaired 9th + today (frozen days hold, not add)
   });
+
+  it('clock going backwards (flying west, clock fix) never resets the streak', () => {
+    let s = daysOfSessions(newStreak(), '2026-03-01T08:00:00', 5); // last day 5 March
+    s = recordSession(s, at('2026-03-04T23:30:00')); // device now thinks it is the 4th
+    expect(s.current).toBe(5);
+    expect(s.lastDay).toBe('2026-03-05');
+    expect(streakStatus(s, '2026-03-04')).toBe('done-today');
+    // and normal life resumes on the 6th
+    s = recordSession(s, at('2026-03-06T08:00:00'));
+    expect(s.current).toBe(6);
+  });
+
+  it('reconcile ignores a lastDay in the future', () => {
+    const s = daysOfSessions(newStreak(), '2026-03-01T08:00:00', 3);
+    const r = reconcile(s, '2026-02-27');
+    expect(r.current).toBe(3);
+    expect(r.repair).toBeNull();
+  });
 });

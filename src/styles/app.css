@@ -245,15 +245,32 @@ p {
 }
 
 /* ---------- Chips ---------- */
+.chips-wrap {
+  position: relative;
+}
 .chips {
   display: flex;
   gap: var(--s2);
+}
+.chip-help {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 25;
+  width: min(300px, calc(100vw - 40px));
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-raised);
+  padding: var(--s3) var(--s4);
+  font-size: 0.875rem;
+  animation: pop-in var(--t-fast) var(--ease-out);
 }
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  height: 40px;
+  height: 44px;
   min-width: 48px;
   padding: 0 var(--s3);
   border-radius: var(--r-pill);
@@ -1250,6 +1267,27 @@ button.chip {
 .mcell:active:not(:disabled) {
   transform: translateY(3px);
 }
+.pair-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-right: 6px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  vertical-align: 1px;
+  background: var(--surface);
+}
+h2[tabindex='-1']:focus {
+  outline: none;
+}
+h2[tabindex='-1']:focus-visible {
+  outline: 2px solid var(--indigo);
+  outline-offset: 4px;
+}
 .mcell-sel {
   border-color: var(--indigo);
   background: var(--primary-tint);
@@ -2090,6 +2128,54 @@ button.chip {
   height: 100%;
   pointer-events: none;
   z-index: 60;
+}
+
+/* ---------- Storage banner ---------- */
+.banner {
+  position: fixed;
+  top: calc(8px + env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(500px, calc(100vw - 24px));
+  z-index: 70;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s1) var(--s3);
+  align-items: start;
+  padding: var(--s3) var(--s4);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-raised);
+  font-size: 0.875rem;
+  animation: pop-in var(--t-base) var(--ease-out);
+}
+.banner > svg {
+  color: var(--link);
+  margin-top: 2px;
+}
+.banner-warn {
+  background: var(--reward-tint);
+  border-color: var(--gold-deep);
+}
+.banner-warn > svg {
+  color: var(--gold-text);
+}
+.banner-actions {
+  grid-column: 2;
+  display: flex;
+  gap: var(--s2);
+  justify-content: flex-end;
+}
+.banner-btn {
+  min-height: 44px;
+  padding: 0 var(--s3);
+  border-radius: var(--r-input);
+  border: 0;
+  background: transparent;
+  color: var(--link);
+  font-weight: 700;
 }
 
 /* ---------- Unit win (full screen) ---------- */

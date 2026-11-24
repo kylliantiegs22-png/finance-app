@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { Question, Screen } from '../content/schema';
 import { type Answer, correctText, emptyAnswer, isComplete, isCorrect, wrongWhy } from '../lib/grade';
 import { haptic, play } from '../lib/fx';
@@ -8,6 +8,7 @@ import { Icon } from '../ui/Icon';
 import { QuestionView } from '../ui/QuestionView';
 import { RichText } from '../ui/RichText';
 import { Visual } from '../ui/Visual';
+import { useModal } from '../ui/useModal';
 
 export type SessionMode = 'lesson' | 'review' | 'unit-review' | 'check';
 export type Item = { key: string; screen: Exclude<Screen, { kind: 'recap' }>; retry?: boolean };
@@ -35,7 +36,7 @@ export function questionItems(qs: Question[], step: Screen['step'] = 'independen
   return qs.map((q, i) => ({ key: `${q.id}-${i}`, screen: { kind: 'question', step, q } }));
 }
 
-export function Session({ mode, items, onExit, onDone, lessonId }: { mode: SessionMode; items: Item[]; onExit: () => void; onDone: (s: SessionStats) => void; lessonId?: string }) {
+export function Session({ mode, items, onExit, onDone, lessonId, title }: { mode: SessionMode; items: Item[]; onExit: () => void; onDone: (s: SessionStats) => void; lessonId?: string; title: string }) {
   const [queue, setQueue] = useState<Item[]>(items);
   const [pos, setPos] = useState(0);
   const item = queue[pos];
@@ -51,6 +52,9 @@ export function Session({ mode, items, onExit, onDone, lessonId }: { mode: Sessi
   const [roll, setRoll] = useState(0);
   const [missions, setMissions] = useState<string[]>([]);
   const [confirmExit, setConfirmExit] = useState(false);
+  const exitRef = useRef<HTMLDivElement>(null);
+  const closeExit = useCallback(() => setConfirmExit(false), []);
+  useModal(exitRef, confirmExit, closeExit);
   const [hint, setHint] = useState(false);
   const started = useRef(Date.now());
   const questionsTotal = useMemo(() => items.filter((i) => i.screen.kind === 'question').length, [items]);
@@ -58,14 +62,38 @@ export function Session({ mode, items, onExit, onDone, lessonId }: { mode: Sessi
   const continueRef = useRef<HTMLButtonElement>(null);
   const bodyRef = useRef<HTMLElement>(null);
 
+  const firstScreen = useRef(true);
   useEffect(() => {
     setHint(false);
     bodyRef.current?.scrollTo({ top: 0 });
+    // Move focus to the new screen's heading so keyboard and screen-reader users land on it.
+    if (!firstScreen.current) bodyRef.current?.querySelector<HTMLElement>('h2')?.focus({ preventScroll: true });
+    firstScreen.current = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pos, queue[pos]?.key]);
 
   useEffect(() => {
     if (fb) continueRef.current?.focus({ preventScroll: true });
+  }, [fb]);
+
+  // Make room under the question for the feedback sheet, so marked answers can be scrolled into view.
+  const sheetRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const body = bodyRef.current;
+    const sheet = sheetRef.current;
+    if (!body) return;
+    if (!sheet) {
+      body.style.paddingBottom = '';
+      return;
+    }
+    const foot = body.parentElement?.querySelector('.session-foot') as HTMLElement | null;
+    const apply = () => {
+      body.style.paddingBottom = `${Math.max(0, sheet.offsetHeight - (foot?.offsetHeight ?? 0)) + 16}px`;
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(sheet);
+    return () => ro.disconnect();
   }, [fb]);
 
   if (!item) return null;
@@ -119,6 +147,7 @@ export function Session({ mode, items, onExit, onDone, lessonId }: { mode: Sessi
 
   return (
     <div className={`session mode-${mode}`} data-testid="session" data-step={s.step} data-kind={s.kind}>
+      <h1 className="sr-only">{title}</h1>
       <header className="session-top">
         <button type="button" className="icon-btn" aria-label="Close" onClick={() => setConfirmExit(true)}>
           <Icon name="X" size={24} />
@@ -148,7 +177,7 @@ export function Session({ mode, items, onExit, onDone, lessonId }: { mode: Sessi
 
         {s.kind === 'teach' && (
           <section className="teach enter">
-            <h2 className="teach-title">
+            <h2 className="teach-title" tabIndex={-1}>
               <RichText text={s.title} />
             </h2>
             <p className="teach-body">
@@ -160,7 +189,7 @@ export function Session({ mode, items, onExit, onDone, lessonId }: { mode: Sessi
 
         {s.kind === 'apply' && (
           <section className="teach enter">
-            <h2 className="teach-title">
+            <h2 className="teach-title" tabIndex={-1}>
               <RichText text={s.title} />
             </h2>
             <p className="teach-body">
@@ -215,7 +244,21 @@ export function Session({ mode, items, onExit, onDone, lessonId }: { mode: Sessi
         )}
         {q && !fb && (
           <div className="confidence">
-            <span className="confidence-label">How sure are you?</span>
+            <span className="confidence-label" id="confidence-label">
+              {ready
+                ? 'How sure are you?'
+                : q.qtype === 'match'
+                  ? 'Match every pair, then check'
+                  : q.qtype === 'order'
+                    ? 'Place every step, then check'
+                    : q.qtype === 'sort'
+                      ? 'Sort every item, then check'
+                      : q.qtype === 'numeric'
+                        ? 'Type a number, then check'
+                        : q.qtype === 'slider'
+                          ? 'Move the slider, then check'
+                          : 'Choose an answer, then check'}
+            </span>
             <div className="confidence-btns">
               <Button variant="secondary" disabled={!ready} onClick={() => check(false)} data-testid="check-guess">
                 <Icon name="Question" size={20} weight="bold" /> Guessing
@@ -233,7 +276,7 @@ export function Session({ mode, items, onExit, onDone, lessonId }: { mode: Sessi
       </div>
 
       {fb && (
-        <div className={`sheet fb ${fb.correct ? 'fb-right' : 'fb-wrong'}`} role="dialog" aria-label={fb.correct ? 'Correct' : 'Not quite'} data-testid="feedback">
+        <div ref={sheetRef} className={`sheet fb ${fb.correct ? 'fb-right' : 'fb-wrong'}`} role="dialog" aria-label={fb.correct ? 'Correct' : 'Not quite'} data-testid="feedback">
           <div className="fb-head">
             <span className="fb-icon">
               {fb.correct ? (
@@ -266,7 +309,7 @@ export function Session({ mode, items, onExit, onDone, lessonId }: { mode: Sessi
 
       {confirmExit && (
         <div className="scrim" onClick={() => setConfirmExit(false)}>
-          <div className="sheet" role="dialog" aria-label="Leave session" onClick={(e) => e.stopPropagation()}>
+          <div ref={exitRef} className="sheet" role="dialog" aria-modal="true" aria-label="Leave session" onClick={(e) => e.stopPropagation()}>
             <h2 className="sheet-title">Take a break?</h2>
             <p className="muted">You can pick this up again any time. This round's answers won't be saved.</p>
             <div className="stack">

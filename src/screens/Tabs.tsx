@@ -64,7 +64,13 @@ export function ReviewTab() {
         <div className="empty">
           <Badge icon="SealCheck" tone="success" size={80} />
           <h2 className="h2">All caught up</h2>
-          <p className="muted">{nextDue ? `Next cards are due in ${diffDays(d, nextDue)} day${diffDays(d, nextDue) > 1 ? 's' : ''}.` : 'Nothing due.'}</p>
+          <p className="muted">
+            {allDue > 0
+              ? `You've done today's ${DAILY_REVIEW_CAP} reviews. ${allDue} more ${allDue > 1 ? 'are' : 'is'} saved for tomorrow, so they stay spaced out.`
+              : nextDue
+                ? `Next cards are due in ${diffDays(d, nextDue)} day${diffDays(d, nextDue) > 1 ? 's' : ''}.`
+                : 'Nothing due.'}
+          </p>
         </div>
       )}
       {total > 0 && (
@@ -262,10 +268,10 @@ export function ProfileTab() {
         </Button>
         <div className="field">
           <span className="field-label">Daily goal</span>
-          <div className="seg seg-wide" role="radiogroup" aria-label="Daily goal">
+          <div className="seg seg-wide" role="group" aria-label="Daily goal">
             {DAILY_GOALS.map((g) => (
-              <button key={g.xp} type="button" role="radio" aria-checked={s.profile.dailyGoal === g.xp} className={`seg-btn ${s.profile.dailyGoal === g.xp ? 'seg-on' : ''}`} onClick={() => setState((x) => ({ ...x, profile: { ...x.profile, dailyGoal: g.xp } }))}>
-                {g.label} · {g.xp} XP
+              <button key={g.xp} type="button" aria-pressed={s.profile.dailyGoal === g.xp} className={`seg-btn ${s.profile.dailyGoal === g.xp ? 'seg-on' : ''}`} onClick={() => setState((x) => ({ ...x, profile: { ...x.profile, dailyGoal: g.xp } }))}>
+                {g.minutes} min · {g.xp} XP
               </button>
             ))}
           </div>
@@ -276,9 +282,9 @@ export function ProfileTab() {
         <h2 className="h3">Settings</h2>
         <div className="field">
           <span className="field-label">Theme</span>
-          <div className="seg seg-wide" role="radiogroup" aria-label="Theme">
+          <div className="seg seg-wide" role="group" aria-label="Theme">
             {(['system', 'light', 'dark'] as const).map((t) => (
-              <button key={t} type="button" role="radio" aria-checked={s.settings.theme === t} data-theme-opt={t} className={`seg-btn ${s.settings.theme === t ? 'seg-on' : ''}`} onClick={() => set({ theme: t })}>
+              <button key={t} type="button" aria-pressed={s.settings.theme === t} data-theme-opt={t} className={`seg-btn ${s.settings.theme === t ? 'seg-on' : ''}`} onClick={() => set({ theme: t })}>
                 {t[0].toUpperCase() + t.slice(1)}
               </button>
             ))}

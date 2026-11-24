@@ -63,6 +63,7 @@ export function Play({ path }: { path: string }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kind, arg, runId]);
 
+  if (typeof document !== 'undefined') document.title = `${setup?.title ?? 'Practice'} · Tally`;
   if (!setup || !setup.items.length) {
     return (
       <div className="page center-page">
@@ -126,7 +127,7 @@ export function Play({ path }: { path: string }) {
     setDone({ result, before, after, stats, bullets: setup!.bullets, mission: setup!.mission });
   }
 
-  return <Session key={`${path}-${runId}`} mode={setup.mode} items={setup.items} lessonId={kind === 'lesson' ? arg : undefined} onExit={() => go('/', true)} onDone={finish} />;
+  return <Session key={`${path}-${runId}`} title={setup.title} mode={setup.mode} items={setup.items} lessonId={kind === 'lesson' ? arg : undefined} onExit={() => go('/', true)} onDone={finish} />;
 }
 
 function fmtTime(sec: number) {
@@ -168,7 +169,7 @@ function Complete({ done }: { done: Done }) {
       <div className="complete-hero enter">
         <Badge icon={isLesson ? 'Trophy' : 'Repeat'} tone="reward" size={88} />
         <h1 className="title">{isLesson ? 'Lesson complete!' : result.kind === 'unit-review' ? 'Unit review done' : 'Review done'}</h1>
-        <p className="muted">{isLesson ? lessons[result.nodeId!]?.title : `${result.total} cards strengthened`}</p>
+        <p className="muted">{isLesson ? lessons[result.nodeId!]?.title : `${result.total} card${result.total === 1 ? '' : 's'} reviewed`}</p>
       </div>
 
       <div className="stat-tiles">
@@ -261,7 +262,9 @@ function UnitWin({ done }: { done: Done }) {
   const unlocked = course.units.filter((u) => u.prereqs.includes(unit.id) && u.prereqs.every((p) => done.after.passedUnits.includes(p)));
   const pct = Math.round((done.result.correct / done.result.total) * 100);
   const canvas = useRef<HTMLCanvasElement>(null);
+  const winBtn = useRef<HTMLButtonElement>(null);
   useEffect(() => {
+    winBtn.current?.focus({ preventScroll: true });
     play('badge');
     haptic([40, 60, 40, 60, 120]);
     const fire = confettiOn(canvas.current!);
@@ -295,7 +298,7 @@ function UnitWin({ done }: { done: Done }) {
           </div>
         </div>
       )}
-      <Button variant="secondary" className="win-btn" onClick={() => go('/', true)} data-testid="win-continue">
+      <Button ref={winBtn} variant="secondary" className="win-btn" onClick={() => go('/', true)} data-testid="win-continue">
         Back to my path
       </Button>
     </div>
