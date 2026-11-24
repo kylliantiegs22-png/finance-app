@@ -65,6 +65,7 @@ test('leave dialog takes focus, closes with Escape and returns focus', async ({ 
   await page.keyboard.press('Tab');
   // focus stays inside the dialog
   expect(await page.evaluate(() => !!document.activeElement?.closest('[aria-label="Leave session"]'))).toBe(true);
+  await axe(page, 'leave dialog');
   await page.keyboard.press('Escape');
   await expect(dialog).toBeHidden();
   await expect(close).toBeFocused();
@@ -167,6 +168,11 @@ test('axe AA on onboarding steps, node card, error and storage banners (light an
   await axe(page, 'node card');
   await page.locator('[data-testid="chips"] button').first().click();
   await axe(page, 'chip help');
+  await page.keyboard.press('Escape');
+  await expect(page.getByTestId('chip-help')).toHaveCount(0);
+  await page.locator('[data-testid="chips"] button').nth(2).click();
+  await page.locator('.unit-banner').first().click();
+  await expect(page.getByTestId('chip-help')).toHaveCount(0); // tap outside closes
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.evaluate(() => (location.hash = '#/play/lesson/1.4'));
   await axe(page, 'lesson dark');

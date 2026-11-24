@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { course, lessons } from '../lib/content';
 import { nodeStates, unitNodes, unitUnlocked, type NodeState, type PathNode } from '../logic/path';
 import { pickSession } from '../logic/leitner';
@@ -53,6 +53,17 @@ export function StatusChips() {
   const st = streakStatus(s.streak, today());
   const toggle = (k: keyof typeof CHIP_HELP) => setOpen((o) => (o === k ? null : k));
   const value = open === 'streak' ? s.streak.current : open === 'freeze' ? s.streak.freezes : s.xp;
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(null);
+    const onDown = (e: PointerEvent) => !(e.target as HTMLElement).closest('.chips-wrap') && setOpen(null);
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onDown);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onDown);
+    };
+  }, [open]);
   return (
     <div className="chips-wrap">
       <div className="chips" data-testid="chips">

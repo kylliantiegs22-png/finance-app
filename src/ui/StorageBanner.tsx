@@ -1,19 +1,18 @@
-import { useState } from 'react';
-import { dismissNotice, retrySave, useHealth } from '../lib/store';
+import { dismissNotice, hideWarning, retrySave, useHealth } from '../lib/store';
 import { Icon } from './Icon';
 
 /** Tells the learner when progress can't be saved or saved data couldn't be read. Never blocks the app. */
-export function StorageBanner() {
+export function StorageBanner({ inSession = false }: { inSession?: boolean }) {
   const h = useHealth();
-  const [hidden, setHidden] = useState(false);
+  const cls = inSession ? ' banner-session' : '';
 
-  if (h.saveFailed && !hidden) {
+  if (h.saveFailed && !h.warningHidden) {
     const msg =
       h.saveFailed === 'quota'
         ? "This device's storage is full, so new progress isn't being saved yet. Keep this tab open; we'll keep trying."
         : "This browser isn't letting Tally save (private browsing can do this). Progress lasts only while this tab is open.";
     return (
-      <div className="banner banner-warn" role="alert" data-testid="save-warning">
+      <div className={`banner banner-warn${cls}`} role="alert" data-testid="save-warning">
         <Icon name="Info" size={20} weight="bold" />
         <p>{msg}</p>
         <div className="banner-actions">
@@ -22,7 +21,7 @@ export function StorageBanner() {
               Try again
             </button>
           )}
-          <button type="button" className="banner-btn" onClick={() => setHidden(true)}>
+          <button type="button" className="banner-btn" onClick={hideWarning}>
             Hide
           </button>
         </div>
@@ -40,7 +39,7 @@ export function StorageBanner() {
           : null;
   if (!notice || h.noticeDismissed) return null;
   return (
-    <div className="banner" role="status" data-testid="storage-notice">
+    <div className={`banner${cls}`} role="status" data-testid="storage-notice">
       <Icon name="Info" size={20} weight="bold" />
       <p>{notice}</p>
       <div className="banner-actions">

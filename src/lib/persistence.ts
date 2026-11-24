@@ -18,6 +18,8 @@ export const KEY = 'tally.v1';
 export const BACKUP_PREFIX = 'tally.backup.';
 /** Day logs older than this are dropped when storage is full (the habit grid shows 66). */
 export const PRUNE_KEEP_DAYS = 120;
+/** At most this many backup copies are kept (oldest removed first). */
+export const MAX_BACKUPS = 3;
 
 export interface StorageLike {
   getItem(key: string): string | null;
@@ -234,6 +236,12 @@ export function backup(storage: StorageLike | null, raw: string, now: Date): str
   const key = `${BACKUP_PREFIX}${now.toISOString().replace(/[:.]/g, '-')}`;
   try {
     storage.setItem(key, raw);
+    const keys: string[] = [];
+    for (let i = 0; i < storage.length; i++) {
+      const k = storage.key(i);
+      if (k && k.startsWith(BACKUP_PREFIX)) keys.push(k);
+    }
+    for (const k of keys.sort().slice(0, Math.max(0, keys.length - MAX_BACKUPS))) storage.removeItem(k);
     return key;
   } catch {
     return null;

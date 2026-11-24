@@ -115,6 +115,9 @@ test('complete all of Unit 1 + unit check, unlock Unit 2, survive reload, offlin
   expect(await readNum(page, 'xp')).toBe(xpEnd);
   for (const id of [...LESSONS, '1.review', '1.check']) await expect(page.locator(`[data-node="${id}"]`)).toHaveAttribute('data-state', 'done');
   await expect(page.getByTestId('unit-2')).toHaveAttribute('data-unlocked', 'true');
+  // a real, fully used save is read back cleanly: no repair notice, no backup copies
+  await expect(page.getByTestId('storage-notice')).toHaveCount(0);
+  expect(await page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith('tally.backup.')).length)).toBe(0);
   await page.waitForTimeout(400);
   await shot(page, 'path-unit1-done', true);
 

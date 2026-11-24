@@ -63,7 +63,10 @@ export function Play({ path }: { path: string }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kind, arg, runId]);
 
-  if (typeof document !== 'undefined') document.title = `${setup?.title ?? 'Practice'} · Tally`;
+  useEffect(() => {
+    document.title = `${setup?.title ?? 'Practice'} · Tally`;
+  }, [setup]);
+
   if (!setup || !setup.items.length) {
     return (
       <div className="page center-page">

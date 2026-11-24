@@ -49,13 +49,17 @@ export function App() {
   const due = useApp((s) => pickSession(s.cards, today(), s.days[today()]?.reviews ?? 0).length);
 
   useEffect(() => {
+    if (!onboarded) document.title = 'Welcome · Tally';
+    else if (!route.startsWith('/play/')) document.title = `${(TABS.find((t) => t.path === route) ?? TABS[0]).label} · Tally`;
+  }, [onboarded, route]);
+
+  useEffect(() => {
     reconcileToday();
     const onVis = () => document.visibilityState === 'visible' && reconcileToday();
     document.addEventListener('visibilitychange', onVis);
     return () => document.removeEventListener('visibilitychange', onVis);
   }, []);
 
-  if (!onboarded) document.title = 'Welcome · Tally';
   if (!onboarded)
     return (
       <>
@@ -66,13 +70,12 @@ export function App() {
   if (route.startsWith('/play/'))
     return (
       <>
-        <StorageBanner />
+        <StorageBanner inSession />
         <Play key={route} path={route} />
       </>
     );
 
   const tab = TABS.find((t) => t.path === route) ?? TABS[0];
-  document.title = `${tab.label} · Tally`;
   return (
     <div className="shell">
       <StorageBanner />

@@ -178,4 +178,12 @@ describe('saving progress', () => {
     expect(k).toMatch(/^tally\.backup\.2026-11-24T09-00-00-000Z$/);
     expect(s.getItem(k!)).toBe('{broken');
   });
+
+  it('keeps at most 3 backups, removing the oldest', () => {
+    const s = new FakeStorage();
+    for (let d = 1; d <= 5; d++) backup(s, `raw${d}`, new Date(Date.UTC(2026, 10, d)));
+    const keys = [...s.map.keys()].filter((k) => k.startsWith(BACKUP_PREFIX)).sort();
+    expect(keys).toHaveLength(3);
+    expect(keys.map((k) => s.getItem(k))).toEqual(['raw3', 'raw4', 'raw5']);
+  });
 });

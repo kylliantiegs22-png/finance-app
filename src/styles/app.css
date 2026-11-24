@@ -2149,11 +2149,20 @@ h2[tabindex='-1']:focus-visible {
   border: 1px solid var(--border-strong);
   box-shadow: var(--shadow-raised);
   font-size: 0.875rem;
-  animation: pop-in var(--t-base) var(--ease-out);
+  animation: banner-in var(--t-base) var(--ease-out);
+}
+@keyframes banner-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -8px);
+  }
 }
 .banner > svg {
   color: var(--link);
   margin-top: 2px;
+}
+.banner-session {
+  top: calc(64px + env(safe-area-inset-top));
 }
 .banner-warn {
   background: var(--reward-tint);
@@ -2170,6 +2179,7 @@ h2[tabindex='-1']:focus-visible {
 }
 .banner-btn {
   min-height: 44px;
+  min-width: 44px;
   padding: 0 var(--s3);
   border-radius: var(--r-input);
   border: 0;

@@ -1,5 +1,12 @@
 import { expect, test, type Page } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 import { failOnErrors, onboard, playSession, readNum } from './helpers';
+
+async function axe(page: Page, label: string) {
+  await page.waitForTimeout(400);
+  const r = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
+  expect(r.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`), label).toEqual([]);
+}
 
 const KEY = 'tally.v1';
 const progress = () => ({
@@ -106,8 +113,26 @@ test.describe('saved data resilience', () => {
     await playSession(page);
     await expect(page.getByTestId('complete')).toBeVisible();
     await expect(page.getByTestId('save-warning')).toBeVisible();
+    await axe(page, 'save warning');
     await page.getByTestId('complete-continue').click();
     await expect(page.locator('[data-node="1.3"]')).toHaveAttribute('data-state', 'done'); // kept in memory
+    // In a lesson the warning sits below the header and never covers Close
+    await page.locator('[data-node="1.4"]').scrollIntoViewIfNeeded();
+    await page.locator('[data-node="1.4"]').click();
+    await page.getByTestId('node-start').click();
+    await expect(page.getByTestId('save-warning')).toBeVisible();
+    await page.waitForTimeout(400); // let the banner finish entering before hit-testing
+    const close = page.getByRole('button', { name: 'Close' });
+    const box = (await close.boundingBox())!;
+    const hit = await page.evaluate(([x, y]) => (document.elementFromPoint(x, y) as HTMLElement | null)?.closest('button')?.getAttribute('aria-label'), [box.x + box.width / 2, box.y + box.height / 2]);
+    expect(hit).toBe('Close');
+    // Hiding it sticks for the rest of the visit
+    await page.getByTestId('save-warning').getByRole('button', { name: 'Hide' }).click();
+    await close.click();
+    await page.getByTestId('leave').click();
+    await page.locator('[data-tab="Review"]').click();
+    await expect(page.getByTestId('save-warning')).toHaveCount(0);
+    await page.locator('[data-tab="Learn"]').click();
     await page.reload();
     await expect(page.getByTestId('path')).toBeVisible();
     expect(await readNum(page, 'xp')).toBe(240); // earlier progress intact
@@ -200,6 +225,7 @@ test.describe('saved data resilience', () => {
     await page.getByTestId('node-start').click();
     await playSession(page); // returns when the session can no longer render
     await expect(page.getByTestId('error-screen')).toBeVisible();
+    await axe(page, 'error screen');
     await page.evaluate(() => sessionStorage.removeItem('boom'));
     await page.getByTestId('error-home').click();
     await expect(page.getByTestId('path')).toBeVisible();

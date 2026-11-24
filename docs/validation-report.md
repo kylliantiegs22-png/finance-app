@@ -110,3 +110,79 @@ Each blocker and major followed the same path: trace to the root cause, write a 
 | A1–A4 | Focus never moved / no modal semantics / ARIA radio role without arrow keys / colour-only pairing | `a11y.spec.ts`: 5 of 9 failed first | 9/9 pass |
 
 Verify gate: `npm run check` (validator, typecheck, Vitest, build, Playwright e2e with axe, webapp sweep). Results are recorded at the end of this report.
+
+---
+
+## Pass 2 (all five skills again, on the fixed app)
+
+Pass 2 looked specifically for problems introduced by the pass 1 fixes: new banners, focus moves, dialogs, storage paths, update policy. **It found no new blocker or major.** All findings were minor and are fixed below.
+
+### 1. Nielsen heuristics, pass 2
+
+Walked onboarding → path → lesson (every question type) → feedback → recap → review → unit check → unit win again, plus the new states: save warning, storage notice, error screen, chip help.
+
+| # | Severity | Heuristic | Where | Evidence | Status |
+| --- | --- | --- | --- | --- | --- |
+| P2-N1 | minor | H3 user control | Save warning inside a lesson | The fixed banner (top 8 px) sat over the lesson's **Close** button (8–56 px) until hidden. "Hide" was local state, so it came back at the start of every lesson. Not blocking (Hide is one tap away). | **Fixed**: the banner sits below the session header (`.banner-session`, top 64 px), and Hide is global (`health.warningHidden`), returning only if the failure reason changes. Test: `resilience.spec.ts › full storage quota…` (hit-tests Close and checks Hide sticks). Proven to fail with the offset removed ("Received: undefined"). |
+| P2-N2 | minor | H8 aesthetics | Banner entrance | Diagnosing why the P2-N1 test passed without the fix: the `pop-in` keyframe's `transform: scale()` **overrode** the banner's `translateX(-50%)`, so it slid in about 180 px off-centre for 250 ms. | **Fixed**: a dedicated `banner-in` keyframe keeps the centring; the test waits for the entrance before hit-testing. |
+| P2-N3 | minor | H3 | Chip help popover | It could only be closed by tapping the same chip again. | **Fixed**: Escape or a tap outside closes it. Test: `a11y.spec.ts › axe AA on onboarding steps…` (Escape and outside-tap assertions) |
+
+Re-checked and fine: the new copy ("Match every pair, then check", the banner texts and the error screen) is plain and in the app's tone, with no guilt language; the error screen gives two clear exits; the notices are dismissible.
+
+### 2. Accessibility, pass 2
+
+| # | Severity | WCAG | Where | Evidence | Status |
+| --- | --- | --- | --- | --- | --- |
+| P2-A1 | minor | 2.5.8 | Banner buttons | "OK" could be narrower than 44 px. | **Fixed**: `min-width: 44px`. |
+| P2-A2 | — | 2.4.7 | Heading focus after a tap | Checked that the A1 fix doesn't paint a focus ring after a finger tap: the active element is the `H2`, `:focus-visible` = false. | **No bug** (probe output in the pass-2 log). |
+
+Newly covered by axe (WCAG 2.0/2.1/2.2 A/AA): save warning in a session, error screen, leave dialog, chip help (light), lesson (dark), storage notice: **0 violations**. Keyboard: chip help and the node card close with Escape; the leave dialog traps focus and returns it.
+
+### 3. Webapp testing, pass 2
+
+Full sweep re-run on the fixed build, plus the new resilience flows, now with console-error failure on in every spec: **0 console errors, 0 warnings, 0 page errors, 0 failed requests** across every screen. Probe: a real save produced by onboarding plus a lesson reloads with **no** repair notice and **no** backup copy (also asserted after the full unit in `unit1.spec.ts`). No findings.
+
+### 4. React best practices + data layer, pass 2
+
+| # | Severity | Rule / area | Where | Evidence | Status |
+| --- | --- | --- | --- | --- | --- |
+| P2-R1 | minor | rendering purity | `App.tsx`, `Play.tsx` | The A6 fix set `document.title` **during render** (a side effect in render). | **Fixed**: moved into `useEffect`. Test: `a11y.spec.ts › every screen has one h1 and a descriptive title` |
+| P2-R2 | minor | storage growth | `persistence.ts › backup` | Each repaired or unreadable load adds a backup key, with no upper bound. | **Fixed**: at most 3 backups, oldest removed. Test: `persistence.test.ts › keeps at most 3 backups, removing the oldest` |
+
+Re-reviewed the new code: the `useModal` deps are stable (`useCallback`); every new listener (chip help, storage, hashchange, visibility) is added once and removed; the ResizeObserver is disconnected; the health store is separate from the app store, so banners don't re-render screens. A store `storage` event during an open session merges correctly, because the session commits through `setState(fn)` on the current state.
+
+### 5. Diagnose + verify, pass 2
+
+| Finding | Root cause | Failing first | Proof |
+| --- | --- | --- | --- |
+| P2-N1 banner over Close | The banner was fixed at top 8 px in every route | The new hit-test assertion, run with the offset removed: `Expected "Close", Received undefined` | Passes with the fix |
+| P2-N2 test false-pass | The keyframe `transform` replaced `translateX(-50%)` during the entrance | Found by tracing why the assertion passed without the fix (banner box measured at x=195 during animation vs x=12 settled) | Dedicated keyframe; assertion now discriminates |
+| Two test-harness errors (reload while on a non-Learn tab; reload aborting an in-flight image) | Test navigation, not the app | — | Tests corrected; the checks were made stricter, never looser |
+
+---
+
+## Final verification
+
+`npm run check` (validator → typecheck → Vitest → build → Playwright e2e with axe → webapp sweep), final run:
+
+- Lesson validator: **8 lessons + unit check valid**
+- Typecheck: **clean**
+- Vitest: **8 files, 63 tests passed** (streak, Leitner, unlocks, dates/DST, persistence with fake storage and a faked clock, update policy, validator, text/ics)
+- Playwright: **22 passed**: `unit1.spec.ts` (whole unit, unlock, reload, offline, axe), `lesson.spec.ts`, `resilience.spec.ts` (9), `a11y.spec.ts` (9), `usability.spec.ts` (2)
+- Webapp sweep: **0 problems**
+
+Data-safety outcomes shown by Playwright (`resilience.spec.ts`):
+
+| Situation | Result |
+| --- | --- |
+| Missing data | Onboarding, no errors |
+| Unreadable (corrupt) JSON | Starts fresh, says so, raw copy kept in `tally.backup.*` |
+| Partly corrupt JSON | App loads; XP, finished lessons and unlocks kept |
+| Older saved data (no version) | Migrates; progress kept; next write upgrades it |
+| Full storage quota | Lesson completes, learner warned, progress kept in memory, **earlier saved progress survives reload** |
+| Storage blocked (private mode) | Whole onboarding and lesson work from memory, with a warning |
+| Offline reload mid-lesson | Lesson reopens from cache; saved progress unchanged |
+| Two tabs | Neither rolls back the other |
+| Render error | Recovery screen, back to the path, progress intact |
+
+Every blocker and major from pass 1 is fixed with a named regression test (above). Pass 2 found no new blocker or major.

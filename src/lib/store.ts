@@ -16,6 +16,8 @@ export interface StorageHealth {
   loaded: LoadStatus;
   backupKey: string | null;
   noticeDismissed: boolean;
+  /** The learner hid the save warning; it comes back only if the problem changes. */
+  warningHidden: boolean;
 }
 
 const storage = getStorage();
@@ -26,6 +28,7 @@ let health: StorageHealth = {
   loaded: first.status,
   backupKey: null,
   noticeDismissed: false,
+  warningHidden: false,
 };
 // Keep a copy of anything we can't fully read before it is ever overwritten.
 if (first.backupRaw !== undefined) health.backupKey = backup(storage, first.backupRaw, new Date());
@@ -39,7 +42,7 @@ function persist() {
   const r = saveTo(storage, state, dayKey(new Date()));
   const next = r.ok ? null : r.reason;
   if (next !== health.saveFailed) {
-    health = { ...health, saveFailed: next };
+    health = { ...health, saveFailed: next, warningHidden: false };
     emitHealth();
   }
 }
@@ -78,6 +81,11 @@ export function useHealth(): StorageHealth {
     },
     () => health,
   );
+}
+
+export function hideWarning() {
+  health = { ...health, warningHidden: true };
+  emitHealth();
 }
 
 export function dismissNotice() {
