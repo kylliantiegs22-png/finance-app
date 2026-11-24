@@ -1,8 +1,8 @@
 # Validation goal prompt
 
-Paste everything inside the box below into Claude Code as `/goal <prompt>`, started from this repo's folder. It runs five open-source checking skills over the app (usability, accessibility, real-browser testing, security and data, careful fixing), fixes what they find, and logs it all in `docs/validation-report.md`.
+Paste everything inside the box below into Claude Code as `/goal <prompt>`, started from this repo's folder. It runs five open-source checking skills over the app (usability, accessibility, real-browser testing, React performance plus saved-data safety, careful fixing), fixes what they find, and logs it all in `docs/validation-report.md`.
 
-The skills are already saved in `.claude/skills/` (sources and licences in its README), so Claude Code finds them automatically: nothing to install. To check, type `/` in Claude Code and look for `nielsen-heuristics-audit`, `accessibility`, `webapp-testing`, `best-practices`, `diagnose` and `verify`.
+The skills are already saved in `.claude/skills/` (sources and licences in its README), so Claude Code finds them automatically: nothing to install. To check, type `/` in Claude Code and look for `nielsen-heuristics-audit`, `accessibility`, `webapp-testing`, `vercel-react-best-practices`, `diagnose` and `verify`.
 
 ```text
 OUTCOME
@@ -12,7 +12,7 @@ THE FIVE SKILLS (in .claude/skills; invoke each, read its SKILL.md and reference
 1. nielsen-heuristics-audit: usability of onboarding, the path, lesson screens, feedback sheet, recap, review.
 2. accessibility: WCAG 2.2 AA with keyboard-only and screen-reader passes, focus order, touch targets, reduced motion, light and dark.
 3. webapp-testing: drive the built app in Playwright at 390x844 and read console errors on every screen.
-4. best-practices: security and code quality. Here "backend" means the data layer: localStorage read/write and schema versioning, quota and private-mode failures, corrupt or older saved JSON, service worker update and offline behaviour, clock and timezone edges in streak and review, no secrets or tracking in the bundle, safe external links.
+4. vercel-react-best-practices: React performance and code quality (bundle size, re-renders, icon imports); skip server and Next.js-only rules. Here "backend" means the data layer, so also check: localStorage read/write and schema versioning, quota and private-mode failures, corrupt or older saved JSON, service worker update and offline behaviour, clock and timezone edges in streak and review, no secrets or tracking in the bundle, safe external links.
 5. diagnose, with verify: every fix goes through root cause, a failing test first, then proof.
 Run them in that order, one pass each, fixing as you go. Then do a second full pass of all five on the fixed app, because fixes cause new issues.
 
@@ -28,5 +28,5 @@ The store and storage layer, the pure logic (streak, review scheduling, unlocks,
 
 SCOPE
 Free to add tests, small helpers, ARIA, copy fixes and storage hardening.
-Not: new lessons or units, new features (accounts, sync, backend, export/backup, push), a redesign, swapping frameworks or libraries, paid tools, or changing course content beyond fixing a factual or accessibility error.
+Not: new lessons or units, new features (accounts, sync, backend, export/backup, push), deploying or hosting changes, a redesign, swapping frameworks or libraries, paid tools, or changing course content beyond fixing a factual or accessibility error.
 ```
