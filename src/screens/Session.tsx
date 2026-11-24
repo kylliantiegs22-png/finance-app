@@ -311,7 +311,7 @@ export function Session({ mode, items, onExit, onDone, lessonId, title }: { mode
         <div className="scrim" onClick={() => setConfirmExit(false)}>
           <div ref={exitRef} className="sheet" role="dialog" aria-modal="true" aria-label="Leave session" onClick={(e) => e.stopPropagation()}>
             <h2 className="sheet-title">Take a break?</h2>
-            <p className="muted">You can pick this up again any time. This round's answers won't be saved.</p>
+            <p className="muted">You can start it again any time. Answers from this round won't be saved.</p>
             <div className="stack">
               <Button onClick={() => setConfirmExit(false)}>Keep going</Button>
               <Button variant="ghost" onClick={onExit} data-testid="leave">
