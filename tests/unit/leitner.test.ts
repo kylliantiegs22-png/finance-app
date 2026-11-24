@@ -84,3 +84,14 @@ describe('leitner', () => {
     for (let i = 1; i < out.length; i++) expect(out[i].lesson).not.toBe(out[i - 1].lesson);
   });
 });
+
+import { strength } from '../../src/logic/leitner';
+describe('skill strength', () => {
+  it('is strong until due, fading when due, weak after a lapse back to box 1', () => {
+    const t = today();
+    expect(strength(undefined, t)).toBe('new');
+    expect(strength(card({ due: addDays(t, 1) }), t)).toBe('strong');
+    expect(strength(card({ box: 3, due: t }), t)).toBe('fading');
+    expect(strength(grade(card({ box: 4 }), false, true, t), t)).toBe('weak');
+  });
+});

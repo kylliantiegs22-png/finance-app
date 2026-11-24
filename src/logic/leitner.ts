@@ -117,8 +117,7 @@ export function pickSession(cards: Cards, today: Day, doneToday: number, opts: {
 export type Strength = 'strong' | 'fading' | 'weak' | 'new';
 export function strength(card: Card | undefined, today: Day): Strength {
   if (!card) return 'new';
-  if (card.box >= 4 && diffDays(card.due, today) < 0) return 'strong';
-  if (card.lapses > 0 && card.box <= 1) return 'weak';
+  if (card.lapses > 0 && card.box === 1) return 'weak';
   if (diffDays(card.due, today) >= 0) return 'fading';
-  return card.box >= 3 ? 'strong' : 'fading';
+  return 'strong';
 }

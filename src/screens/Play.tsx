@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Question } from '../content/schema';
 import { checks, conceptBank, conceptsOfLesson, course, lessons, unitById } from '../lib/content';
 import { commitSession, getState, today, useApp, type AppState, type SessionResult } from '../lib/store';
 import { interleave, pickSession, RESCUE_SIZE } from '../logic/leitner';
 import { passed as passedCheck, PASS_PCT } from '../logic/path';
 import { lessonXp, XP } from '../logic/xp';
-import { confettiBurst, confettiCannons, haptic, play } from '../lib/fx';
+import { confettiBurst, confettiCannons, confettiOn, haptic, play } from '../lib/fx';
 import { go } from '../router';
 import { Badge, Button, CountUp } from '../ui/bits';
 import { Icon } from '../ui/Icon';
@@ -148,16 +148,23 @@ function Complete({ done }: { done: Done }) {
   const nextLesson = isLesson ? course.units.flatMap((u) => u.lessons).find((_, i, arr) => arr[i - 1]?.id === result.nodeId) : undefined;
   const missionPlanned = isLesson && stats.missions.length > 0;
   const live = useApp((s) => s.streak.current);
+  const canvas = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     play('complete');
     haptic([30, 40, 60]);
-    confettiBurst();
-    if (streakUp || goalMet) setTimeout(() => play('streak', 0.5), 900);
+    const fire = confettiOn(canvas.current!);
+    confettiBurst(fire);
+    const t = streakUp || goalMet ? setTimeout(() => play('streak', 0.5), 900) : undefined;
+    return () => {
+      clearTimeout(t);
+      fire.reset();
+    };
   }, [streakUp, goalMet]);
 
   return (
     <div className="page complete" data-testid="complete">
+      <canvas ref={canvas} className="fx-canvas" aria-hidden="true" />
       <div className="complete-hero enter">
         <Badge icon={isLesson ? 'Trophy' : 'Repeat'} tone="reward" size={88} />
         <h1 className="title">{isLesson ? 'Lesson complete!' : result.kind === 'unit-review' ? 'Unit review done' : 'Review done'}</h1>
@@ -253,14 +260,18 @@ function UnitWin({ done }: { done: Done }) {
   const unit = unitById(done.result.unit!);
   const unlocked = course.units.filter((u) => u.prereqs.includes(unit.id) && u.prereqs.every((p) => done.after.passedUnits.includes(p)));
   const pct = Math.round((done.result.correct / done.result.total) * 100);
+  const canvas = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     play('badge');
     haptic([40, 60, 40, 60, 120]);
-    confettiCannons();
+    const fire = confettiOn(canvas.current!);
+    confettiCannons(fire);
+    return () => fire.reset();
   }, []);
   return (
     <div className="unit-win" data-testid="unit-win" role="dialog" aria-label={`Unit ${unit.id} mastered`}>
       <div className="win-rays" aria-hidden="true" />
+      <canvas ref={canvas} className="fx-canvas" aria-hidden="true" />
       <div className="win-medal">
         <div className="win-medal-ring">
           <Badge icon={unit.icon} tone="reward" size={120} />

@@ -199,7 +199,7 @@ function Slider({ q, a, set, revealed }: { q: Extract<Question, { qtype: 'slider
   return (
     <div className="slider">
       <div className="slider-value num" aria-live="polite">
-        {a.v === null ? 'Drag to guess' : fmtNum(v, q.prefix, q.suffix)}
+        {a.v === null ? <span className="slider-placeholder">Drag the slider to guess</span> : fmtNum(v, q.prefix, q.suffix)}
       </div>
       <input
         type="range"

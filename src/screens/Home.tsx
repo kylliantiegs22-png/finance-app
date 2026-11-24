@@ -179,7 +179,7 @@ function UnitSection({ unit, s, open, setOpen }: { unit: (typeof course.units)[n
 function PathNodeView({ n, state, x, y, unitTitle, open, setOpen }: { n: PathNode; state: NodeState; x: number; y: number; unitTitle: string; open: boolean; setOpen: (v: string | null) => void }) {
   const title = nodeTitle(n, unitTitle);
   const href = n.kind === 'lesson' ? `/play/lesson/${n.id}` : n.kind === 'review' ? `/play/unit-review/${n.unit}` : `/play/check/${n.unit}`;
-  const icon = state === 'locked' ? 'Lock' : state === 'done' ? 'Check' : n.kind === 'review' ? 'Repeat' : n.kind === 'check' ? 'Trophy' : 'Star';
+  const icon = state === 'locked' ? 'Lock' : n.kind === 'review' ? 'Repeat' : n.kind === 'check' ? 'Trophy' : state === 'done' ? 'Check' : 'Star';
   const available = n.kind !== 'lesson' || !!lessons[n.id];
   const lesson = lessons[n.id];
   return (

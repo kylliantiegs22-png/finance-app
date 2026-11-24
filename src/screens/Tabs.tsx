@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { conceptLabels, course, lessons, conceptsOfLesson } from '../lib/content';
+import { conceptBank, conceptLabels, course, lessons, conceptsOfLesson } from '../lib/content';
 import { addDays, diffDays, lastNDays, weekStart } from '../logic/dates';
 import { DAILY_REVIEW_CAP, dueCards, pickSession, strength, type Strength } from '../logic/leitner';
 import { buildIcs } from '../logic/ics';
@@ -186,7 +186,7 @@ export function ProgressTab() {
                       {l.id} · {l.title}
                     </div>
                     <ul>
-                      {conceptsOfLesson(lesson).map((c) => {
+                      {conceptsOfLesson(lesson).filter((c) => conceptBank[c]?.lesson === l.id).map((c) => {
                         const st = strength(s.cards[c], d);
                         return (
                           <li key={c} className={`skill skill-${st}`}>

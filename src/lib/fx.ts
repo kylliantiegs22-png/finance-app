@@ -62,23 +62,29 @@ export function reducedMotion(): boolean {
 }
 
 const BRAND = ['#4F46E5', '#7C3AED', '#10B981', '#FBBF24', '#818CF8'];
+type Fire = ReturnType<typeof confetti.create>;
+
+/** Confetti draws on a canvas owned by the celebrating screen, so it disappears with it. */
+export function confettiOn(canvas: HTMLCanvasElement): Fire {
+  return confetti.create(canvas, { resize: true, disableForReducedMotion: true });
+}
 
 /** Medium celebration: brand confetti burst at lesson end. */
-export function confettiBurst() {
+export function confettiBurst(fire: Fire) {
   if (reducedMotion()) return;
-  const opts = { colors: BRAND, disableForReducedMotion: true, zIndex: 60 };
-  confetti({ ...opts, particleCount: 70, spread: 70, startVelocity: 42, origin: { x: 0.5, y: 0.35 }, scalar: 0.9 });
-  setTimeout(() => confetti({ ...opts, particleCount: 40, spread: 100, startVelocity: 30, origin: { x: 0.5, y: 0.3 }, scalar: 0.8 }), 180);
+  const opts = { colors: BRAND };
+  void fire({ ...opts, particleCount: 70, spread: 70, startVelocity: 42, origin: { x: 0.5, y: 0.35 }, scalar: 0.9 });
+  setTimeout(() => void fire({ ...opts, particleCount: 40, spread: 100, startVelocity: 30, origin: { x: 0.5, y: 0.3 }, scalar: 0.8 }), 180);
 }
 
 /** Large celebration: side cannons for the full-screen unit win. */
-export function confettiCannons() {
+export function confettiCannons(fire: Fire) {
   if (reducedMotion()) return;
-  const opts = { colors: [...BRAND, '#F97316'], disableForReducedMotion: true, zIndex: 60 };
+  const opts = { colors: [...BRAND, '#F97316'] };
   const end = Date.now() + 1200;
   (function frame() {
-    confetti({ ...opts, particleCount: 4, angle: 60, spread: 60, origin: { x: 0, y: 0.7 } });
-    confetti({ ...opts, particleCount: 4, angle: 120, spread: 60, origin: { x: 1, y: 0.7 } });
+    void fire({ ...opts, particleCount: 4, angle: 60, spread: 60, origin: { x: 0, y: 0.7 } });
+    void fire({ ...opts, particleCount: 4, angle: 120, spread: 60, origin: { x: 1, y: 0.7 } });
     if (Date.now() < end) requestAnimationFrame(frame);
   })();
 }
