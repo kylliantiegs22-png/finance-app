@@ -173,7 +173,12 @@ function UnitSection({ unit, s, open, setOpen }: { unit: (typeof course.units)[n
         <div className="unit-text">
           <div className="unit-kicker">
             Unit {unit.id}
-            {isGoalUnit(s.profile.goal, unit.id) && <span className="goal-tag">Your goal</span>}
+            {isGoalUnit(s.profile.goal, unit.id) && (
+              <>
+                {' '}
+                <span className="goal-tag">Your goal</span>
+              </>
+            )}
           </div>
           <h2 className="unit-title">{unit.title}</h2>
           <div className="unit-meta">

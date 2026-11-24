@@ -152,3 +152,16 @@ test('Home names the daily target the learner chose (5, 10 or 15 minutes)', asyn
     await expect(page.locator('.today-title')).toHaveText(`Your ${mins} minutes`);
   }
 });
+
+test('the goal can be changed later in Profile and the path follows', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate((s) => localStorage.setItem('tally.v1', s), JSON.stringify({ v: 1, onboarded: true, xp: 5, profile: { goal: 'debt' } }));
+  await page.reload();
+  await expect(page.getByTestId('unit-3').locator('.goal-tag')).toHaveCount(1);
+  await page.locator('[data-tab="Profile"]').click();
+  await page.locator('[data-goal-opt="invest"]').click();
+  await expect(page.locator('[data-goal-opt="invest"]')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('[data-tab="Learn"]').click();
+  await expect(page.getByTestId('unit-6').locator('.goal-tag')).toHaveCount(1);
+  await expect(page.getByTestId('unit-3').locator('.goal-tag')).toHaveCount(0);
+});

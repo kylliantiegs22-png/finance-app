@@ -269,3 +269,50 @@ All five clear 80 overall and 16 of 20 on educational value, **but this round is
 | F15 | major | Olivia, Liam, Sarah (any who pick a goal) | Onboarding → Home | Copy promises units will be pointed at; `profile.goal` is read nowhere. | **Fixed.** Copy now "We'll mark where it lives on your path. Nothing gets locked." and each unit that serves the goal shows a "Your goal" tag (`src/logic/goals.ts`). Tests: `usability.spec.ts › the goal chosen in onboarding is reflected on the path, as promised` (failed before: "Expected substring: Your goal … element(s) not found"); `goals.test.ts` (2). |
 | F16 | minor | Emma, Sarah, Liam | Home today card | "Your 10 minutes" regardless of the chosen 5/10/15. | **Fixed.** Title uses the chosen target. Test: `usability.spec.ts › Home names the daily target the learner chose` (failed before: expected "Your 5 minutes", received "Your 10 minutes"). |
 | F17 | minor | all | Harness | `test-results/` is wiped by Playwright, deleting transcripts. | **Fixed.** Transcripts go to `persona-transcripts/` (git-ignored). |
+
+---
+
+## Round 3 (after fixes F15–F17)
+
+Built from commit `9c870b5`; cleared storage; same personas. Transcripts read in `persona-transcripts/`, screenshots in `docs/persona-evidence/round-3/`.
+
+**Confirmed on screen.** Onboarding now says "We'll mark where it lives on your path. Nothing gets locked." and Sarah's Unit 3 shows **YOUR GOAL** beside "Debt and credit" (`persona-transcripts/sarah.md`, HOME END). Home reads "Your 5 minutes" for Emma and Sarah, "Your 10 minutes" for Jake and Olivia, "Your 15 minutes" for Liam. All 5 transcripts: 0 retried questions after a "Your money" screen; 0 console problems.
+
+### Scores
+
+| Category (max) | Emma 16 | Jake 20 | Olivia 24 | Liam 28 | Sarah 35 |
+| --- | --- | --- | --- | --- | --- |
+| Educational value (20) | 16 | 17 | 16 | 16 | 16 |
+| Content accuracy & quality (15) | 12 | 13 | 13 | 13 | 13 |
+| UX & navigation (15) | 13 | 13 | 13 | 13 | 13 |
+| Functionality & reliability (15) | 14 | 14 | 14 | 14 | 14 |
+| Engagement & interactivity (10) | 9 | 9 | 9 | 9 | 9 |
+| Accessibility & inclusivity (10) | 9 | 9 | 9 | 9 | 8 |
+| Visual design (5) | 4 | 4 | 4 | 4 | 4 |
+| Performance (5) | 4 | 4 | 4 | 4 | 4 |
+| Privacy & security (5) | 5 | 5 | 5 | 5 | 5 |
+| **Total (100)** | **86** | **88** | **87** | **87** | **86** |
+
+Measured: first screen cold (4× CPU, slow 4G) 1.59–1.75 s; screen change median 112–124 ms; every persona finished Unit 1, passed the check on attempt 2, unlocked Unit 2, and kept XP and streak across reloads (Emma 659/5, Jake 712/6, Olivia 734/6, Liam 710/4, Sarah 715/7 with 1 freeze).
+
+Plans: unchanged from Round 2 and still complete and correct (the lessons they depend on were not touched).
+
+### What a hard reviewer still marks down
+
+- **Educational value (16, not higher).** Practice always uses the lesson's numbers; a learner's own numbers appear only in the ungraded "Your money" screen. Teen content is thin for Emma (one teen example and three apply lines in about 120 screens). Debt-vs-buffer (Sarah, Liam), tax on casual pay (Emma, Jake), payslip lines and super checks (Olivia) are real needs that belong to Units 3, 4 and 5 (recommendations).
+- **Content accuracy (12–13, not 15).** The ATO figures (12% super guarantee, resident tax rates) come from the ATO-cited table in `docs/curriculum.md`, and Moneysmart pages could not be fetched from the build environment, so "about 3 months" and 50/30/20 are labelled as common rules of thumb rather than verified citations. FCS figures were read on apra.gov.au. Emma finds the examples mostly adult (hence 12).
+- **UX (13).** Leaving a lesson restarts it (F11); no placement check (F10); the review cap line can read as a backlog (F14).
+- **Functionality (14).** Nothing failed, but one class of bug (retry ordering, F4) reached a real round before it was caught, so the score stays below perfect until a round is clean after a code change.
+- **Accessibility (8–9).** No skip link (won't-fix, one landmark per screen); the glossary words are under 44 px (inline exception); Sarah's family type (single income, child support) appears in one example only.
+- **Visual (4), performance (4).** A 1.6–1.8 s throttled first load; screen changes are fast (≈120 ms) but not instant.
+- **Privacy (5).** No accounts, no network calls other than same-origin files (bundle scan), progress only in `localStorage`; the only residue worth noting is that a copy of unreadable saved data is kept on the device (never sent).
+
+### New findings
+
+| # | Sev | Personas | Where | Evidence | Status |
+| --- | --- | --- | --- | --- | --- |
+| F18 | minor | Sarah, Olivia, Liam (screen reader users) | Home unit banner | The new tag's text content is "Unit 3Your goal" (no space), which assistive tech may read as one word. | **Fixed.** A real space before the tag. Test: `a11y.spec.ts › the "Your goal" tag is a separate word for assistive tech` (failed before: received "Unit 3Your goal"). |
+| F19 | minor | Liam, Sarah | Profile | The goal could be set in onboarding but never changed. | **Fixed.** "Your goal" control in Profile; the path follows. Test: `usability.spec.ts › the goal can be changed later in Profile and the path follows` (failed before: control missing). |
+| F20 | minor | Emma, Liam | Profile | Segment labels wrapped awkwardly ("5 min · 30 / XP", "Pay & / tax"). | **Fixed.** Labels stay on one line (checked in a screenshot). |
+
+Because code changed after this round, a **fresh Round 4** from cleared storage follows.

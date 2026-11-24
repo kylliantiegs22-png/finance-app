@@ -263,6 +263,23 @@ export function ProfileTab() {
           <span className="field-label">Around</span>
           <input className="input" type="time" value={s.profile.time} onChange={(e) => setState((x) => ({ ...x, profile: { ...x.profile, time: e.target.value } }))} />
         </label>
+        <div className="field">
+          <span className="field-label">Your goal (marks units on your path)</span>
+          <div className="seg seg-wide" role="group" aria-label="Your goal">
+            {(
+              [
+                ['pay', 'Pay & tax'],
+                ['debt', 'Debt'],
+                ['invest', 'Investing'],
+                ['pro', 'Pro'],
+              ] as const
+            ).map(([id, label]) => (
+              <button key={id} type="button" aria-pressed={s.profile.goal === id} data-goal-opt={id} className={`seg-btn ${s.profile.goal === id ? 'seg-on' : ''}`} onClick={() => setState((x) => ({ ...x, profile: { ...x.profile, goal: id } }))}>
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
         <Button variant="secondary" onClick={() => downloadIcs(s.profile.cue, s.profile.time)}>
           <Icon name="CalendarPlus" size={20} weight="bold" /> Add daily reminder to calendar
         </Button>

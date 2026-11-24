@@ -185,3 +185,9 @@ test('storage banners pass axe', async ({ page }) => {
   await expect(page.getByTestId('storage-notice')).toBeVisible();
   await axe(page, 'storage notice');
 });
+
+test('the "Your goal" tag is a separate word for assistive tech ("Unit 3 Your goal")', async ({ page }) => {
+  await seedAndGo(page, '#/', { v: 1, onboarded: true, xp: 5, profile: { goal: 'debt' } });
+  const text = await page.getByTestId('unit-3').locator('.unit-kicker').evaluate((e) => e.textContent);
+  expect(text).toMatch(/Unit 3\s+Your goal/);
+});

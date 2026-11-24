@@ -1451,6 +1451,10 @@ h2[tabindex='-1']:focus-visible {
 }
 .seg-wide .seg-btn {
   flex: 1;
+  min-width: 0;
+  padding: 0 var(--s2);
+  white-space: nowrap;
+  font-size: 0.8125rem;
 }
 .seg-btn {
   min-height: 44px;
