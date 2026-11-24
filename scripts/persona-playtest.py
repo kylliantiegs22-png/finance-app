@@ -285,12 +285,14 @@ def run_persona(pw, pid, rnd):
     r = Run(pid, rnd, page, ctx, ev)
     page.clock.install(time=START)
 
+    # Record what storage held when the page started (before the app writes its default state).
+    page.add_init_script("if (window.__lsAtStart === undefined) { window.__lsAtStart = localStorage.length }")
     t0 = time.perf_counter()
     page.goto(URL)
     page.wait_for_selector('[data-testid="onboarding"]')
     r.facts['cold_first_screen_ms'] = round((time.perf_counter() - t0) * 1000)
     r.facts['nav'] = page.evaluate('(() => { const n = performance.getEntriesByType("navigation")[0]; return n ? {dcl: Math.round(n.domContentLoadedEventEnd), load: Math.round(n.loadEventEnd)} : null })()')
-    r.facts['fresh_storage'] = page.evaluate('localStorage.length') == 0
+    r.facts['fresh_storage'] = page.evaluate('window.__lsAtStart') == 0
 
     r.onboarding()
     lessons_left = list(LESSONS)
