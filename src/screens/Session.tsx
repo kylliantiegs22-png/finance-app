@@ -9,6 +9,7 @@ import { QuestionView } from '../ui/QuestionView';
 import { RichText } from '../ui/RichText';
 import { Visual } from '../ui/Visual';
 import { useModal } from '../ui/useModal';
+import { retryPosition } from '../logic/session';
 
 export type SessionMode = 'lesson' | 'review' | 'unit-review' | 'check';
 export type Item = { key: string; screen: Exclude<Screen, { kind: 'recap' }>; retry?: boolean };
@@ -117,10 +118,9 @@ export function Session({ mode, items, onExit, onDone, lessonId, title }: { mode
       haptic([20, 60, 20]);
       setStreak(0);
       if (allowRetry) {
-        // Re-ask later in the session: confident misses come back sooner.
-        const gap = sure ? 2 : 4;
+        // Re-ask later in the session (confident misses come back sooner), but before any "apply" screen.
         setQueue((qq) => {
-          const at = Math.min(qq.length, pos + 1 + gap);
+          const at = retryPosition(qq.map((i) => i.screen), pos, sure);
           const copy: Item = { key: item.key + '-r' + pos, screen: item.screen, retry: true };
           return [...qq.slice(0, at), copy, ...qq.slice(at)];
         });
@@ -210,7 +210,7 @@ export function Session({ mode, items, onExit, onDone, lessonId, title }: { mode
               <span className="mission-text">
                 <span className="mission-kicker">Real-money move</span>
                 <RichText text={s.action} />
-                <span className="mission-cta">{missions.includes(lessonId ?? '') ? "Planned — we'll ask how it went" : "Tap to plan it — it's not graded"}</span>
+                <span className="mission-cta">{missions.includes(lessonId ?? '') ? "Saved. Tick it off in Profile once you've done it" : "Tap to plan it. It isn't graded"}</span>
               </span>
             </button>
           </section>

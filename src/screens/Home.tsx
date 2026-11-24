@@ -26,18 +26,22 @@ export function nextAction(s: AppState) {
   const done = s.days[d]?.reviews ?? 0;
   const due = pickSession(s.cards, d, done).length;
   if (due > 0 && done === 0) return { kind: 'review' as const, label: `Warm up: ${due} review${due > 1 ? 's' : ''}`, href: '/play/review' };
+  let finished = false;
   for (const u of course.units) {
     if (!unitUnlocked(u, s.passedUnits)) continue;
     const st = nodeStates(u, s.completed, s.passedUnits);
     const cur = unitNodes(u).find((n) => st[n.id] === 'current');
     if (!cur) continue;
-    if (cur.kind === 'lesson' && !lessons[cur.id]) continue;
+    if (cur.kind === 'lesson' && !lessons[cur.id]) {
+      finished = true; // an unlocked unit whose lessons aren't written yet
+      continue;
+    }
     if (cur.kind === 'lesson') return { kind: 'lesson' as const, label: `Start lesson ${cur.id}`, href: `/play/lesson/${cur.id}` };
     if (cur.kind === 'review') return { kind: 'unit-review' as const, label: `Unit ${u.id} review`, href: `/play/unit-review/${u.id}` };
     return { kind: 'check' as const, label: `Take the Unit ${u.id} check`, href: `/play/check/${u.id}` };
   }
-  if (due > 0) return { kind: 'review' as const, label: `Review ${due} card${due > 1 ? 's' : ''}`, href: '/play/review' };
-  if (Object.keys(s.cards).length) return { kind: 'rescue' as const, label: '2-minute practice', href: '/play/rescue' };
+  if (due > 0) return { kind: 'review' as const, label: `Review ${due} card${due > 1 ? 's' : ''}`, href: '/play/review', finished };
+  if (Object.keys(s.cards).length) return { kind: 'rescue' as const, label: '2-minute practice', href: '/play/rescue', finished };
   return null;
 }
 
@@ -123,7 +127,12 @@ export function Home() {
         </div>
         {st === 'repair' && (
           <p className="today-repair">
-            <Icon name="Lifebuoy" size={18} weight="duotone" /> You missed yesterday. Finish 2 sessions today and your {s.streak.current}-day streak carries on.
+            <Icon name="Lifebuoy" size={18} weight="duotone" /> You missed yesterday. Do 2 lessons or reviews today and your {s.streak.current}-day streak carries on.
+          </p>
+        )}
+        {action && 'finished' in action && action.finished && (
+          <p className="today-repair" data-testid="all-done">
+            <Icon name="SealCheck" size={18} weight="duotone" /> You've done every lesson that's ready. More units are being written; until then, reviews keep what you learned fresh.
           </p>
         )}
         {action ? (
@@ -131,7 +140,7 @@ export function Home() {
             {action.label} <Icon name="ArrowRight" size={20} weight="bold" />
           </Button>
         ) : (
-          <p className="today-repair">You've finished everything that's ready. More units are on the way.</p>
+          <p className="today-repair" data-testid="all-done">You've done every lesson that's ready. More units are being written.</p>
         )}
       </section>
 

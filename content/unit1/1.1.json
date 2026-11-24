@@ -5,8 +5,14 @@
   "objective": "Name the three areas of finance (personal, corporate, markets) and why money decisions compound over a lifetime",
   "minutes": 5,
   "sources": [
-    { "name": "ASIC Moneysmart", "url": "https://moneysmart.gov.au/" },
-    { "name": "CFA Institute Investment Foundations curriculum", "url": "https://www.cfainstitute.org/sites/default/files/docs/programs/investment-foundations-certificate/investment-foundations-certificate-curriculum.pdf" }
+    {
+      "name": "ASIC Moneysmart",
+      "url": "https://moneysmart.gov.au/"
+    },
+    {
+      "name": "CFA Institute Investment Foundations curriculum",
+      "url": "https://www.cfainstitute.org/sites/default/files/docs/programs/investment-foundations-certificate/investment-foundations-certificate-curriculum.pdf"
+    }
   ],
   "screens": [
     {
@@ -37,9 +43,17 @@
         "qtype": "mcq",
         "prompt": "Which of these is a **finance** question?",
         "options": [
-          { "text": "Should I keep my savings in a bank or pay down my car loan?" },
-          { "text": "Which train gets me to work fastest?", "why": "That's about time and transport, not managing money." },
-          { "text": "What's the best way to cook rice?", "why": "Cooking isn't finance, even if rice is cheap!" }
+          {
+            "text": "Should I keep my savings in a bank or pay down my car loan?"
+          },
+          {
+            "text": "Which train gets me to work fastest?",
+            "why": "That's about time and transport, not managing money."
+          },
+          {
+            "text": "What's the best way to cook rice?",
+            "why": "Cooking isn't finance, even if rice is cheap!"
+          }
         ],
         "answer": 0,
         "explanation": "Finance is about how money is earned, saved, borrowed, invested and spent, and the choices between them.",
@@ -67,9 +81,33 @@
       "visual": {
         "type": "compare",
         "items": [
-          { "title": "Personal", "icon": "Wallet", "points": ["Budgets", "Savings", "Super"] },
-          { "title": "Corporate", "icon": "Buildings", "points": ["Funding", "Projects", "Profit"] },
-          { "title": "Markets", "icon": "ChartLineUp", "points": ["Shares", "Bonds", "Prices"] }
+          {
+            "title": "Personal",
+            "icon": "Wallet",
+            "points": [
+              "Budgets",
+              "Savings",
+              "Super"
+            ]
+          },
+          {
+            "title": "Corporate",
+            "icon": "Buildings",
+            "points": [
+              "Funding",
+              "Projects",
+              "Profit"
+            ]
+          },
+          {
+            "title": "Markets",
+            "icon": "ChartLineUp",
+            "points": [
+              "Shares",
+              "Bonds",
+              "Prices"
+            ]
+          }
         ]
       }
     },
@@ -78,7 +116,11 @@
       "step": "core",
       "title": "Money decisions compound",
       "body": "A choice you repeat every week is really thousands of choices. And money left to grow earns returns on its past returns. That's [[compounding]]: small, early, steady decisions end up mattering more than big, late ones.",
-      "visual": { "type": "stat", "value": "$1,000 → $1,102.50", "label": "after 2 years at 5% a year: the extra $2.50 is interest on interest" }
+      "visual": {
+        "type": "stat",
+        "value": "$1,000 → $1,102.50",
+        "label": "after 2 years at 5% a year: the extra $2.50 is interest on interest"
+      }
     },
     {
       "kind": "teach",
@@ -87,7 +129,11 @@
       "body": "Jack buys a $5 coffee every day. Is that a problem? Finance doesn't judge; it just makes the trade-off visible.",
       "visual": {
         "type": "steps",
-        "lines": ["$5 a day × 365 days = **$1,825 a year**", "Over 10 years: $18,250, before any interest", "The question isn't 'is coffee bad?' but 'is it worth that to me?'"]
+        "lines": [
+          "$5 a day × 365 days = **$1,825 a year**",
+          "Over 10 years: $18,250, before any interest",
+          "The question isn't 'is coffee bad?' but 'is it worth that to me?'"
+        ]
       }
     },
     {
@@ -99,9 +145,18 @@
         "qtype": "match",
         "prompt": "Match each decision to its area of finance.",
         "pairs": [
-          ["Choosing a super fund", "Personal finance"],
-          ["A company borrowing to build a factory", "Corporate finance"],
-          ["Shares changing price on the ASX", "Financial markets"]
+          [
+            "Choosing a super fund",
+            "Personal finance"
+          ],
+          [
+            "A company borrowing to build a factory",
+            "Corporate finance"
+          ],
+          [
+            "Shares changing price on the ASX",
+            "Financial markets"
+          ]
         ],
         "hint": "Ask: whose money is it, and where is the decision made: a household, a business, or a market?",
         "explanation": "Super is your money (personal). A firm's funding is corporate. Prices set by buyers and sellers are markets.",
@@ -150,7 +205,11 @@
         "qtype": "blank",
         "sentence": "Working out your own pay, bills and savings is called ___ finance.",
         "prompt": "Fill the gap.",
-        "options": ["personal", "corporate", "public"],
+        "options": [
+          "personal",
+          "corporate",
+          "public"
+        ],
         "answer": 0,
         "explanation": "Personal finance covers your own money decisions, which is where this course begins.",
         "difficulty": 1
@@ -180,9 +239,17 @@
         "qtype": "mcq",
         "prompt": "Two friends save the same amount each year at the same interest rate. Ana starts at 25, Ben at 35. Both stop at 65. Who ends up with more?",
         "options": [
-          { "text": "Ana, because her money has ten extra years to compound" },
-          { "text": "They end up about the same", "why": "Ana's money grows for longer, and growth builds on growth." },
-          { "text": "Ben, because he saves when he earns more", "why": "Here they save the same amount, so only time differs, and time favours Ana." }
+          {
+            "text": "Ana, because her money has ten extra years to compound"
+          },
+          {
+            "text": "They end up about the same",
+            "why": "Ana's money grows for longer, and growth builds on growth."
+          },
+          {
+            "text": "Ben, because he saves when he earns more",
+            "why": "Here they save the same amount, so only time differs, and time favours Ana."
+          }
         ],
         "answer": 0,
         "explanation": "Ana saves for 40 years, Ben for 30, and Ana's early savings also earn interest on interest for longer.",
@@ -197,12 +264,27 @@
         "concept": "finance-areas",
         "qtype": "sort",
         "prompt": "Sort each one: is it about your own money, or about businesses and markets?",
-        "buckets": ["Personal", "Business & markets"],
+        "buckets": [
+          "Personal",
+          "Business & markets"
+        ],
         "items": [
-          { "text": "Paying off a credit card", "bucket": 0 },
-          { "text": "A fund manager trading shares on the ASX", "bucket": 1 },
-          { "text": "Saving for a holiday", "bucket": 0 },
-          { "text": "A company issuing new shares", "bucket": 1 }
+          {
+            "text": "Paying off a credit card",
+            "bucket": 0
+          },
+          {
+            "text": "A fund manager trading shares on the ASX",
+            "bucket": 1
+          },
+          {
+            "text": "Saving for a holiday",
+            "bucket": 0
+          },
+          {
+            "text": "A company issuing new shares",
+            "bucket": 1
+          }
         ],
         "explanation": "Cards and holiday savings are household decisions; share issues and trading belong to companies and markets.",
         "difficulty": 1
@@ -212,7 +294,7 @@
       "kind": "apply",
       "step": "apply",
       "title": "Your turn",
-      "body": "Pick one small thing you pay for every week. Multiply it by 52. Is the yearly number worth it to you? No right answer; just notice it.",
+      "body": "Pick one small thing you pay for every week: bubble tea, a streaming plan, the kids' canteen days. Multiply it by 52. Is the yearly number worth it to you? No right answer; just notice it.",
       "action": "Find one weekly spend and work out its **yearly cost**."
     },
     {
@@ -231,7 +313,19 @@
       "concept": "finance-areas",
       "qtype": "mcq",
       "prompt": "A business deciding whether to borrow money for a new warehouse is an example of…",
-      "options": [{ "text": "Corporate finance" }, { "text": "Personal finance", "why": "It's the business's money, not a household's." }, { "text": "Financial markets", "why": "Markets are where things are traded; this is a company's own funding choice." }],
+      "options": [
+        {
+          "text": "Corporate finance"
+        },
+        {
+          "text": "Personal finance",
+          "why": "It's the business's money, not a household's."
+        },
+        {
+          "text": "Financial markets",
+          "why": "Markets are where things are traded; this is a company's own funding choice."
+        }
+      ],
       "answer": 0,
       "explanation": "How a business raises and spends money is corporate finance.",
       "difficulty": 1

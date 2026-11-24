@@ -5,9 +5,18 @@
   "objective": "Build a 50/30/20 budget and a zero-based budget from the same payslip",
   "minutes": 6,
   "sources": [
-    { "name": "ASIC Moneysmart: How to do a budget", "url": "https://moneysmart.gov.au/budgeting/how-to-do-a-budget" },
-    { "name": "ATO: Tax rates – Australian residents", "url": "https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" },
-    { "name": "ATO: Super guarantee", "url": "https://www.ato.gov.au/tax-rates-and-codes/key-superannuation-rates-and-thresholds/super-guarantee" }
+    {
+      "name": "ASIC Moneysmart: How to do a budget",
+      "url": "https://moneysmart.gov.au/budgeting/how-to-do-a-budget"
+    },
+    {
+      "name": "ATO: Tax rates – Australian residents",
+      "url": "https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents"
+    },
+    {
+      "name": "ATO: Super guarantee",
+      "url": "https://www.ato.gov.au/tax-rates-and-codes/key-superannuation-rates-and-thresholds/super-guarantee"
+    }
   ],
   "screens": [
     {
@@ -37,9 +46,17 @@
         "qtype": "mcq",
         "prompt": "What is a budget, really?",
         "options": [
-          { "text": "A plan for where your money goes, made before you spend it" },
-          { "text": "A record of what you already spent", "why": "That's tracking. A budget is the plan you track against." },
-          { "text": "A way to cut out everything fun", "why": "A good budget plans for fun too, so you can enjoy it guilt-free." }
+          {
+            "text": "A plan for where your money goes, made before you spend it"
+          },
+          {
+            "text": "A record of what you already spent",
+            "why": "That's tracking. A budget is the plan you track against."
+          },
+          {
+            "text": "A way to cut out everything fun",
+            "why": "A good budget plans for fun too, so you can enjoy it guilt-free."
+          }
         ],
         "answer": 0,
         "explanation": "A budget is a plan made in advance. Tracking (next lesson) shows how reality compares to the plan.",
@@ -55,9 +72,18 @@
         "type": "split",
         "title": "50/30/20",
         "segments": [
-          { "label": "Needs", "pct": 50 },
-          { "label": "Wants", "pct": 30 },
-          { "label": "Savings & extra debt", "pct": 20 }
+          {
+            "label": "Needs",
+            "pct": 50
+          },
+          {
+            "label": "Wants",
+            "pct": 30
+          },
+          {
+            "label": "Savings & extra debt",
+            "pct": 20
+          }
         ]
       }
     },
@@ -66,21 +92,52 @@
       "step": "core",
       "title": "Method 2: zero-based",
       "body": "Give **every dollar a job** before the month starts. Income minus everything you plan to spend, save and repay should equal **$0**. Savings isn't 'what's left over'; it's a line in the plan, like rent.",
-      "visual": { "type": "stat", "value": "Income − planned dollars = $0", "label": "Nothing left unassigned" }
+      "visual": {
+        "type": "stat",
+        "value": "Income − planned dollars = $0",
+        "label": "Nothing left unassigned"
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Paid weekly or fortnightly?",
+      "body": "Budgets are monthly, but pay often isn't. Multiply weekly pay by 52, or fortnightly pay by 26, then divide by 12. Don't use ×4 or ×2: a year has 52 weeks, so some months hold an extra payday.",
+      "visual": {
+        "type": "steps",
+        "lines": [
+          "$360 a week × 52 ÷ 12 = **$1,560** a month",
+          "$1,800 a fortnight × 26 ÷ 12 = **$3,900** a month"
+        ]
+      }
     },
     {
       "kind": "teach",
       "step": "example",
-      "title": "Worked example: Lena's payslip",
-      "body": "Lena earns $60,000 a year, paid monthly. Tax comes out before her pay lands. Her employer's {{sgRate}} [[super]] goes to her fund on top, not into her bank.",
+      "title": "Worked example: Lena, a nurse",
+      "body": "Lena is a nurse earning $60,000 a year, paid monthly. Tax comes out before her pay lands. Her employer's {{sgRate}} [[super]] goes to her fund on top, not into her bank.",
       "visual": {
         "type": "payslip",
         "employer": "Harbour Health, Sydney",
         "period": "Monthly pay · 2026-27",
         "rows": [
-          { "label": "Salary", "amount": 5000, "kind": "earn" },
-          { "label": "Tax withheld (PAYG)", "amount": 802, "kind": "deduct", "fact": "payslip60kTaxMonthly" },
-          { "label": "Employer super (to fund)", "amount": 600, "kind": "info", "fact": "payslip60kSuperMonthly" }
+          {
+            "label": "Salary",
+            "amount": 5000,
+            "kind": "earn"
+          },
+          {
+            "label": "Tax withheld (PAYG)",
+            "amount": 802,
+            "kind": "deduct",
+            "fact": "payslip60kTaxMonthly"
+          },
+          {
+            "label": "Employer super (to fund)",
+            "amount": 600,
+            "kind": "info",
+            "fact": "payslip60kSuperMonthly"
+          }
         ],
         "net": 4198
       }
@@ -93,9 +150,21 @@
       "visual": {
         "type": "split",
         "segments": [
-          { "label": "Needs", "pct": 50, "amount": 2100 },
-          { "label": "Wants", "pct": 30, "amount": 1260 },
-          { "label": "Savings & extra debt", "pct": 20, "amount": 840 }
+          {
+            "label": "Needs",
+            "pct": 50,
+            "amount": 2100
+          },
+          {
+            "label": "Wants",
+            "pct": 30,
+            "amount": 1260
+          },
+          {
+            "label": "Savings & extra debt",
+            "pct": 20,
+            "amount": 840
+          }
         ]
       }
     },
@@ -112,9 +181,23 @@
           "employer": "Harbour Health, Sydney",
           "period": "Monthly pay · 2026-27",
           "rows": [
-            { "label": "Salary", "amount": 5000, "kind": "earn" },
-            { "label": "Tax withheld (PAYG)", "amount": 802, "kind": "deduct", "fact": "payslip60kTaxMonthly" },
-            { "label": "Employer super (to fund)", "amount": 600, "kind": "info", "fact": "payslip60kSuperMonthly" }
+            {
+              "label": "Salary",
+              "amount": 5000,
+              "kind": "earn"
+            },
+            {
+              "label": "Tax withheld (PAYG)",
+              "amount": 802,
+              "kind": "deduct",
+              "fact": "payslip60kTaxMonthly"
+            },
+            {
+              "label": "Employer super (to fund)",
+              "amount": 600,
+              "kind": "info",
+              "fact": "payslip60kSuperMonthly"
+            }
           ],
           "net": 4198
         },
@@ -149,9 +232,18 @@
         "qtype": "match",
         "prompt": "Match each item to its 50/30/20 bucket.",
         "pairs": [
-          ["Rent", "Needs (50%)"],
-          ["Concert tickets", "Wants (30%)"],
-          ["Emergency fund deposit", "Savings (20%)"]
+          [
+            "Rent",
+            "Needs (50%)"
+          ],
+          [
+            "Concert tickets",
+            "Wants (30%)"
+          ],
+          [
+            "Emergency fund deposit",
+            "Savings (20%)"
+          ]
         ],
         "hint": "Needs keep you housed and fed; savings build your future.",
         "explanation": "Rent is a need, a concert is a want, and building an emergency fund counts as savings.",
@@ -163,14 +255,15 @@
       "step": "guided",
       "q": {
         "id": "u1l4-g-4",
-        "concept": "zero-based-budget",
-        "qtype": "blank",
-        "prompt": "Fill the gap.",
-        "sentence": "In a zero-based budget, income minus everything you plan to spend, save and repay equals ___.",
-        "options": ["$0", "20% of income", "your salary"],
-        "answer": 0,
-        "explanation": "Every dollar is assigned a job, so nothing is left unplanned: the total comes to $0.",
-        "difficulty": 1
+        "concept": "pay-cycles",
+        "qtype": "numeric",
+        "prompt": "Jake takes home $420 a week from his casual shifts. What is that per month, to budget with?",
+        "answer": 1820,
+        "prefix": "$",
+        "calc": "420 * 52 / 12",
+        "hint": "Weekly pay × 52 weeks, then ÷ 12 months.",
+        "explanation": "$420 × 52 = $21,840 a year, and ÷ 12 = $1,820 a month. Using ×4 would give $1,680 and miss an extra payday.",
+        "difficulty": 2
       }
     },
     {
@@ -211,7 +304,13 @@
         "concept": "what-a-budget-is",
         "qtype": "order",
         "prompt": "Put the steps for building a budget in order.",
-        "items": ["Find your take-home pay", "List your needs", "Set your savings amount", "Plan wants with what's left", "Track and adjust each month"],
+        "items": [
+          "Find your take-home pay",
+          "List your needs",
+          "Set your savings amount",
+          "Plan wants with what's left",
+          "Track and adjust each month"
+        ],
         "explanation": "Start from what actually lands, cover needs, pay yourself first, then plan wants, and adjust as you learn.",
         "difficulty": 2
       }
@@ -220,8 +319,8 @@
       "kind": "apply",
       "step": "apply",
       "title": "Try it on your pay",
-      "body": "Open your last payslip or banking app. Find your take-home pay for one pay period, then work out 20% of it. Could you set that aside?",
-      "action": "Find your take-home pay and work out your **20% savings** figure."
+      "body": "Find your take-home pay for one pay period: a payslip, your banking app, or just your pocket money. Paid weekly? × 52 ÷ 12 for a month. Shifts vary? Use a quieter pay.",
+      "action": "Work out your **20% savings** figure."
     },
     {
       "kind": "recap",
@@ -264,6 +363,17 @@
       "answer": false,
       "explanation": "Budget from take-home pay: the amount that actually lands in your account after tax.",
       "difficulty": 1
+    },
+    {
+      "id": "u1l4-r-4",
+      "concept": "pay-cycles",
+      "qtype": "numeric",
+      "prompt": "Take-home pay is $1,500 a fortnight. What is that per month?",
+      "answer": 3250,
+      "prefix": "$",
+      "calc": "1500 * 26 / 12",
+      "explanation": "$1,500 × 26 = $39,000 a year, ÷ 12 = $3,250 a month.",
+      "difficulty": 2
     }
   ]
 }

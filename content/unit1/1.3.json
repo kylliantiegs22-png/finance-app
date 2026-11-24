@@ -5,8 +5,14 @@
   "objective": "Sort expenses into needs and wants and spot two common spending triggers",
   "minutes": 5,
   "sources": [
-    { "name": "ASIC Moneysmart: Budgeting", "url": "https://moneysmart.gov.au/budgeting" },
-    { "name": "ASIC Moneysmart: Buy now pay later", "url": "https://moneysmart.gov.au/loans/buy-now-pay-later-services" }
+    {
+      "name": "ASIC Moneysmart: Budgeting",
+      "url": "https://moneysmart.gov.au/budgeting"
+    },
+    {
+      "name": "ASIC Moneysmart: Buy now pay later",
+      "url": "https://moneysmart.gov.au/loans/buy-now-pay-later-services"
+    }
   ],
   "screens": [
     {
@@ -18,9 +24,17 @@
         "qtype": "mcq",
         "prompt": "Why do online stores show a countdown like **'Sale ends in 02:14:09'**?",
         "options": [
-          { "text": "Urgency makes us decide fast, before we think it through" },
-          { "text": "To help shoppers plan their budgets", "why": "It's designed to rush you, not to help you plan." },
-          { "text": "It's required by consumer law", "why": "No law requires countdowns. They're a sales tactic." }
+          {
+            "text": "Urgency makes us decide fast, before we think it through"
+          },
+          {
+            "text": "To help shoppers plan their budgets",
+            "why": "It's designed to rush you, not to help you plan."
+          },
+          {
+            "text": "It's required by consumer law",
+            "why": "No law requires countdowns. They're a sales tactic."
+          }
         ],
         "answer": 0,
         "explanation": "Time pressure pushes us to act on impulse. Spotting the tactic gives you back the choice.",
@@ -35,13 +49,31 @@
         "concept": "needs-vs-wants",
         "qtype": "sort",
         "prompt": "Have a go: need or want?",
-        "buckets": ["Need", "Want"],
+        "buckets": [
+          "Need",
+          "Want"
+        ],
         "items": [
-          { "text": "Rent", "bucket": 0 },
-          { "text": "Concert tickets", "bucket": 1 },
-          { "text": "Basic groceries", "bucket": 0 },
-          { "text": "A second streaming service", "bucket": 1 },
-          { "text": "Electricity bill", "bucket": 0 }
+          {
+            "text": "Rent",
+            "bucket": 0
+          },
+          {
+            "text": "Concert tickets",
+            "bucket": 1
+          },
+          {
+            "text": "Basic groceries",
+            "bucket": 0
+          },
+          {
+            "text": "A second streaming service",
+            "bucket": 1
+          },
+          {
+            "text": "Electricity bill",
+            "bucket": 0
+          }
         ],
         "explanation": "Needs keep you housed, fed, healthy and able to work. Wants make life nicer but you could skip them.",
         "difficulty": 1
@@ -55,8 +87,24 @@
       "visual": {
         "type": "compare",
         "items": [
-          { "title": "Need", "icon": "House", "points": ["Rent or mortgage", "Groceries", "Power, phone"] },
-          { "title": "Want", "icon": "ShoppingCart", "points": ["Takeaway", "New gadgets", "Extra subscriptions"] }
+          {
+            "title": "Need",
+            "icon": "House",
+            "points": [
+              "Rent or mortgage",
+              "Groceries",
+              "Power, phone"
+            ]
+          },
+          {
+            "title": "Want",
+            "icon": "ShoppingCart",
+            "points": [
+              "Takeaway",
+              "New gadgets",
+              "Extra subscriptions"
+            ]
+          }
         ]
       }
     },
@@ -65,7 +113,11 @@
       "step": "core",
       "title": "Four common spending triggers",
       "body": "**Urgency**: 'only 2 left', countdowns. **Social**: scrolling, influencers, keeping up with friends. **Feelings**: stress, boredom, payday 'treat yourself'. **Easy payment**: tap-and-go or [[buy now pay later]] makes spending feel painless. Name the trigger, then pause.",
-      "visual": { "type": "icon", "name": "Brain", "caption": "Most impulse buys start with a trigger, not a plan" }
+      "visual": {
+        "type": "icon",
+        "name": "Brain",
+        "caption": "Most impulse buys start with a trigger, not a plan"
+      }
     },
     {
       "kind": "teach",
@@ -76,12 +128,36 @@
         "type": "ledger",
         "title": "Liam's spending",
         "rows": [
-          { "label": "Rent", "amount": 1500, "note": "Need" },
-          { "label": "Groceries", "amount": 480, "note": "Need" },
-          { "label": "Electricity", "amount": 140, "note": "Need" },
-          { "label": "Takeaway and delivery", "amount": 260, "note": "Want" },
-          { "label": "Clothes", "amount": 150, "note": "Want" },
-          { "label": "Gym and streaming", "amount": 105, "note": "Want" }
+          {
+            "label": "Rent",
+            "amount": 1500,
+            "note": "Need"
+          },
+          {
+            "label": "Groceries",
+            "amount": 480,
+            "note": "Need"
+          },
+          {
+            "label": "Electricity",
+            "amount": 140,
+            "note": "Need"
+          },
+          {
+            "label": "Takeaway and delivery",
+            "amount": 260,
+            "note": "Want"
+          },
+          {
+            "label": "Clothes",
+            "amount": 150,
+            "note": "Want"
+          },
+          {
+            "label": "Gym and streaming",
+            "amount": 105,
+            "note": "Want"
+          }
         ]
       }
     },
@@ -92,7 +168,11 @@
       "body": "Seeing the split shows him where choice really lives.",
       "visual": {
         "type": "steps",
-        "lines": ["Needs: $1,500 + $480 + $140 = **$2,120**", "Wants: $260 + $150 + $105 = **$515**", "Most takeaway was after late shifts: a **feelings** trigger he can plan for"]
+        "lines": [
+          "Needs: $1,500 + $480 + $140 = **$2,120**",
+          "Wants: $260 + $150 + $105 = **$515**",
+          "Most takeaway was after late shifts: a **feelings** trigger he can plan for"
+        ]
       }
     },
     {
@@ -104,9 +184,18 @@
         "qtype": "match",
         "prompt": "Match each moment to its trigger.",
         "pairs": [
-          ["'Only 2 left in stock!'", "Urgency"],
-          ["A friend's holiday photos", "Social"],
-          ["Online shopping after a bad day", "Feelings"]
+          [
+            "'Only 2 left in stock!'",
+            "Urgency"
+          ],
+          [
+            "A friend's holiday photos",
+            "Social"
+          ],
+          [
+            "Online shopping after a bad day",
+            "Feelings"
+          ]
         ],
         "hint": "Ask what's pushing you: the clock, other people, or your mood?",
         "explanation": "Low stock rushes you (urgency), others' lives prompt comparison (social), and mood-driven buys are feelings.",
@@ -152,7 +241,11 @@
         "qtype": "blank",
         "prompt": "Fill the gap.",
         "sentence": "Waiting 24 hours before buying something unplanned gives the ___ time to fade.",
-        "options": ["trigger", "budget", "discount"],
+        "options": [
+          "trigger",
+          "budget",
+          "discount"
+        ],
         "answer": 0,
         "explanation": "Most urges fade with time. A short pause lets you decide with a clear head.",
         "difficulty": 1
@@ -182,9 +275,17 @@
         "qtype": "mcq",
         "prompt": "Payday hits and Sara buys $180 of clothes she hadn't planned, thinking 'I've earned it'. Which trigger is this?",
         "options": [
-          { "text": "Feelings" },
-          { "text": "Urgency", "why": "Nothing was rushing her. The push came from her mood about payday." },
-          { "text": "Social", "why": "No one else was involved. It was her own 'treat yourself' feeling." }
+          {
+            "text": "Feelings"
+          },
+          {
+            "text": "Urgency",
+            "why": "Nothing was rushing her. The push came from her mood about payday."
+          },
+          {
+            "text": "Social",
+            "why": "No one else was involved. It was her own 'treat yourself' feeling."
+          }
         ],
         "answer": 0,
         "explanation": "'I've earned it' on payday is an emotional trigger. Planning a small, budgeted treat beats an unplanned splurge.",
@@ -200,9 +301,17 @@
         "qtype": "mcq",
         "prompt": "You see headphones you love at 40% off, ending tonight. They weren't in your plan. What's the best first move?",
         "options": [
-          { "text": "Pause, check your budget, and buy only if it still fits" },
-          { "text": "Buy now: 40% off is too good to miss", "why": "A discount on something you didn't plan to buy is still extra spending." },
-          { "text": "Buy with buy now pay later so it doesn't hurt today", "why": "That hides the cost; it doesn't remove it." }
+          {
+            "text": "Pause, check your budget, and buy only if it still fits"
+          },
+          {
+            "text": "Buy now: 40% off is too good to miss",
+            "why": "A discount on something you didn't plan to buy is still extra spending."
+          },
+          {
+            "text": "Buy with buy now pay later so it doesn't hurt today",
+            "why": "That hides the cost; it doesn't remove it."
+          }
         ],
         "answer": 0,
         "explanation": "A sale saves money only if you'd have bought it anyway. Pause and check first.",
@@ -213,7 +322,7 @@
       "kind": "apply",
       "step": "apply",
       "title": "Spot your trigger",
-      "body": "Think of your last purchase you regretted. What pushed you: urgency, social, feelings or easy payment? Knowing your main trigger is the first defence.",
+      "body": "Think of your last purchase you regretted. What pushed you: urgency, social, feelings or easy payment? Teens, students and parents all have a favourite trigger. Knowing yours is the first defence.",
       "action": "Name your most common **spending trigger** and one way to pause next time."
     },
     {
@@ -232,12 +341,27 @@
       "concept": "needs-vs-wants",
       "qtype": "sort",
       "prompt": "Need or want?",
-      "buckets": ["Need", "Want"],
+      "buckets": [
+        "Need",
+        "Want"
+      ],
       "items": [
-        { "text": "Car registration", "bucket": 0 },
-        { "text": "Weekend brunch out", "bucket": 1 },
-        { "text": "Prescription medicine", "bucket": 0 },
-        { "text": "New sneakers (old ones are fine)", "bucket": 1 }
+        {
+          "text": "Car registration",
+          "bucket": 0
+        },
+        {
+          "text": "Weekend brunch out",
+          "bucket": 1
+        },
+        {
+          "text": "Prescription medicine",
+          "bucket": 0
+        },
+        {
+          "text": "New sneakers (old ones are fine)",
+          "bucket": 1
+        }
       ],
       "explanation": "Rego and medicine are essentials. Brunch out and spare sneakers are nice-to-haves.",
       "difficulty": 1
@@ -247,7 +371,19 @@
       "concept": "spending-triggers",
       "qtype": "mcq",
       "prompt": "A one-tap 'Pay in 4' button at checkout mainly works through which trigger?",
-      "options": [{ "text": "Easy payment" }, { "text": "Urgency", "why": "It isn't about time running out." }, { "text": "Social", "why": "No one else is involved." }],
+      "options": [
+        {
+          "text": "Easy payment"
+        },
+        {
+          "text": "Urgency",
+          "why": "It isn't about time running out."
+        },
+        {
+          "text": "Social",
+          "why": "No one else is involved."
+        }
+      ],
       "answer": 0,
       "explanation": "Splitting a price into small parts makes spending feel painless, so it's an easy-payment trigger.",
       "difficulty": 1

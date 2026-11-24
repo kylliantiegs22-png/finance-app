@@ -5,8 +5,14 @@
   "objective": "Calculate your net worth and monthly surplus from a list of assets, debts, income and bills",
   "minutes": 5,
   "sources": [
-    { "name": "ASIC Moneysmart: Budgeting", "url": "https://moneysmart.gov.au/budgeting" },
-    { "name": "Investopedia: Net worth (concept only)", "url": "https://www.investopedia.com/terms/n/networth.asp" }
+    {
+      "name": "ASIC Moneysmart: Budgeting",
+      "url": "https://moneysmart.gov.au/budgeting"
+    },
+    {
+      "name": "Investopedia: Net worth (concept only)",
+      "url": "https://www.investopedia.com/terms/n/networth.asp"
+    }
   ],
   "screens": [
     {
@@ -18,9 +24,17 @@
         "qtype": "mcq",
         "prompt": "Zoe earns $95,000 but owes more than she owns. Tom earns $55,000, has $20,000 saved and no debts. Who is better off **right now**?",
         "options": [
-          { "text": "Tom" },
-          { "text": "Zoe, because she earns more", "why": "Income is what flows in. What you're worth is what you own minus what you owe." },
-          { "text": "You can't compare them", "why": "You can, by comparing what each owns minus what each owes." }
+          {
+            "text": "Tom"
+          },
+          {
+            "text": "Zoe, because she earns more",
+            "why": "Income is what flows in. What you're worth is what you own minus what you owe."
+          },
+          {
+            "text": "You can't compare them",
+            "why": "You can, by comparing what each owns minus what each owes."
+          }
         ],
         "answer": 0,
         "explanation": "A high income doesn't mean wealth. Tom owns more than he owes; Zoe owes more than she owns.",
@@ -35,12 +49,27 @@
         "concept": "assets-and-liabilities",
         "qtype": "sort",
         "prompt": "Have a guess: is each one something you **own** or something you **owe**?",
-        "buckets": ["Own", "Owe"],
+        "buckets": [
+          "Own",
+          "Owe"
+        ],
         "items": [
-          { "text": "Money in savings", "bucket": 0 },
-          { "text": "Credit card balance", "bucket": 1 },
-          { "text": "Your super balance", "bucket": 0 },
-          { "text": "Car loan", "bucket": 1 }
+          {
+            "text": "Money in savings",
+            "bucket": 0
+          },
+          {
+            "text": "Credit card balance",
+            "bucket": 1
+          },
+          {
+            "text": "Your super balance",
+            "bucket": 0
+          },
+          {
+            "text": "Car loan",
+            "bucket": 1
+          }
         ],
         "explanation": "Savings and super are things you own (assets). Card balances and loans are money you owe (liabilities).",
         "difficulty": 1
@@ -51,31 +80,62 @@
       "step": "core",
       "title": "Net worth: own minus owe",
       "body": "Add up what you own, your [[assets]]. Subtract what you owe, your [[liabilities]]. What's left is your [[net worth]]. It can be negative, and that's common early on, especially with study or car debt. What matters is which way it's heading.",
-      "visual": { "type": "stat", "value": "Assets − Liabilities", "label": "= Net worth" }
+      "visual": {
+        "type": "stat",
+        "value": "Assets − Liabilities",
+        "label": "= Net worth"
+      }
     },
     {
       "kind": "teach",
       "step": "core",
       "title": "Surplus: in minus out",
       "body": "Net worth is a snapshot. Your monthly [[surplus]] is the flow: [[take-home pay]] minus what you spend. A surplus can grow your savings or pay down debt. A deficit means debt is growing or savings are shrinking.",
-      "visual": { "type": "stat", "value": "Take-home − Spending", "label": "= Monthly surplus (or deficit)" }
+      "visual": {
+        "type": "stat",
+        "value": "Take-home − Spending",
+        "label": "= Monthly surplus (or deficit)"
+      }
     },
     {
       "kind": "teach",
       "step": "example",
-      "title": "Worked example: Aisha, 27, Brisbane",
+      "title": "Worked example: Aisha, a nurse in Brisbane",
       "body": "Aisha lists everything she owns and owes.",
       "visual": {
         "type": "ledger",
         "title": "Aisha's balance sheet",
         "rows": [
-          { "label": "Savings account", "amount": 6500, "tone": "asset" },
-          { "label": "Car (sale value)", "amount": 9000, "tone": "asset" },
-          { "label": "Super", "amount": 14000, "tone": "asset" },
-          { "label": "Car loan", "amount": 5200, "tone": "debt" },
-          { "label": "Credit card", "amount": 1300, "tone": "debt" }
+          {
+            "label": "Savings account",
+            "amount": 6500,
+            "tone": "asset"
+          },
+          {
+            "label": "Car (sale value)",
+            "amount": 9000,
+            "tone": "asset"
+          },
+          {
+            "label": "Super",
+            "amount": 14000,
+            "tone": "asset"
+          },
+          {
+            "label": "Car loan",
+            "amount": 5200,
+            "tone": "debt"
+          },
+          {
+            "label": "Credit card",
+            "amount": 1300,
+            "tone": "debt"
+          }
         ],
-        "total": { "label": "Net worth", "amount": 23000 }
+        "total": {
+          "label": "Net worth",
+          "amount": 23000
+        }
       }
     },
     {
@@ -85,7 +145,11 @@
       "body": "She takes home **$4,200** a month.",
       "visual": {
         "type": "steps",
-        "lines": ["Rent $1,650 + groceries $600 + transport $250 + phone $120 + everything else $780 = **$3,400**", "$4,200 − $3,400 = **$800 surplus** a month", "That's $9,600 a year to save or clear debt"]
+        "lines": [
+          "Rent $1,650 + groceries $600 + transport $250 + phone $120 + everything else $780 = **$3,400**",
+          "$4,200 − $3,400 = **$800 surplus** a month",
+          "That's $9,600 a year to save or clear debt"
+        ]
       }
     },
     {
@@ -95,14 +159,23 @@
         "id": "u1l2-g-1",
         "concept": "assets-and-liabilities",
         "qtype": "tap",
-        "prompt": "Tap the **liability** on Ben's list.",
+        "prompt": "Ben is at uni. Tap the **liability** on his list.",
         "visual": {
           "type": "ledger",
           "title": "Ben's list",
           "rows": [
-            { "label": "Everyday account", "amount": 1800 },
-            { "label": "HECS-HELP debt", "amount": 18500 },
-            { "label": "Laptop (sale value)", "amount": 700 }
+            {
+              "label": "Everyday account",
+              "amount": 1800
+            },
+            {
+              "label": "HECS-HELP debt",
+              "amount": 18500
+            },
+            {
+              "label": "Laptop (sale value)",
+              "amount": 700
+            }
           ]
         },
         "answer": 1,
@@ -136,7 +209,11 @@
         "qtype": "blank",
         "prompt": "Fill the gap.",
         "sentence": "Take-home pay minus spending is your monthly ___.",
-        "options": ["surplus", "net worth", "salary"],
+        "options": [
+          "surplus",
+          "net worth",
+          "salary"
+        ],
         "answer": 0,
         "hint": "Net worth is a snapshot; this is the monthly flow.",
         "explanation": "Money left over each month is your surplus. If it's negative, it's a deficit.",
@@ -195,9 +272,17 @@
         "qtype": "mcq",
         "prompt": "Kai pays $500 off his credit card using money from his savings account. What happens to his net worth?",
         "options": [
-          { "text": "It stays the same" },
-          { "text": "It goes up by $500", "why": "His debt fell by $500, but his savings fell by $500 too." },
-          { "text": "It goes down by $500", "why": "He lost $500 of savings but also owes $500 less, so it cancels out." }
+          {
+            "text": "It stays the same"
+          },
+          {
+            "text": "It goes up by $500",
+            "why": "His debt fell by $500, but his savings fell by $500 too."
+          },
+          {
+            "text": "It goes down by $500",
+            "why": "He lost $500 of savings but also owes $500 less, so it cancels out."
+          }
         ],
         "answer": 0,
         "explanation": "Assets and liabilities both drop by $500, so net worth doesn't change. He does save on future card interest.",
@@ -208,7 +293,7 @@
       "kind": "apply",
       "step": "apply",
       "title": "Your snapshot",
-      "body": "Grab your banking app. Jot down roughly what you own and what you owe. No one sees this but you, and a rough number is fine.",
+      "body": "Grab your banking app. Jot down roughly what you own and what you owe. At uni? Count HECS-HELP as owed. Under 18? Count savings and anything you owe family. A rough number is fine.",
       "action": "Write down your **net worth** today, and check it again in three months."
     },
     {
@@ -249,7 +334,19 @@
       "concept": "assets-and-liabilities",
       "qtype": "mcq",
       "prompt": "Which of these is a liability?",
-      "options": [{ "text": "A buy now pay later balance" }, { "text": "A term deposit", "why": "That's money you own, so it's an asset." }, { "text": "Your super", "why": "Super belongs to you, so it's an asset." }],
+      "options": [
+        {
+          "text": "A buy now pay later balance"
+        },
+        {
+          "text": "A term deposit",
+          "why": "That's money you own, so it's an asset."
+        },
+        {
+          "text": "Your super",
+          "why": "Super belongs to you, so it's an asset."
+        }
+      ],
       "answer": 0,
       "explanation": "Anything you still have to pay back, like a BNPL balance, is a liability.",
       "difficulty": 1

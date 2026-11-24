@@ -5,8 +5,14 @@
   "objective": "Size an emergency fund in months of expenses and decide where to hold it",
   "minutes": 5,
   "sources": [
-    { "name": "ASIC Moneysmart: Emergency fund", "url": "https://moneysmart.gov.au/saving/emergency-fund" },
-    { "name": "APRA: Financial Claims Scheme", "url": "https://www.apra.gov.au/financial-claims-scheme-banks-building-societies-and-credit-unions" }
+    {
+      "name": "ASIC Moneysmart: Emergency fund",
+      "url": "https://moneysmart.gov.au/saving/emergency-fund"
+    },
+    {
+      "name": "APRA: Financial Claims Scheme",
+      "url": "https://www.apra.gov.au/financial-claims-scheme-banks-building-societies-and-credit-unions"
+    }
   ],
   "screens": [
     {
@@ -18,9 +24,17 @@
         "qtype": "mcq",
         "prompt": "Your car needs **$1,400** of repairs to get you to work tomorrow, and you have no savings. What usually happens next?",
         "options": [
-          { "text": "It goes on a credit card or loan, and you pay interest on it" },
-          { "text": "Nothing: the garage waits until you're ready", "why": "Most garages want payment when the job's done." },
-          { "text": "You skip work until payday", "why": "That can cost more than the repair. Most people borrow instead." }
+          {
+            "text": "It goes on a credit card or loan, and you pay interest on it"
+          },
+          {
+            "text": "Nothing: the garage waits until you're ready",
+            "why": "Most garages want payment when the job's done."
+          },
+          {
+            "text": "You skip work until payday",
+            "why": "That can cost more than the repair. Most people borrow instead."
+          }
         ],
         "answer": 0,
         "explanation": "Without a buffer, surprises become debt. An emergency fund turns a crisis into an inconvenience.",
@@ -50,7 +64,11 @@
       "step": "core",
       "title": "Cash for real surprises",
       "body": "An [[emergency fund]] is money set aside for things you can't plan: losing your job, an urgent repair, a medical bill. It's not for holidays or sales. Size it in months of **essential** expenses: about 3 months is a common start, closer to 6 if your income is irregular.",
-      "visual": { "type": "stat", "value": "3–6 months", "label": "of essential expenses: a common rule of thumb" }
+      "visual": {
+        "type": "stat",
+        "value": "3–6 months",
+        "label": "of essential expenses: a common rule of thumb"
+      }
     },
     {
       "kind": "teach",
@@ -60,8 +78,24 @@
       "visual": {
         "type": "compare",
         "items": [
-          { "title": "Good fit", "icon": "Vault", "points": ["Separate savings account", "Instant access", "Earns interest"] },
-          { "title": "Poor fit", "icon": "ChartLineUp", "points": ["Shares or crypto", "Everyday account", "Cash at home"] }
+          {
+            "title": "Good fit",
+            "icon": "Vault",
+            "points": [
+              "Separate savings account",
+              "Instant access",
+              "Earns interest"
+            ]
+          },
+          {
+            "title": "Poor fit",
+            "icon": "ChartLineUp",
+            "points": [
+              "Shares or crypto",
+              "Everyday account",
+              "Cash at home"
+            ]
+          }
         ]
       }
     },
@@ -72,7 +106,12 @@
       "body": "Chloe's essential costs are rent, groceries, bills and transport.",
       "visual": {
         "type": "steps",
-        "lines": ["Essentials: **$2,800** a month", "3 months: $2,800 × 3 = **$8,400** target", "Saving $175 a week: $8,400 ÷ $175 = **48 weeks**", "First milestone: $1,000, so small shocks are covered sooner"]
+        "lines": [
+          "Essentials: **$2,800** a month",
+          "3 months: $2,800 × 3 = **$8,400** target",
+          "Saving $175 a week: $8,400 ÷ $175 = **48 weeks**",
+          "First milestone: $1,000, so small shocks are covered sooner"
+        ]
       }
     },
     {
@@ -83,12 +122,27 @@
         "concept": "what-counts-as-emergency",
         "qtype": "sort",
         "prompt": "Is this a job for the emergency fund?",
-        "buckets": ["Emergency", "Not one"],
+        "buckets": [
+          "Emergency",
+          "Not one"
+        ],
         "items": [
-          { "text": "Sudden job loss", "bucket": 0 },
-          { "text": "Concert presale tickets", "bucket": 1 },
-          { "text": "Broken fridge", "bucket": 0 },
-          { "text": "Cheap flights for a holiday", "bucket": 1 }
+          {
+            "text": "Sudden job loss",
+            "bucket": 0
+          },
+          {
+            "text": "Concert presale tickets",
+            "bucket": 1
+          },
+          {
+            "text": "Broken fridge",
+            "bucket": 0
+          },
+          {
+            "text": "Cheap flights for a holiday",
+            "bucket": 1
+          }
         ],
         "hint": "Ask: is it unexpected and necessary, or just a good deal?",
         "explanation": "Emergencies are unexpected and necessary. Deals and treats belong in their own savings goals.",
@@ -102,12 +156,12 @@
         "id": "u1l6-g-2",
         "concept": "emergency-fund-size",
         "qtype": "numeric",
-        "prompt": "Jai's essentials cost $2,200 a month. What's a 3-month emergency fund target?",
-        "answer": 6600,
+        "prompt": "Maya is a single parent. Rent, groceries, the kids' costs and bills come to $2,900 a month. What's a 3-month emergency fund target?",
+        "answer": 8700,
         "prefix": "$",
-        "calc": "2200 * 3",
+        "calc": "2900 * 3",
         "hint": "Multiply monthly essentials by the number of months.",
-        "explanation": "$2,200 × 3 = $6,600.",
+        "explanation": "$2,900 × 3 = $8,700.",
         "difficulty": 1
       }
     },
@@ -120,9 +174,17 @@
         "qtype": "mcq",
         "prompt": "Where is the best place for Jai's emergency fund?",
         "options": [
-          { "text": "A separate savings account at an Australian bank" },
-          { "text": "Shares, so it grows faster", "why": "Share prices can fall just when you need the money, like during a downturn when jobs are lost." },
-          { "text": "His everyday account, so it's easy to reach", "why": "Mixed with spending money, it tends to get spent." }
+          {
+            "text": "A separate savings account at an Australian bank"
+          },
+          {
+            "text": "Shares, so it grows faster",
+            "why": "Share prices can fall just when you need the money, like during a downturn when jobs are lost."
+          },
+          {
+            "text": "His everyday account, so it's easy to reach",
+            "why": "Mixed with spending money, it tends to get spent."
+          }
         ],
         "answer": 0,
         "hint": "You want it safe, separate, and available within a day.",
@@ -139,7 +201,11 @@
         "qtype": "blank",
         "prompt": "Fill the gap.",
         "sentence": "Size your emergency fund using your ___ expenses, not everything you spend.",
-        "options": ["essential", "total", "yearly"],
+        "options": [
+          "essential",
+          "total",
+          "yearly"
+        ],
         "answer": 0,
         "explanation": "In a real emergency you'd cut wants, so only essentials need covering.",
         "difficulty": 1
@@ -184,9 +250,17 @@
         "qtype": "mcq",
         "prompt": "In a 50/30/20 budget, which bucket should regular emergency fund deposits come from?",
         "options": [
-          { "text": "The 20% for savings and extra debt" },
-          { "text": "The 50% for needs", "why": "Needs are today's essentials. The fund is saving for later." },
-          { "text": "The 30% for wants", "why": "It's not a treat; it's protection, so it belongs with savings." }
+          {
+            "text": "The 20% for savings and extra debt"
+          },
+          {
+            "text": "The 50% for needs",
+            "why": "Needs are today's essentials. The fund is saving for later."
+          },
+          {
+            "text": "The 30% for wants",
+            "why": "It's not a treat; it's protection, so it belongs with savings."
+          }
         ],
         "answer": 0,
         "explanation": "Building a buffer is saving, so it comes from the 20% bucket.",
@@ -197,7 +271,7 @@
       "kind": "apply",
       "step": "apply",
       "title": "Set your number",
-      "body": "Add up one month of your essentials: rent, groceries, bills, transport. Multiply by 3. That's your target. If you don't have a separate savings account, opening one takes minutes in most banking apps.",
+      "body": "Add up one month of essentials: rent, groceries, bills, transport, kids' costs. Multiply by 3. That's your target. Tight budget? Aim for one month first, then build. A separate savings account takes minutes to open.",
       "action": "Work out your **3-month emergency fund target**."
     },
     {
@@ -236,7 +310,19 @@
       "concept": "what-counts-as-emergency",
       "qtype": "mcq",
       "prompt": "Which is a true emergency-fund expense?",
-      "options": [{ "text": "An urgent dental bill" }, { "text": "A new TV on sale", "why": "A deal isn't an emergency." }, { "text": "A friend's hens weekend", "why": "Planned events need their own savings goal." }],
+      "options": [
+        {
+          "text": "An urgent dental bill"
+        },
+        {
+          "text": "A new TV on sale",
+          "why": "A deal isn't an emergency."
+        },
+        {
+          "text": "A friend's hens weekend",
+          "why": "Planned events need their own savings goal."
+        }
+      ],
       "answer": 0,
       "explanation": "Unexpected and necessary costs, like urgent dental work, are what the fund is for.",
       "difficulty": 1

@@ -5,8 +5,14 @@
   "objective": "Turn a vague goal into a dated, costed SMART goal with a weekly saving target",
   "minutes": 5,
   "sources": [
-    { "name": "ASIC Moneysmart: Saving", "url": "https://moneysmart.gov.au/saving" },
-    { "name": "ASIC Moneysmart: Savings goals calculator", "url": "https://moneysmart.gov.au/budgeting/savings-goals-calculator" }
+    {
+      "name": "ASIC Moneysmart: Saving",
+      "url": "https://moneysmart.gov.au/saving"
+    },
+    {
+      "name": "ASIC Moneysmart: Savings goals calculator",
+      "url": "https://moneysmart.gov.au/budgeting/savings-goals-calculator"
+    }
   ],
   "screens": [
     {
@@ -18,9 +24,17 @@
         "qtype": "mcq",
         "prompt": "Which goal is most likely to actually happen?",
         "options": [
-          { "text": "Save $2,000 for a laptop by 1 March, putting $80 aside each payday" },
-          { "text": "Save more money this year", "why": "There's no amount, date or plan, so there's nothing to check progress against." },
-          { "text": "Be better with money", "why": "A good intention, but it isn't something you can measure." }
+          {
+            "text": "Save $2,000 for a laptop by 1 March, putting $80 aside each payday"
+          },
+          {
+            "text": "Save more money this year",
+            "why": "There's no amount, date or plan, so there's nothing to check progress against."
+          },
+          {
+            "text": "Be better with money",
+            "why": "A good intention, but it isn't something you can measure."
+          }
         ],
         "answer": 0,
         "explanation": "A clear amount, a date and a regular step turn a wish into a plan you can track.",
@@ -53,7 +67,13 @@
       "body": "A good money goal is **Specific** (what exactly), **Measurable** (how many dollars), **Achievable** (fits your surplus), **Relevant** (matters to you) and **Time-bound** (by when). 'Travel more' becomes '$3,600 for Japan by 30 June'.",
       "visual": {
         "type": "steps",
-        "lines": ["S: Japan trip", "M: $3,600", "A: fits a $150 surplus", "R: seeing family", "T: by 30 June"]
+        "lines": [
+          "S: Japan trip",
+          "M: $3,600",
+          "A: fits a $150 surplus",
+          "R: seeing family",
+          "T: by 30 June"
+        ]
       }
     },
     {
@@ -61,7 +81,11 @@
       "step": "core",
       "title": "Turn it into a weekly number",
       "body": "Divide the cost by the weeks until your date. That's your weekly target. Then make it automatic: a scheduled transfer to a separate savings account on payday, so saving happens before spending.",
-      "visual": { "type": "stat", "value": "Goal ÷ weeks left", "label": "= your weekly saving target" }
+      "visual": {
+        "type": "stat",
+        "value": "Goal ÷ weeks left",
+        "label": "= your weekly saving target"
+      }
     },
     {
       "kind": "teach",
@@ -70,7 +94,13 @@
       "body": "Hana wants to visit family in Japan.",
       "visual": {
         "type": "steps",
-        "lines": ["Flights, stay and spending: **$3,600**", "36 weeks until 30 June", "$3,600 ÷ 36 = **$100 a week**", "Her surplus is $150 a week, so it's achievable", "Auto-transfer $100 each payday to a savings account"]
+        "lines": [
+          "Flights, stay and spending: **$3,600**",
+          "36 weeks until 30 June",
+          "$3,600 ÷ 36 = **$100 a week**",
+          "Her surplus is $150 a week, so it's achievable",
+          "Auto-transfer $100 each payday to a savings account"
+        ]
       }
     },
     {
@@ -82,9 +112,18 @@
         "qtype": "match",
         "prompt": "Match each part of Hana's goal to its SMART letter.",
         "pairs": [
-          ["A trip to Japan", "Specific"],
-          ["$3,600", "Measurable"],
-          ["By 30 June", "Time-bound"]
+          [
+            "A trip to Japan",
+            "Specific"
+          ],
+          [
+            "$3,600",
+            "Measurable"
+          ],
+          [
+            "By 30 June",
+            "Time-bound"
+          ]
         ],
         "hint": "Which part says what, which says how much, and which says when?",
         "explanation": "The trip is the specific what, $3,600 makes it measurable, and 30 June makes it time-bound.",
@@ -98,12 +137,12 @@
         "id": "u1l8-g-2",
         "concept": "weekly-saving-target",
         "qtype": "numeric",
-        "prompt": "Leo needs $2,400 for a used e-bike in 24 weeks. What's his weekly target?",
-        "answer": 100,
+        "prompt": "Zac, 16, is saving $480 for a second-hand guitar in 24 weeks. What's his weekly target?",
+        "answer": 20,
         "prefix": "$",
-        "calc": "2400 / 24",
+        "calc": "480 / 24",
         "hint": "Divide the cost by the number of weeks.",
-        "explanation": "$2,400 ÷ 24 = $100 a week.",
+        "explanation": "$480 ÷ 24 = $20 a week.",
         "difficulty": 1
       }
     },
@@ -116,9 +155,17 @@
         "qtype": "mcq",
         "prompt": "'Save $5,000 for a car.' Which SMART part is missing?",
         "options": [
-          { "text": "Time-bound: there's no date" },
-          { "text": "Measurable: there's no amount", "why": "$5,000 is the measurable part." },
-          { "text": "Specific: it doesn't say what for", "why": "It says what: a car." }
+          {
+            "text": "Time-bound: there's no date"
+          },
+          {
+            "text": "Measurable: there's no amount",
+            "why": "$5,000 is the measurable part."
+          },
+          {
+            "text": "Specific: it doesn't say what for",
+            "why": "It says what: a car."
+          }
         ],
         "answer": 0,
         "hint": "Look for what, how much and when.",
@@ -134,7 +181,13 @@
         "concept": "smart-goals",
         "qtype": "order",
         "prompt": "Put the steps for turning a vague goal into a plan in order.",
-        "items": ["Name the goal", "Put a price on it", "Set a date", "Divide by the weeks left", "Automate the transfer"],
+        "items": [
+          "Name the goal",
+          "Put a price on it",
+          "Set a date",
+          "Divide by the weeks left",
+          "Automate the transfer"
+        ],
         "explanation": "What, how much, by when, then the weekly number, then make it automatic.",
         "difficulty": 2
       }
@@ -146,11 +199,11 @@
         "id": "u1l8-i-1",
         "concept": "weekly-saving-target",
         "qtype": "numeric",
-        "prompt": "Tom is moving out in 30 weeks and needs $4,500 for bond, removalists and furniture. What's his weekly target?",
-        "answer": 150,
+        "prompt": "Nina and her partner are saving a $39,000 home deposit over 3 years (156 weeks). What's their weekly target?",
+        "answer": 250,
         "prefix": "$",
-        "calc": "4500 / 30",
-        "explanation": "$4,500 ÷ 30 weeks = $150 a week.",
+        "calc": "39000 / 156",
+        "explanation": "$39,000 ÷ 156 weeks = $250 a week, split between the two of them.",
         "difficulty": 2
       }
     },
@@ -178,9 +231,17 @@
         "qtype": "mcq",
         "prompt": "Sophie has no savings and two goals: a holiday and an emergency fund. What's a sensible order?",
         "options": [
-          { "text": "Build a small emergency buffer first, then save for the holiday" },
-          { "text": "Holiday first: the emergency fund can wait", "why": "Without a buffer, one surprise bill could wipe out the holiday savings or create debt." },
-          { "text": "Neither until she earns more", "why": "Small, regular amounts work at any income." }
+          {
+            "text": "Build a small emergency buffer first, then save for the holiday"
+          },
+          {
+            "text": "Holiday first: the emergency fund can wait",
+            "why": "Without a buffer, one surprise bill could wipe out the holiday savings or create debt."
+          },
+          {
+            "text": "Neither until she earns more",
+            "why": "Small, regular amounts work at any income."
+          }
         ],
         "answer": 0,
         "explanation": "A starter buffer protects every other goal from surprise bills turning into debt.",
@@ -191,7 +252,7 @@
       "kind": "apply",
       "step": "apply",
       "title": "Write your goal",
-      "body": "Pick one thing you'd love to save for. Give it a price and a date, then divide by the weeks left. Could you set up that transfer today?",
+      "body": "Pick one thing you'd love to save for: a laptop, a trip, a home deposit. Give it a price and a date, then divide by the weeks left. Could you set up that transfer today?",
       "action": "Write one **SMART goal** with its weekly saving target."
     },
     {
@@ -221,7 +282,19 @@
       "concept": "smart-goals",
       "qtype": "mcq",
       "prompt": "Which goal is SMART?",
-      "options": [{ "text": "Save $900 for a new phone by 1 August" }, { "text": "Save heaps this year", "why": "No amount or date." }, { "text": "Stop wasting money", "why": "Not measurable, and no date." }],
+      "options": [
+        {
+          "text": "Save $900 for a new phone by 1 August"
+        },
+        {
+          "text": "Save heaps this year",
+          "why": "No amount or date."
+        },
+        {
+          "text": "Stop wasting money",
+          "why": "Not measurable, and no date."
+        }
+      ],
       "answer": 0,
       "explanation": "It names what, how much and by when, so you can plan the weekly step.",
       "difficulty": 1

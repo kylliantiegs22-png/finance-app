@@ -7,7 +7,7 @@ export default defineConfig({
   workers: 1,
   reporter: [['list']],
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL: `http://localhost:${process.env.E2E_PORT ?? 4173}`,
     actionTimeout: 10_000,
     screenshot: 'only-on-failure',
     viewport: { width: 390, height: 844 },
@@ -17,8 +17,8 @@ export default defineConfig({
     launchOptions: { executablePath: process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium' },
   },
   webServer: {
-    command: 'npm run preview',
-    url: 'http://localhost:4173',
+    command: process.env.E2E_PORT ? `npx vite preview --port ${process.env.E2E_PORT} --strictPort --outDir ${process.env.E2E_OUT ?? 'dist'}` : 'npm run preview',
+    url: `http://localhost:${process.env.E2E_PORT ?? 4173}`,
     reuseExistingServer: true,
     timeout: 60_000,
   },
