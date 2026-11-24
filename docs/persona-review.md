@@ -192,3 +192,80 @@ Played: "the kids are in bed", 20:30, "Stop worrying about debt", 5-minute goal;
 | F12 | minor | Olivia, Liam, Sarah, Emma | Topics | Tax on casual pay, payslip allowances, super checks, car loan vs deposit, investing, home loans. | **Recommendation**, not marked down: they belong to Units 3, 4, 5, 6 and 8, and Home says honestly "Unlocked · lessons coming soon". |
 | F13 | minor | all five | Harness | `favicon.svg ERR_ABORTED` from reloading mid-request. | **Fixed in the harness** (waits for network idle; filters this single case). Not an app fault. |
 | F14 | minor | Emma, Jake | Review tab | "Up to 8 a day — 16 more wait for tomorrow" can feel like a growing backlog. | **Won't fix**: the 8-a-day cap is research-backed (`docs/learning-research.md`); the wording already says they're saved so they stay spaced out. Watch in later rounds. |
+
+---
+
+## Round 2 (after fixes F1–F9, F13)
+
+Built from commit `a7db804`; cleared storage; same five personas, same schedules. Everything below is re-scored from what the transcripts and screenshots in `docs/persona-evidence/round-2/` show.
+
+### What the personas saw that is new
+
+- Lesson 1.4 now has a screen "Paid weekly or fortnightly?": "Multiply weekly pay by 52, or fortnightly pay by 26, then divide by 12. Don't use ×4 or ×2: a year has 52 weeks, so some months hold an extra payday." and the practice "Jake takes home $420 a week from his casual shifts. What is that per month, to budget with?" (all five saw it).
+- The 50/30/20 screen: "If rent pushes needs to 60% or more, trim wants first and still save something."
+- Examples and apply screens for other lives: "Maya is a single parent. Rent, groceries, the kids' costs and bills come to $2,900 a month", "Zac, 16, is saving $480 for a second-hand guitar", "Nina and her partner are saving a $39,000 home deposit over 3 years", "Lena is a nurse earning $60,000", "At uni? Count HECS-HELP as owed. Under 18? Count savings and anything you owe family.", "Find your take-home pay … a payslip, your banking app, or just your pocket money."
+- No retried question came after a "Your money" screen in any of the 40 lessons played (checked mechanically across all five transcripts: 8 apply screens each, 0 retries after them).
+- After Unit 1, Home says "You've done every lesson that's ready. More units are being written; until then, reviews keep what you learned fresh." (all five).
+- Onboarding chips now include "I get home" and "the kids are in bed", and the first feedback reads "Not quite: it buys less".
+
+### Scores
+
+| Category (max) | Emma 16 | Jake 20 | Olivia 24 | Liam 28 | Sarah 35 |
+| --- | --- | --- | --- | --- | --- |
+| Educational value (20) | 16 | 17 | 16 | 16 | 16 |
+| Content accuracy & quality (15) | 12 | 13 | 13 | 13 | 13 |
+| UX & navigation (15) | 13 | 13 | 13 | 13 | 13 |
+| Functionality & reliability (15) | 14 | 14 | 14 | 14 | 14 |
+| Engagement & interactivity (10) | 8 | 8 | 8 | 8 | 8 |
+| Accessibility & inclusivity (10) | 9 | 9 | 9 | 9 | 8 |
+| Visual design (5) | 4 | 4 | 4 | 4 | 4 |
+| Performance (5) | 4 | 4 | 4 | 4 | 4 |
+| Privacy & security (5) | 5 | 5 | 5 | 5 | 5 |
+| **Total (100)** | **85** | **87** | **86** | **86** | **85** |
+| Band | Excellent | Excellent | Excellent | Excellent | Excellent |
+
+All five clear 80 overall and 16 of 20 on educational value, **but this round is not final**: reading the transcripts closely found a new major (F15) and a minor (F16) that are still open, and the code changed to fix them.
+
+### Measured facts (`docs/persona-evidence/round-2/*.json`)
+
+| | Emma | Jake | Olivia | Liam | Sarah |
+| --- | --- | --- | --- | --- | --- |
+| Finished Unit 1 + check | yes (2 attempts) | yes (2) | yes (2) | yes (2) | yes (2) |
+| XP / streak | 659 / 5 | 712 / 6 | 734 / 6 | 710 / 4 | 715 / 7 (1 freeze) |
+| First screen, cold, 4× CPU + slow 4G | 1.73 s | 1.69 s | 1.91 s | 1.56 s | 1.66 s |
+| Screen change median / p95 | 127 / 189 ms | 127 / 191 ms | 130 / 193 ms | 117 / 163 ms | 122 / 185 ms |
+| Console problems | 0 | 0 | 0 | 0 | 0 |
+| Reminder (.ics) correct | yes | yes | declined | yes | yes |
+
+### Real-life plans (re-done from the Round 2 lessons, arithmetic checked)
+
+**Emma** – weekly income $40 + $90 ÷ 2 = **$85**. Needs $25 (phone $12, bus $8, school $5) · wants $30 · saving $30. (Needs are small because her parents cover housing, so saving 35% is fine.) Essentials a month = $25 × 52 ÷ 12 = **$108.33** (1 month emergency fund). Goal: $680 laptop in 40 weeks = **$17 a week**; at $30 a week she gets there in **22.7 weeks**. This week: set a $30 transfer after her café shift. *Complete and correct.* Not covered (Unit 4): tax on casual pay.
+
+**Jake** – take-home **$560 a week**; needs $240 + $85 + $30 + $15 + $25 = **$395 (70.5%)**; wants $80; saving $85 (zero-based, because needs > 50% and the lesson now says trim wants first). Essentials a month = $395 × 52 ÷ 12 = **$1,711.67**; 3 months = **$5,135**; first milestone one month = about **20 weeks** at $85. Laptop ($1,400 in 28 weeks = $50 a week) waits until the one-month buffer is built. This week: move $85 on payday into a separate savings account. *Complete and correct.* Not covered (Unit 3): HECS-HELP repayments.
+
+**Olivia** – take-home **$2,250 a fortnight** (read from her payslip). Needs $1,250 (55.6%) · wants $450 (20%) · saving $550 (24.4%). Essentials a month = $1,250 × 26 ÷ 12 = **$2,708.33**; 3 months = **$8,125** = about **14.8 fortnights** of saving. Goal: $4,200 holiday in 52 weeks = **$81 a week**. This week: check her payslip shows a super line. *Complete and correct.* Not covered: why her tax is what it is and whether super is 12% (Units 4 and 5).
+
+**Liam** – take-home **$5,900 a month**; needs $3,400 (57.6%) · wants $1,300 · saving and debt $1,200. Emergency fund 3 × $3,400 = **$10,200**, leaving $7,800 of his $18,000 for the deposit. Deposit **$62,400** in 156 weeks: ($62,400 − $7,800) ÷ 156 = **$350 a week = $1,516.67 a month**. That is **$316.67 more** than he saves, so he trims wants to about **$983**, or lengthens the plan to **45.5 months**. This week: set up the separate savings transfer. *Complete and correct.* Not covered (Units 3, 8): car loan vs deposit, how big a deposit should be.
+
+**Sarah** – take-home **$4,300 a month**; needs $3,510 (**81.6%**) so 50/30/20 doesn't apply; she trims wants to $250 and has **$540** for saving and the card. Emergency fund: 3 months would be $10,530, so she follows "Tight budget? Aim for one month first": **$3,510**, saving $300 a month (**$69.23 a week**, about 11.7 months). The other $240 a month clears the $2,400 card in 10 months. This week: open a separate savings account and set the $69 transfer. *Complete and correct.* Not covered (Unit 3): which of the card or the buffer to do first (she used the app's "extra debt repayment" idea but couldn't judge the order).
+
+### Feedback (what changed since Round 1)
+
+**Strengths (all five).** The plans can now be built from the lessons alone (weekly and fortnightly pay, needs above 50%, tight-budget emergency fund). The examples include each of them somewhere: Emma ("Zac, 16", pocket money), Jake ("Ben is at uni", HECS-HELP, "Jake takes home $420 a week"), Olivia ("Lena is a nurse", "Shifts vary? Use a quieter pay."), Liam (Nina's home deposit), Sarah ("Maya is a single parent"). Feedback is kind and specific, the streak repair flow worked again for Jake and Sarah, and nothing logged a console problem.
+
+**Weaknesses (open).**
+- **F15 (major).** Onboarding says "We'll use it to point you at the right units", but the goal each persona chose is stored and never used: Sarah chose "Stop worrying about debt", Liam "Start investing", and nothing on their path reflected it.
+- **F16 (minor).** Home says "Your 10 minutes" even though Emma and Sarah chose 5 minutes and Liam 15 (`emma-home-day1.png`).
+- Examples for teens are still few: Emma met a teen example in 1.8 and teen lines in three apply screens out of about 120 screens. (recommendation: a teen track in a later unit.)
+- Leaving a lesson still restarts it (F11); no placement check (F10); the review cap message can read as a backlog (F14).
+- Interactive practice always uses the lesson's numbers; the learner's own numbers only appear in the ungraded apply screen.
+
+**Recommendations (not marked down).** Debt vs buffer priority (Unit 3), tax and payslip detail for casual and shift workers (Unit 4), super checks (Unit 5), investing and a first home (Units 6–8), and a lighter "teen" path.
+
+### New findings
+
+| # | Sev | Personas | Where | Evidence | Status |
+| --- | --- | --- | --- | --- | --- |
+| F15 | major | Olivia, Liam, Sarah (any who pick a goal) | Onboarding → Home | Copy promises units will be pointed at; `profile.goal` is read nowhere. | **Fixed.** Copy now "We'll mark where it lives on your path. Nothing gets locked." and each unit that serves the goal shows a "Your goal" tag (`src/logic/goals.ts`). Tests: `usability.spec.ts › the goal chosen in onboarding is reflected on the path, as promised` (failed before: "Expected substring: Your goal … element(s) not found"); `goals.test.ts` (2). |
+| F16 | minor | Emma, Sarah, Liam | Home today card | "Your 10 minutes" regardless of the chosen 5/10/15. | **Fixed.** Title uses the chosen target. Test: `usability.spec.ts › Home names the daily target the learner chose` (failed before: expected "Your 5 minutes", received "Your 10 minutes"). |
+| F17 | minor | all | Harness | `test-results/` is wiped by Playwright, deleting transcripts. | **Fixed.** Transcripts go to `persona-transcripts/` (git-ignored). |
