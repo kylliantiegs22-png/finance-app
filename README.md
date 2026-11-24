@@ -30,6 +30,9 @@ That runs, in order:
 | Unit tests | `npm test` | Streak (freezes, 24 h repair), Leitner scheduling (1/3/7/16/35/90 days, cap 8, interleaving, sure/guess), unlocks and the 80 % gate, .ics, validator — all with a faked clock |
 | Build | `npm run build` | Static output + Workbox service worker + manifest |
 | End to end | `npm run e2e` | Playwright at 390×844: onboarding, every Unit 1 lesson, review node, a failed then passed unit check, Unit 2 unlocks, reload persistence, next-day review on a faked clock, offline reload, manifest, axe WCAG 2 AA scans. Screenshots go to `screenshots/` |
+| Webapp sweep | `npm run sweep` | Python Playwright (the `webapp-testing` skill) drives every screen of the built app and fails on any console error, page error or failed request |
+
+Resilience and accessibility suites (`tests/e2e/resilience.spec.ts`, `a11y.spec.ts`, `usability.spec.ts`) cover corrupt, older and missing saved data, a full quota, private mode, offline reload mid-lesson, two tabs, keyboard and screen-reader flows. Findings and fixes are logged in `docs/validation-report.md`.
 
 Playwright uses the Chromium at `/opt/pw-browsers/chromium`; set `CHROMIUM_PATH` to use another.
 

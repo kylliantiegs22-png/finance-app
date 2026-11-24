@@ -134,7 +134,7 @@ Re-checked and fine: the new copy ("Match every pair, then check", the banner te
 | # | Severity | WCAG | Where | Evidence | Status |
 | --- | --- | --- | --- | --- | --- |
 | P2-A1 | minor | 2.5.8 | Banner buttons | "OK" could be narrower than 44 px. | **Fixed**: `min-width: 44px`. |
-| P2-A2 | — | 2.4.7 | Heading focus after a tap | Checked that the A1 fix doesn't paint a focus ring after a finger tap: the active element is the `H2`, `:focus-visible` = false. | **No bug** (probe output in the pass-2 log). |
+| P2-A2 | — | 2.4.7 | Heading focus after a tap | Checked that the A1 fix doesn't paint a focus ring after a finger tap: the active element is the `H2`, `:focus-visible` = false. | **No bug**: a pass-2 probe script reported the active element as `H2` with `:focus-visible` false after a tap. |
 
 Newly covered by axe (WCAG 2.0/2.1/2.2 A/AA): save warning in a session, error screen, leave dialog, chip help (light), lesson (dark), storage notice: **0 violations**. Keyboard: chip help and the node card close with Escape; the leave dialog traps focus and returns it.
 
