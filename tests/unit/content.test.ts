@@ -51,3 +51,23 @@ describe('ics reminder input safety', () => {
     expect(ics).toContain('SUMMARY:After my morning coffee\\, I do my Tally lesson');
   });
 });
+
+import { readFileSync } from 'node:fs';
+describe('examples reflect more than one life stage', () => {
+  const all = [1, 2, 3, 4, 5, 6, 7, 8].map((i) => readFileSync(`content/unit1/1.${i}.json`, 'utf8')).join('\n');
+  it.each([
+    ['a teenager on pocket money or a first job', /pocket money|, 16,|Under 18/],
+    ['a uni student', /uni student|At uni|HECS-HELP/],
+    ['a nurse or shift worker', /nurse|Shifts vary/],
+    ['a parent', /single parent|kids' costs/],
+    ['a home deposit goal', /home deposit/],
+  ])('has %s', (_label, re) => {
+    expect(all).toMatch(re as RegExp);
+  });
+  it('teaches weekly and fortnightly pay to a month with 52 and 26, not x4', () => {
+    const l = JSON.parse(readFileSync('content/unit1/1.4.json', 'utf8'));
+    const body = JSON.stringify(l.screens);
+    expect(body).toMatch(/Multiply weekly pay by 52, or fortnightly pay by 26, then divide by 12/);
+    expect(body).toMatch(/trim wants first and still save something/);
+  });
+});

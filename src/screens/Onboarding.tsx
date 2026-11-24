@@ -27,7 +27,7 @@ const GOALS = [
   { id: 'invest', icon: 'ChartLineUp', title: 'Start investing' },
   { id: 'pro', icon: 'Buildings', title: 'Go deeper (pro finance)' },
 ];
-const CUES = ['my morning coffee', 'I sit on the train', 'lunch', 'I brush my teeth tonight'];
+const CUES = ['my morning coffee', 'I get on the bus or train', 'lunch', 'I get home', 'the kids are in bed', 'I brush my teeth tonight'];
 
 export function Onboarding() {
   const [step, setStep] = useState(0);
@@ -82,7 +82,7 @@ export function Onboarding() {
           </div>
           {checked ? (
             <div className={`inline-fb ${isCorrect(FIRST, a) ? 'fb-right' : 'fb-wrong'}`} role="status">
-              <strong>{isCorrect(FIRST, a) ? 'Correct! +5 XP' : 'Not quite — less'}</strong>
+              <strong>{isCorrect(FIRST, a) ? 'Correct! +5 XP' : 'Not quite: it buys less'}</strong>
               <p>{FIRST.explanation}</p>
             </div>
           ) : null}
