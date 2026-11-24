@@ -1,0 +1,141 @@
+/* Pop-up calculator for maths questions. Uses tokens only (see tokens.css). */
+
+/* Header button that opens it: a small indigo pill so it's easy to spot and reach. */
+.calc-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  min-width: var(--touch);
+  padding: 0 var(--s3);
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--primary-tint);
+  color: var(--link);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex: none;
+  transition: transform var(--t-fast) var(--ease-out);
+  animation: pop-in var(--t-base) var(--spring);
+}
+.calc-open:active {
+  transform: scale(0.94);
+}
+.calc-open:focus-visible,
+.calc-key:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 2px;
+}
+@media (max-width: 360px) {
+  .calc-open-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+}
+
+/* Above the feedback sheet, so it can still be opened to check the maths afterwards. */
+.calc-scrim {
+  z-index: 45;
+}
+.calc-sheet {
+  z-index: 50;
+  gap: var(--s3);
+  padding-top: var(--s4);
+}
+.calc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: calc(var(--s2) * -1);
+}
+.calc-head .sheet-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+}
+.calc-head .sheet-title svg {
+  color: var(--link);
+}
+
+.calc-display {
+  background: var(--sunken);
+  border-radius: var(--r-card);
+  padding: var(--s3) var(--s4);
+  text-align: right;
+  min-height: 84px;
+  display: grid;
+  align-content: end;
+  gap: 2px;
+}
+.calc-expr {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+  overflow-wrap: anywhere;
+  line-height: 1.2;
+}
+.calc-result {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--emerald-text);
+  min-height: 1.4em;
+}
+
+.calc-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s2);
+}
+.calc-key {
+  --key-bg: var(--surface);
+  --key-fg: var(--text);
+  --key-base: var(--border-strong);
+  min-height: 56px;
+  border: 2px solid var(--border);
+  border-radius: var(--r-card);
+  background: var(--key-bg);
+  color: var(--key-fg);
+  font-size: 1.375rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 3px 0 var(--key-base);
+  margin-bottom: 3px;
+  transition: transform var(--t-fast) var(--ease-out);
+  touch-action: manipulation;
+}
+.calc-key:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 var(--key-base);
+}
+.calc-fn {
+  --key-bg: var(--sunken);
+  --key-fg: var(--muted);
+}
+.calc-op {
+  --key-bg: var(--primary-tint);
+  --key-fg: var(--link);
+  border-color: transparent;
+}
+.calc-eq {
+  --key-bg: var(--indigo);
+  --key-fg: #fff;
+  --key-base: var(--indigo-base);
+  border-color: transparent;
+}
+.calc-wide {
+  grid-column: span 2;
+}
+
+@media (max-height: 640px) {
+  .calc-key {
+    min-height: var(--touch);
+  }
+  .calc-display {
+    min-height: 68px;
+  }
+}

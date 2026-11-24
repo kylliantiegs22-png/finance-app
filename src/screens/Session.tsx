@@ -8,6 +8,8 @@ import { Icon } from '../ui/Icon';
 import { QuestionView } from '../ui/QuestionView';
 import { RichText } from '../ui/RichText';
 import { Visual } from '../ui/Visual';
+import { Calculator } from '../ui/Calculator';
+import { isMathsQuestion } from '../lib/calc';
 import { useModal } from '../ui/useModal';
 import { retryPosition } from '../logic/session';
 
@@ -57,6 +59,8 @@ export function Session({ mode, items, onExit, onDone, lessonId, title }: { mode
   const closeExit = useCallback(() => setConfirmExit(false), []);
   useModal(exitRef, confirmExit, closeExit);
   const [hint, setHint] = useState(false);
+  const [calcOpen, setCalcOpen] = useState(false);
+  const closeCalc = useCallback(() => setCalcOpen(false), []);
   const started = useRef(Date.now());
   const questionsTotal = useMemo(() => items.filter((i) => i.screen.kind === 'question').length, [items]);
   const live = useRef<HTMLDivElement>(null);
@@ -144,6 +148,7 @@ export function Session({ mode, items, onExit, onDone, lessonId, title }: { mode
   const ready = q && answer ? isComplete(q, answer) : false;
   const why = fb && q && answer ? (!fb.correct && wrongWhy(q, answer)) || q.explanation : '';
   const right = fb && q && !fb.correct ? correctText(q) : null;
+  const showCalc = !!q && isMathsQuestion(q);
 
   return (
     <div className={`session mode-${mode}`} data-testid="session" data-step={s.step} data-kind={s.kind}>
@@ -153,6 +158,12 @@ export function Session({ mode, items, onExit, onDone, lessonId, title }: { mode
           <Icon name="X" size={24} />
         </button>
         <ProgressBar value={progress} tone={mode === 'review' || mode === 'unit-review' ? 'reward' : 'growth'} label="Session progress" />
+        {showCalc && (
+          <button type="button" className="calc-open" aria-haspopup="dialog" onClick={() => setCalcOpen(true)} data-testid="calc-open">
+            <Icon name="Calculator" size={20} weight="duotone" />
+            <span className="calc-open-label">Calculator</span>
+          </button>
+        )}
         {roll > 0 && (
           <span key={roll} className="roll-chip" aria-live="polite">
             <Icon name="Lightning" weight="fill" size={14} /> On a roll
@@ -306,6 +317,12 @@ export function Session({ mode, items, onExit, onDone, lessonId, title }: { mode
           </Button>
         </div>
       )}
+
+      <Calculator
+        open={calcOpen && showCalc}
+        onClose={closeCalc}
+        onUse={q?.qtype === 'numeric' && !fb ? (v) => setAnswer({ qtype: 'numeric', v }) : undefined}
+      />
 
       {confirmExit && (
         <div className="scrim" onClick={() => setConfirmExit(false)}>
