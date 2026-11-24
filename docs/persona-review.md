@@ -375,7 +375,7 @@ Built from commit `38fde43`. Each persona ran in a brand-new browser context. A 
 - **Plan (complete, correct).** Take-home **$2,250 a fortnight** (from her payslip). Needs $1,250 (55.6%), wants $450 (20%), saving $550 (24.4%). Essentials a month = $1,250 × 26 ÷ 12 = **$2,708.33**; 3 months = **$8,125** (about 14.8 fortnights of saving). Holiday goal $4,200 in 52 weeks = **$81 a week**. This week: confirm her payslip shows a super line.
 
 **Liam, 28 (software tester, first home in 3 years)** — *87.*
-- **Strengths.** "Nina and her partner are saving a $39,000 home deposit over 3 years (156 weeks)" is his goal; the offset lesson ("interest charged on $470,000") fits his future loan; his path shows **UNIT 6 YOUR GOAL** for "Start investing", and Unit 6 honestly says "Unlocked · lessons coming soon" is not shown yet because it stays locked, so nothing misleads him. He can change the goal in Profile.
+- **Strengths.** "Nina and her partner are saving a $39,000 home deposit over 3 years (156 weeks)" is his goal; the offset lesson ("interest charged on $470,000") fits his future loan; his path shows **UNIT 6 YOUR GOAL** for "Start investing". Unit 6 is still locked behind Unit 2 and its banner shows its topic ("Risk, return, diversification"), so he can see where investing will live without being misled. He can change the goal in Profile.
 - **Weaknesses.** Car loan vs deposit and how big a deposit must be belong to Units 3 and 8. Practice uses the lesson's numbers; his own appear only in the apply screen.
 - **Recommendations.** A first-home unit (LMI, schemes, Queensland duty: Unit 8).
 - **Plan (complete, correct).** Take-home **$5,900 a month**. Needs $3,400 (57.6%), wants $1,300, saving and debt $1,200. Emergency fund 3 × $3,400 = **$10,200**, leaving **$7,800** of his $18,000 for the deposit. Deposit **$62,400** in 156 weeks = ($62,400 − $7,800) ÷ 156 = **$350 a week = $1,516.67 a month**, which is **$316.67 more** than he saves; he trims wants to about **$983** (or lengthens to **45.5 months**). This week: set up the separate savings transfer.
@@ -391,7 +391,7 @@ Built from commit `38fde43`. Each persona ran in a brand-new browser context. A 
 - **Educational value 16–17, not 18+.** Practice is always on the lesson's numbers; the learner's own numbers are an ungraded step; teen content is thin; the priority questions (debt vs buffer, tax on casual pay, payslip lines, deposit size) are real needs that belong to later units.
 - **Accuracy 12–13.** ATO figures come from the curriculum's ATO-cited table because ato.gov.au and moneysmart.gov.au block automated access here (only the Financial Claims Scheme figures were read directly, on apra.gov.au); "about 3 months" and 50/30/20 are labelled as common rules of thumb.
 - **UX 13.** Leaving restarts a lesson (F11); no placement check (F10); the review cap line can read as a backlog (F14); F21 below.
-- **Functionality 14.** Zero console errors and no lost progress in any of the 5 × 4 playthroughs, but a retry-ordering bug (F4) and two copy promises (F5, F15) reached users before a round caught them, which a 15 would need not to have happened in a clean sequence.
+- **Functionality 14.** No app console errors and no lost progress in any of the 5 × 4 playthroughs (Round 1's logged "problems" were the harness's own cancelled favicon requests), but a retry-ordering bug (F4) and two copy promises (F5, F15) reached users before a round caught them, which a 15 would need not to have happened in a clean sequence.
 - **Accessibility 8–9.** No skip link (won't-fix); small inline glossary targets; limited family types in examples.
 - **Visual 4, performance 4.** First load is 1.7–1.8 s under throttling; screen changes about 125 ms.
 - **Privacy 5.** The only residue to mention is that a copy of unreadable saved data is kept on the device (never sent anywhere).
@@ -414,4 +414,4 @@ No blocker and no major is open. F10, F11, F14 and F21 are minor and recorded as
 - Every persona ≥ 16 of 20 on educational value: **16, 17, 16, 16, 16**.
 - Each plan complete and correct (arithmetic checked in code): **yes**.
 - No blocker or major open: **yes**.
-- `npm run check`: passed on `38fde43` (see below for the final run).
+- `npm run check`: **passed** on the final tree (validator: 8 lessons + unit check valid; typecheck clean; 75 unit tests; build; 30 Playwright tests with axe; screen sweep 0 problems).
