@@ -8,6 +8,8 @@ import { play } from '../lib/fx';
 import { Badge, Button, Chip, Ring } from '../ui/bits';
 import { Icon } from '../ui/Icon';
 import { go } from '../router';
+import { isGoalUnit } from '../logic/goals';
+import { DAILY_GOALS } from '../logic/xp';
 
 const OFFSETS = [0, 0.9, 1.35, 0.9, 0, -0.9, -1.35, -0.9];
 const STEP_X = 46;
@@ -118,7 +120,7 @@ export function Home() {
           <div className="today-text">
             <div className="today-kicker">Today's goal · {goal} XP</div>
             <div className="today-title">
-              {todayXp >= goal ? 'Goal met. Nice work.' : st === 'repair' ? 'Repair your streak today' : st === 'done-today' ? 'Streak safe for today' : 'Your 10 minutes'}
+              {todayXp >= goal ? 'Goal met. Nice work.' : st === 'repair' ? 'Repair your streak today' : st === 'done-today' ? 'Streak safe for today' : `Your ${DAILY_GOALS.find((g) => g.xp === goal)?.minutes ?? 10} minutes`}
             </div>
             <div className="today-cue">
               <Icon name="Clock" size={16} /> After {s.profile.cue}, I do my lesson
@@ -169,7 +171,10 @@ function UnitSection({ unit, s, open, setOpen }: { unit: (typeof course.units)[n
       <div className="unit-banner">
         <Badge icon={unit.icon} tone={passed ? 'success' : unlocked ? 'brand' : 'locked'} size={56} />
         <div className="unit-text">
-          <div className="unit-kicker">Unit {unit.id}</div>
+          <div className="unit-kicker">
+            Unit {unit.id}
+            {isGoalUnit(s.profile.goal, unit.id) && <span className="goal-tag">Your goal</span>}
+          </div>
           <h2 className="unit-title">{unit.title}</h2>
           <div className="unit-meta">
             {passed ? (

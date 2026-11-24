@@ -108,7 +108,7 @@ export function Onboarding() {
       {step === 2 && (
         <section className="onboard-body enter">
           <h1 className="title">What brings you here?</h1>
-          <p className="muted">We'll use it to point you at the right units. Nothing gets locked.</p>
+          <p className="muted">We'll mark where it lives on your path. Nothing gets locked.</p>
           <div className="choice-list" role="group" aria-label="Your goal">
             {GOALS.map((g) => (
               <button key={g.id} type="button" aria-pressed={goal === g.id} className={`choice ${goal === g.id ? 'choice-on' : ''}`} onClick={() => { play('tap', 0.35); setGoal(g.id); }} data-goal={g.id}>

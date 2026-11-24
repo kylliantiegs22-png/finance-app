@@ -552,6 +552,17 @@ button.chip {
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+.goal-tag {
+  margin-left: var(--s2);
+  padding: 1px 8px;
+  border-radius: var(--r-pill);
+  background: var(--primary-tint);
+  color: var(--link);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
 .unit-title {
   font-size: 1.125rem;
   font-weight: 700;

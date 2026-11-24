@@ -7,7 +7,7 @@
 Per persona it writes (all under docs/persona-evidence/round-N/):
   <id>.json   facts: console problems, timings, ics check, final state
   <id>-*.png  screenshots at key moments
-and test-results/persona/<id>.md : a transcript of every screen's text (not committed).
+and persona-transcripts/<id>.md : a transcript of every screen's text (not committed).
 """
 import argparse, json, os, re, statistics, sys, time
 from datetime import datetime, timedelta
@@ -223,7 +223,7 @@ class Run:
         if p['download_ics']:
             with pg.expect_download() as d:
                 pg.click('[data-testid="ob-ics"]')
-            path = ROOT / 'test-results' / 'persona' / f'{self.pid}.ics'
+            path = ROOT / 'persona-transcripts' / f'{self.pid}.ics'
             path.parent.mkdir(parents=True, exist_ok=True)
             d.value.save_as(str(path))
             ics = path.read_text()
@@ -382,7 +382,7 @@ def run_persona(pw, pid, rnd):
     r.facts['shots'] = r.shots
     r.facts['backups'] = page.evaluate("Object.keys(localStorage).filter(k => k.startsWith('tally.backup.')).length")
     (ev / f'{pid}.json').write_text(json.dumps(r.facts, indent=2))
-    out = ROOT / 'test-results' / 'persona'
+    out = ROOT / 'persona-transcripts'
     out.mkdir(parents=True, exist_ok=True)
     (out / f'{pid}.md').write_text('\n'.join(r.t))
     browser.close()

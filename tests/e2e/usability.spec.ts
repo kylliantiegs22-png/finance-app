@@ -129,3 +129,26 @@ test('the pay-cycle question teaches weekly pay x 52 / 12, not x 4', async () =>
   expect(q.answer).toBeCloseTo((420 * 52) / 12, 5);
   expect(q.explanation).toMatch(/52/);
 });
+
+test('the goal chosen in onboarding is reflected on the path, as promised', async ({ page }) => {
+  for (const [goal, unit, others] of [
+    ['debt', 3, [4, 6]],
+    ['pay', 4, [3, 6]],
+    ['invest', 6, [3, 4]],
+  ] as const) {
+    await page.goto('/');
+    await page.evaluate((s) => localStorage.setItem('tally.v1', s), JSON.stringify({ v: 1, onboarded: true, xp: 5, profile: { goal } }));
+    await page.reload();
+    await expect(page.getByTestId(`unit-${unit}`).locator('.goal-tag')).toContainText('Your goal');
+    for (const o of others) await expect(page.getByTestId(`unit-${o}`).locator('.goal-tag')).toHaveCount(0);
+  }
+});
+
+test('Home names the daily target the learner chose (5, 10 or 15 minutes)', async ({ page }) => {
+  for (const [xp, mins] of [[30, 5], [60, 10], [100, 15]] as const) {
+    await page.goto('/');
+    await page.evaluate((s) => localStorage.setItem('tally.v1', s), JSON.stringify({ v: 1, onboarded: true, xp: 5, profile: { dailyGoal: xp } }));
+    await page.reload();
+    await expect(page.locator('.today-title')).toHaveText(`Your ${mins} minutes`);
+  }
+});
