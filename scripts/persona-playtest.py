@@ -43,7 +43,8 @@ class Run:
         self.where = 'start'
         page.on('console', lambda m: self.note(f'console.{m.type}', m.text) if m.type in ('error', 'warning') else None)
         page.on('pageerror', lambda e: self.note('pageerror', str(e)))
-        page.on('requestfailed', lambda r: self.note('requestfailed', f'{r.url} {r.failure}'))
+        # A reload cancels the previous page's in-flight favicon request; that is harness noise, not an app fault.
+        page.on('requestfailed', lambda r: None if ('favicon' in r.url and 'ERR_ABORTED' in str(r.failure)) else self.note('requestfailed', f'{r.url} {r.failure}'))
 
     def note(self, kind, text):
         self.problems.append(f'[{self.where}] {kind}: {text}')
