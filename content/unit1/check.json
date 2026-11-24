@@ -1,0 +1,146 @@
+{
+  "id": "1.check",
+  "unit": 1,
+  "title": "Unit 1 check: Money foundations",
+  "passPct": 80,
+  "questions": [
+    {
+      "id": "u1c-01",
+      "concept": "finance-areas",
+      "qtype": "mcq",
+      "prompt": "A supermarket chain deciding how to fund new stores is mostly a question of…",
+      "options": [{ "text": "Corporate finance" }, { "text": "Personal finance", "why": "It's a business's money, not a household's." }, { "text": "Financial markets", "why": "Markets are where things trade; this is the company's own funding choice." }],
+      "answer": 0,
+      "explanation": "How businesses raise and spend money is corporate finance.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1c-02",
+      "concept": "net-worth",
+      "qtype": "numeric",
+      "prompt": "Assets: $4,200 savings, $21,000 super and a $7,500 car. Debts: $12,000 HECS-HELP and $800 on a card. What's the net worth?",
+      "answer": 19900,
+      "prefix": "$",
+      "calc": "4200 + 21000 + 7500 - 12000 - 800",
+      "explanation": "$32,700 owned − $12,800 owed = $19,900.",
+      "difficulty": 2
+    },
+    {
+      "id": "u1c-03",
+      "concept": "monthly-surplus",
+      "qtype": "numeric",
+      "prompt": "Take-home pay $3,900 a month. Spending: rent $1,600, food $550, transport $220, bills $310, other $700. What's the surplus?",
+      "answer": 520,
+      "prefix": "$",
+      "calc": "3900 - (1600 + 550 + 220 + 310 + 700)",
+      "explanation": "Spending is $3,380, so $3,900 − $3,380 = $520.",
+      "difficulty": 2
+    },
+    {
+      "id": "u1c-04",
+      "concept": "needs-vs-wants",
+      "qtype": "sort",
+      "prompt": "Need or want?",
+      "buckets": ["Need", "Want"],
+      "items": [
+        { "text": "Car insurance for driving to work", "bucket": 0 },
+        { "text": "Upgrading to the newest phone", "bucket": 1 },
+        { "text": "Water bill", "bucket": 0 },
+        { "text": "Takeaway three nights a week", "bucket": 1 }
+      ],
+      "explanation": "Insurance you rely on and utilities are needs; upgrades and frequent takeaway are wants.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1c-05",
+      "concept": "spending-triggers",
+      "qtype": "mcq",
+      "prompt": "'Only 3 left at this price!' is designed to trigger…",
+      "options": [{ "text": "Urgency" }, { "text": "Social comparison", "why": "No one else is involved; it's about time and scarcity." }, { "text": "A feelings-based treat", "why": "It works on fear of missing out on a deal, which is urgency." }],
+      "answer": 0,
+      "explanation": "Scarcity and countdowns push quick decisions: an urgency trigger.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1c-06",
+      "concept": "budget-50-30-20",
+      "qtype": "numeric",
+      "prompt": "Take-home pay is $4,800 a month. Under 50/30/20, how much goes to savings and extra debt repayments?",
+      "answer": 960,
+      "prefix": "$",
+      "calc": "4800 * 0.2",
+      "explanation": "20% of $4,800 = $960.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1c-07",
+      "concept": "zero-based-budget",
+      "qtype": "truefalse",
+      "prompt": "In a zero-based budget, any money left at the end of the month is your savings.",
+      "answer": false,
+      "explanation": "Savings is planned up front as its own line. Every dollar gets a job before the month starts.",
+      "difficulty": 2
+    },
+    {
+      "id": "u1c-08",
+      "concept": "categorising-spending",
+      "qtype": "tap",
+      "prompt": "Tap the transaction that belongs in **transport**.",
+      "visual": {
+        "type": "statement",
+        "title": "Everyday account",
+        "rows": [
+          { "date": "12 Nov", "desc": "Café, Fortitude Valley", "amount": -6.5 },
+          { "date": "13 Nov", "desc": "go card top-up", "amount": -30 },
+          { "date": "14 Nov", "desc": "Supermarket", "amount": -112.8 }
+        ]
+      },
+      "answer": 1,
+      "explanation": "A public transport card top-up is transport. The café is eating out and the supermarket is groceries.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1c-09",
+      "concept": "emergency-fund-size",
+      "qtype": "numeric",
+      "prompt": "Essentials cost $2,650 a month. What's a 3-month emergency fund target?",
+      "answer": 7950,
+      "prefix": "$",
+      "calc": "2650 * 3",
+      "explanation": "$2,650 × 3 = $7,950.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1c-10",
+      "concept": "fcs-guarantee",
+      "qtype": "mcq",
+      "prompt": "Ana has $280,000 in savings at one Australian bank. What does the Financial Claims Scheme protect?",
+      "options": [{ "text": "Up to {{fcsLimit}} of it" }, { "text": "All $280,000", "why": "The limit is {{fcsLimit}} per person, per bank." }, { "text": "None of it: only term deposits are covered", "why": "Savings accounts are covered too." }],
+      "answer": 0,
+      "explanation": "Protection is capped at {{fcsLimit}} per account holder per bank, so $30,000 sits above the limit.",
+      "difficulty": 2
+    },
+    {
+      "id": "u1c-11",
+      "concept": "offset-account",
+      "qtype": "numeric",
+      "prompt": "A $450,000 home loan has $35,000 sitting in its offset account. On what balance is interest charged?",
+      "answer": 415000,
+      "prefix": "$",
+      "calc": "450000 - 35000",
+      "explanation": "$450,000 − $35,000 = $415,000.",
+      "difficulty": 2
+    },
+    {
+      "id": "u1c-12",
+      "concept": "weekly-saving-target",
+      "qtype": "numeric",
+      "prompt": "You want $2,600 for a course that starts in 20 weeks. What's your weekly saving target?",
+      "answer": 130,
+      "prefix": "$",
+      "calc": "2600 / 20",
+      "explanation": "$2,600 ÷ 20 weeks = $130 a week.",
+      "difficulty": 1
+    }
+  ]
+}

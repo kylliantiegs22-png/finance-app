@@ -1,0 +1,14 @@
+{
+  "super": "Superannuation: money your employer (and you) put aside for retirement, invested until you can access it, usually from age 60.",
+  "asx": "The Australian Securities Exchange, Australia's main market for buying and selling shares.",
+  "compounding": "Earning returns on your past returns, so growth builds on itself over time.",
+  "assets": "Things you own that have money value: savings, super, a car you could sell.",
+  "liabilities": "Money you owe: credit cards, loans, HECS-HELP, buy now pay later balances.",
+  "net worth": "What you own minus what you owe. A snapshot of your finances at one moment.",
+  "surplus": "Money left over after spending in a period. If spending is higher, it's a deficit.",
+  "take-home pay": "Your pay after tax and other deductions: the amount that lands in your bank account.",
+  "buy now pay later": "A way to split a purchase into instalments. It's a form of credit, regulated in Australia, and late fees can apply.",
+  "emergency fund": "Cash kept aside only for unexpected, necessary costs like job loss or urgent repairs.",
+  "financial claims scheme": "An Australian Government guarantee on deposits at authorised banks, building societies and credit unions, up to a limit per person per institution.",
+  "offset account": "A transaction account linked to a home loan. Its balance is subtracted from the loan balance before interest is worked out."
+}

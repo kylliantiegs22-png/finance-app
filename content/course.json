@@ -1,0 +1,629 @@
+{
+ "units": [
+  {
+   "id": 1,
+   "title": "Money foundations",
+   "focus": "Budgeting, saving, banking",
+   "icon": "Wallet",
+   "season": "personal",
+   "prereqs": [],
+   "lessons": [
+    {
+     "id": "1.1",
+     "title": "What finance is",
+     "objective": "Name the three areas of finance (personal, corporate, markets) and why money decisions compound over a lifetime"
+    },
+    {
+     "id": "1.2",
+     "title": "Income, spending and net worth",
+     "objective": "Calculate your net worth and monthly surplus from a list of assets, debts, income and bills"
+    },
+    {
+     "id": "1.3",
+     "title": "Needs, wants and spending psychology",
+     "objective": "Sort expenses into needs and wants and spot two common spending triggers"
+    },
+    {
+     "id": "1.4",
+     "title": "Building a budget",
+     "objective": "Build a 50/30/20 budget and a zero-based budget from the same payslip"
+    },
+    {
+     "id": "1.5",
+     "title": "Tracking spending",
+     "objective": "Choose a tracking method and categorise a month of transactions"
+    },
+    {
+     "id": "1.6",
+     "title": "The emergency fund",
+     "objective": "Size an emergency fund in months of expenses and decide where to hold it"
+    },
+    {
+     "id": "1.7",
+     "title": "Australian bank accounts",
+     "objective": "Compare transaction, savings and offset accounts, bonus-interest conditions, and the Financial Claims Scheme guarantee"
+    },
+    {
+     "id": "1.8",
+     "title": "Setting money goals",
+     "objective": "Turn a vague goal into a dated, costed SMART goal with a weekly saving target"
+    }
+   ],
+   "mission": "Work out your own net worth and monthly surplus on paper."
+  },
+  {
+   "id": 2,
+   "title": "The maths of money",
+   "focus": "Interest, inflation, time value",
+   "icon": "Percent",
+   "season": "personal",
+   "prereqs": [
+    1
+   ],
+   "lessons": [
+    {
+     "id": "2.1",
+     "title": "Percentages that matter",
+     "objective": "Calculate percentage change, percentage points and returns without a calculator mistake"
+    },
+    {
+     "id": "2.2",
+     "title": "Simple vs compound interest",
+     "objective": "Compute both for the same deposit and explain why the gap grows"
+    },
+    {
+     "id": "2.3",
+     "title": "The Rule of 72",
+     "objective": "Estimate doubling time for any rate"
+    },
+    {
+     "id": "2.4",
+     "title": "Inflation and real returns",
+     "objective": "Convert a nominal return into a real return using CPI"
+    },
+    {
+     "id": "2.5",
+     "title": "Interest rate labels",
+     "objective": "Tell apart nominal, effective annual and comparison rates, and compounding frequency"
+    },
+    {
+     "id": "2.6",
+     "title": "Future value",
+     "objective": "Project the future value of a lump sum and of regular deposits"
+    },
+    {
+     "id": "2.7",
+     "title": "Present value",
+     "objective": "Discount a future amount to today and explain the time value of money"
+    },
+    {
+     "id": "2.8",
+     "title": "Risk and return, first look",
+     "objective": "Explain why higher expected return comes with higher risk, using savings vs shares"
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "title": "Debt and credit",
+   "focus": "Cards, loans, HECS, credit scores",
+   "icon": "CreditCard",
+   "season": "personal",
+   "prereqs": [
+    2
+   ],
+   "lessons": [
+    {
+     "id": "3.1",
+     "title": "Good debt, bad debt",
+     "objective": "Judge a debt by its cost, purpose and whether it funds an appreciating asset"
+    },
+    {
+     "id": "3.2",
+     "title": "Credit cards",
+     "objective": "Explain interest-free periods, minimum repayments and how long a balance takes to clear"
+    },
+    {
+     "id": "3.3",
+     "title": "Buy now pay later",
+     "objective": "Describe how BNPL works, its fees and its regulation as credit"
+    },
+    {
+     "id": "3.4",
+     "title": "Personal and car loans",
+     "objective": "Compare loans by comparison rate, fees and total cost"
+    },
+    {
+     "id": "3.5",
+     "title": "Credit scores and reports",
+     "objective": "Read an Australian credit report and list what raises or lowers your score"
+    },
+    {
+     "id": "3.6",
+     "title": "HECS-HELP",
+     "objective": "Explain indexation and compulsory repayments and when paying extra makes sense"
+    },
+    {
+     "id": "3.7",
+     "title": "Paying off debt",
+     "objective": "Compare the avalanche and snowball methods on a worked example"
+    },
+    {
+     "id": "3.8",
+     "title": "When debt goes wrong",
+     "objective": "Know hardship options and where to get free help (National Debt Helpline)"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "title": "Tax in Australia",
+   "focus": "Income tax, deductions, CGT, GST",
+   "icon": "Receipt",
+   "season": "personal",
+   "prereqs": [
+    1
+   ],
+   "lessons": [
+    {
+     "id": "4.1",
+     "title": "How income tax works",
+     "objective": "Calculate tax on a salary using marginal rates and the tax-free threshold"
+    },
+    {
+     "id": "4.2",
+     "title": "Your payslip",
+     "objective": "Read gross pay, PAYG withholding, super and net pay; know what a TFN does"
+    },
+    {
+     "id": "4.3",
+     "title": "Medicare levy and surcharge",
+     "objective": "Explain the 2% levy and when the surcharge applies without private hospital cover"
+    },
+    {
+     "id": "4.4",
+     "title": "Deductions",
+     "objective": "Decide whether a common expense is deductible and what records you need"
+    },
+    {
+     "id": "4.5",
+     "title": "Lodging a tax return",
+     "objective": "Walk through myTax, pre-fill, the 31 October deadline and refunds vs debts"
+    },
+    {
+     "id": "4.6",
+     "title": "Offsets and rebates",
+     "objective": "Tell a deduction from an offset and show how each changes tax payable"
+    },
+    {
+     "id": "4.7",
+     "title": "Capital gains tax",
+     "objective": "Calculate a capital gain, including the 50% discount for assets held over 12 months"
+    },
+    {
+     "id": "4.8",
+     "title": "Side income, ABN and GST",
+     "objective": "Know when you need an ABN, when GST registration applies, and how side income is taxed"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "title": "Superannuation",
+   "focus": "Super, contributions, retirement",
+   "icon": "PiggyBank",
+   "season": "personal",
+   "prereqs": [
+    4
+   ],
+   "lessons": [
+    {
+     "id": "5.1",
+     "title": "What super is",
+     "objective": "Explain the super guarantee, preservation and why super is taxed concessionally"
+    },
+    {
+     "id": "5.2",
+     "title": "Getting paid super",
+     "objective": "Check your employer pays the correct rate each payday under Payday Super"
+    },
+    {
+     "id": "5.3",
+     "title": "Choosing a fund",
+     "objective": "Compare funds on fees, returns and insurance using the YourSuper comparison tool"
+    },
+    {
+     "id": "5.4",
+     "title": "Investment options",
+     "objective": "Match growth, balanced and conservative options to age and risk tolerance"
+    },
+    {
+     "id": "5.5",
+     "title": "Contributions and caps",
+     "objective": "Tell concessional from non-concessional contributions and know the caps exist"
+    },
+    {
+     "id": "5.6",
+     "title": "Boosting super",
+     "objective": "Compare salary sacrifice, personal deductible contributions, co-contribution and LISTO"
+    },
+    {
+     "id": "5.7",
+     "title": "First Home Super Saver",
+     "objective": "Explain how FHSS lets you save a home deposit inside super"
+    },
+    {
+     "id": "5.8",
+     "title": "Retirement income",
+     "objective": "Describe accessing super, account-based pensions and the Age Pension basics"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "title": "Investing fundamentals",
+   "focus": "Risk, return, diversification",
+   "icon": "ChartPieSlice",
+   "season": "investing",
+   "prereqs": [
+    2
+   ],
+   "lessons": [
+    {
+     "id": "6.1",
+     "title": "Why invest",
+     "objective": "Show how inflation erodes cash and what long-run investing aims to do"
+    },
+    {
+     "id": "6.2",
+     "title": "Asset classes",
+     "objective": "Describe cash, bonds, property and shares by risk, return and income"
+    },
+    {
+     "id": "6.3",
+     "title": "Measuring risk",
+     "objective": "Explain volatility, drawdown and sequencing risk in plain terms"
+    },
+    {
+     "id": "6.4",
+     "title": "Diversification",
+     "objective": "Show how combining assets lowers risk without equally lowering return"
+    },
+    {
+     "id": "6.5",
+     "title": "Your investor profile",
+     "objective": "Set a time horizon and risk tolerance for a goal"
+    },
+    {
+     "id": "6.6",
+     "title": "Fees matter",
+     "objective": "Calculate how a 1% fee difference compounds over 30 years"
+    },
+    {
+     "id": "6.7",
+     "title": "Investing vs paying debt",
+     "objective": "Compare an investment's expected return with a debt's guaranteed cost"
+    },
+    {
+     "id": "6.8",
+     "title": "Behavioural biases",
+     "objective": "Spot loss aversion, recency bias, overconfidence and herd behaviour"
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "title": "Shares, funds and markets",
+   "focus": "ASX, ETFs, bonds, property",
+   "icon": "ChartLineUp",
+   "season": "investing",
+   "prereqs": [
+    6
+   ],
+   "lessons": [
+    {
+     "id": "7.1",
+     "title": "What a share is",
+     "objective": "Explain ownership, voting and how share prices are set"
+    },
+    {
+     "id": "7.2",
+     "title": "How the ASX works",
+     "objective": "Describe brokers, orders, settlement and CHESS vs custodial holdings"
+    },
+    {
+     "id": "7.3",
+     "title": "Dividends and franking credits",
+     "objective": "Calculate a grossed-up dividend and the franking credit's tax effect"
+    },
+    {
+     "id": "7.4",
+     "title": "ETFs and managed funds",
+     "objective": "Compare ETFs, managed funds and LICs on cost, structure and tax"
+    },
+    {
+     "id": "7.5",
+     "title": "Index vs active investing",
+     "objective": "Explain why most active funds trail their index after fees"
+    },
+    {
+     "id": "7.6",
+     "title": "Bonds",
+     "objective": "Explain coupon, yield and why bond prices fall when rates rise"
+    },
+    {
+     "id": "7.7",
+     "title": "Property and REITs",
+     "objective": "Compare direct property, REITs and their costs, gearing and liquidity"
+    },
+    {
+     "id": "7.8",
+     "title": "Your first investment plan",
+     "objective": "Set up dollar-cost averaging, record-keeping and CGT tracking"
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "title": "Big life money",
+   "focus": "Home buying, insurance, advice, scams",
+   "icon": "House",
+   "season": "investing",
+   "prereqs": [
+    3,
+    5
+   ],
+   "lessons": [
+    {
+     "id": "8.1",
+     "title": "Rent vs buy",
+     "objective": "Compare the true costs of renting and owning over 10 years"
+    },
+    {
+     "id": "8.2",
+     "title": "Saving a deposit",
+     "objective": "Explain deposit size, LMI and government home buyer schemes"
+    },
+    {
+     "id": "8.3",
+     "title": "Mortgages",
+     "objective": "Compare variable, fixed, split, offset and redraw"
+    },
+    {
+     "id": "8.4",
+     "title": "Buying costs in Queensland",
+     "objective": "List stamp duty, concessions, conveyancing and inspection costs"
+    },
+    {
+     "id": "8.5",
+     "title": "Insurance",
+     "objective": "Decide which of health, income protection, life, home and car cover you need"
+    },
+    {
+     "id": "8.6",
+     "title": "Wills and estate basics",
+     "objective": "Explain wills, powers of attorney and super death benefit nominations"
+    },
+    {
+     "id": "8.7",
+     "title": "Financial advice",
+     "objective": "Check an adviser on ASIC's register and tell general from personal advice"
+    },
+    {
+     "id": "8.8",
+     "title": "Scams",
+     "objective": "Recognise investment, crypto and impersonation scams and report them to Scamwatch"
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "title": "Economics for investors",
+   "focus": "Cycle, inflation, RBA, AUD",
+   "icon": "Globe",
+   "season": "pro",
+   "prereqs": [
+    6
+   ],
+   "lessons": [
+    {
+     "id": "9.1",
+     "title": "Supply and demand",
+     "objective": "Predict price changes from shifts in supply or demand"
+    },
+    {
+     "id": "9.2",
+     "title": "GDP and the business cycle",
+     "objective": "Identify the cycle's phases and how markets behave in each"
+    },
+    {
+     "id": "9.3",
+     "title": "Inflation and CPI",
+     "objective": "Explain how the ABS measures inflation and why it matters to savers"
+    },
+    {
+     "id": "9.4",
+     "title": "The RBA and interest rates",
+     "objective": "Explain the cash rate, the inflation target and how rate moves reach your loan"
+    },
+    {
+     "id": "9.5",
+     "title": "Government budgets",
+     "objective": "Tell fiscal from monetary policy and read a deficit figure"
+    },
+    {
+     "id": "9.6",
+     "title": "Jobs and wages",
+     "objective": "Read unemployment and wage price data"
+    },
+    {
+     "id": "9.7",
+     "title": "The Australian dollar",
+     "objective": "Explain what moves the AUD and how it affects imports and global shares"
+    },
+    {
+     "id": "9.8",
+     "title": "How macro moves markets",
+     "objective": "Link rates, inflation and growth to share and bond prices, including the yield curve"
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "title": "Accounting and financial statements",
+   "focus": "Reading company accounts",
+   "icon": "Notebook",
+   "season": "pro",
+   "prereqs": [
+    2
+   ],
+   "lessons": [
+    {
+     "id": "10.1",
+     "title": "Why accounting exists",
+     "objective": "Explain who uses accounts and what accounting standards do"
+    },
+    {
+     "id": "10.2",
+     "title": "The accounting equation",
+     "objective": "Apply assets = liabilities + equity to simple transactions"
+    },
+    {
+     "id": "10.3",
+     "title": "The income statement",
+     "objective": "Read revenue, expenses, EBITDA, EBIT and net profit"
+    },
+    {
+     "id": "10.4",
+     "title": "The balance sheet",
+     "objective": "Read assets, liabilities and equity, current vs non-current"
+    },
+    {
+     "id": "10.5",
+     "title": "The cash flow statement",
+     "objective": "Tell operating, investing and financing cash flow apart"
+    },
+    {
+     "id": "10.6",
+     "title": "Accrual vs cash",
+     "objective": "Explain why profit and cash differ, including depreciation"
+    },
+    {
+     "id": "10.7",
+     "title": "Financial ratios",
+     "objective": "Calculate margins, ROE, current ratio and debt-to-equity"
+    },
+    {
+     "id": "10.8",
+     "title": "Reading an annual report",
+     "objective": "Find the key numbers in a real ASX company's annual report"
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "title": "Corporate finance",
+   "focus": "Capital, NPV, IRR, financing",
+   "icon": "Buildings",
+   "season": "pro",
+   "prereqs": [
+    10
+   ],
+   "lessons": [
+    {
+     "id": "11.1",
+     "title": "How companies raise money",
+     "objective": "Compare debt, equity, IPOs and capital raisings"
+    },
+    {
+     "id": "11.2",
+     "title": "Cost of capital",
+     "objective": "Explain cost of debt, cost of equity and WACC"
+    },
+    {
+     "id": "11.3",
+     "title": "CAPM",
+     "objective": "Estimate cost of equity with the risk-free rate, beta and equity risk premium"
+    },
+    {
+     "id": "11.4",
+     "title": "NPV",
+     "objective": "Decide whether to accept a project using net present value"
+    },
+    {
+     "id": "11.5",
+     "title": "IRR and payback",
+     "objective": "Calculate IRR and payback and know when they mislead"
+    },
+    {
+     "id": "11.6",
+     "title": "Capital structure",
+     "objective": "Explain how leverage changes risk and return for shareholders"
+    },
+    {
+     "id": "11.7",
+     "title": "Dividends and buybacks",
+     "objective": "Compare ways companies return cash to shareholders"
+    },
+    {
+     "id": "11.8",
+     "title": "Working capital",
+     "objective": "Explain the cash conversion cycle and why profitable firms can run out of cash"
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "title": "Valuation and portfolios",
+   "focus": "Multiples, DCF, asset allocation",
+   "icon": "Scales",
+   "season": "pro",
+   "prereqs": [
+    7,
+    11
+   ],
+   "lessons": [
+    {
+     "id": "12.1",
+     "title": "What valuation means",
+     "objective": "Tell price from value and name the three main approaches"
+    },
+    {
+     "id": "12.2",
+     "title": "Multiples",
+     "objective": "Use P/E, EV/EBITDA and P/B to compare companies"
+    },
+    {
+     "id": "12.3",
+     "title": "Dividend discount model",
+     "objective": "Value a steady dividend payer with the Gordon growth model"
+    },
+    {
+     "id": "12.4",
+     "title": "DCF, part 1",
+     "objective": "Forecast free cash flow from the financial statements"
+    },
+    {
+     "id": "12.5",
+     "title": "DCF, part 2",
+     "objective": "Discount free cash flow, add terminal value and get to value per share"
+    },
+    {
+     "id": "12.6",
+     "title": "Asset allocation",
+     "objective": "Build a portfolio mix for a goal and time horizon"
+    },
+    {
+     "id": "12.7",
+     "title": "Rebalancing and performance",
+     "objective": "Rebalance a portfolio and judge returns against a benchmark and the Sharpe ratio"
+    },
+    {
+     "id": "12.8",
+     "title": "Capstone",
+     "objective": "Value a real ASX company end to end and write a one-paragraph investment view"
+    }
+   ]
+  }
+ ]
+}

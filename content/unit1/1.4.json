@@ -1,0 +1,269 @@
+{
+  "id": "1.4",
+  "unit": 1,
+  "title": "Building a budget",
+  "objective": "Build a 50/30/20 budget and a zero-based budget from the same payslip",
+  "minutes": 6,
+  "sources": [
+    { "name": "ASIC Moneysmart: How to do a budget", "url": "https://moneysmart.gov.au/budgeting/how-to-do-a-budget" },
+    { "name": "ATO: Tax rates – Australian residents", "url": "https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" },
+    { "name": "ATO: Super guarantee", "url": "https://www.ato.gov.au/tax-rates-and-codes/key-superannuation-rates-and-thresholds/super-guarantee" }
+  ],
+  "screens": [
+    {
+      "kind": "question",
+      "step": "hook",
+      "q": {
+        "id": "u1l4-hook",
+        "concept": "budget-50-30-20",
+        "qtype": "slider",
+        "prompt": "A popular budgeting rule splits take-home pay three ways. Guess: what share goes to **savings and extra debt repayments**?",
+        "min": 0,
+        "max": 50,
+        "step": 5,
+        "answer": 20,
+        "tolerance": 5,
+        "suffix": "%",
+        "explanation": "The 50/30/20 rule puts 20% towards savings and paying debt down faster, 50% to needs and 30% to wants.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "try",
+      "q": {
+        "id": "u1l4-try-1",
+        "concept": "what-a-budget-is",
+        "qtype": "mcq",
+        "prompt": "What is a budget, really?",
+        "options": [
+          { "text": "A plan for where your money goes, made before you spend it" },
+          { "text": "A record of what you already spent", "why": "That's tracking. A budget is the plan you track against." },
+          { "text": "A way to cut out everything fun", "why": "A good budget plans for fun too, so you can enjoy it guilt-free." }
+        ],
+        "answer": 0,
+        "explanation": "A budget is a plan made in advance. Tracking (next lesson) shows how reality compares to the plan.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Method 1: the 50/30/20 split",
+      "body": "Start from [[take-home pay]], not salary. Then aim for about **50%** on needs, **30%** on wants and **20%** on savings and extra debt repayments. It's a starting point, not a law: in a pricey rental market, needs often run higher.",
+      "visual": {
+        "type": "split",
+        "title": "50/30/20",
+        "segments": [
+          { "label": "Needs", "pct": 50 },
+          { "label": "Wants", "pct": 30 },
+          { "label": "Savings & extra debt", "pct": 20 }
+        ]
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Method 2: zero-based",
+      "body": "Give **every dollar a job** before the month starts. Income minus everything you plan to spend, save and repay should equal **$0**. Savings isn't 'what's left over'; it's a line in the plan, like rent.",
+      "visual": { "type": "stat", "value": "Income − planned dollars = $0", "label": "Nothing left unassigned" }
+    },
+    {
+      "kind": "teach",
+      "step": "example",
+      "title": "Worked example: Lena's payslip",
+      "body": "Lena earns $60,000 a year, paid monthly. Tax comes out before her pay lands. Her employer's {{sgRate}} [[super]] goes to her fund on top, not into her bank.",
+      "visual": {
+        "type": "payslip",
+        "employer": "Harbour Health, Sydney",
+        "period": "Monthly pay · 2026-27",
+        "rows": [
+          { "label": "Salary", "amount": 5000, "kind": "earn" },
+          { "label": "Tax withheld (PAYG)", "amount": 802, "kind": "deduct", "fact": "payslip60kTaxMonthly" },
+          { "label": "Employer super (to fund)", "amount": 600, "kind": "info", "fact": "payslip60kSuperMonthly" }
+        ],
+        "net": 4198
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "example",
+      "title": "Lena's 50/30/20",
+      "body": "She rounds take-home pay to **$4,200** to keep it simple.",
+      "visual": {
+        "type": "split",
+        "segments": [
+          { "label": "Needs", "pct": 50, "amount": 2100 },
+          { "label": "Wants", "pct": 30, "amount": 1260 },
+          { "label": "Savings & extra debt", "pct": 20, "amount": 840 }
+        ]
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l4-g-1",
+        "concept": "take-home-pay",
+        "qtype": "tap",
+        "prompt": "Tap the line that belongs to Lena but **never reaches her bank account**.",
+        "visual": {
+          "type": "payslip",
+          "employer": "Harbour Health, Sydney",
+          "period": "Monthly pay · 2026-27",
+          "rows": [
+            { "label": "Salary", "amount": 5000, "kind": "earn" },
+            { "label": "Tax withheld (PAYG)", "amount": 802, "kind": "deduct", "fact": "payslip60kTaxMonthly" },
+            { "label": "Employer super (to fund)", "amount": 600, "kind": "info", "fact": "payslip60kSuperMonthly" }
+          ],
+          "net": 4198
+        },
+        "answer": 2,
+        "hint": "Tax goes to the ATO, not to her. Which line is still her money?",
+        "explanation": "Super is Lena's money, paid into her super fund for retirement, so it's not part of her budget today.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l4-g-2",
+        "concept": "budget-50-30-20",
+        "qtype": "numeric",
+        "prompt": "Using $4,200 take-home pay, how much does the 50/30/20 rule give Lena for **wants**?",
+        "answer": 1260,
+        "prefix": "$",
+        "calc": "4200 * 0.3",
+        "hint": "Wants are 30%. 10% of $4,200 is $420.",
+        "explanation": "30% of $4,200 = $1,260 for wants.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l4-g-3",
+        "concept": "budget-50-30-20",
+        "qtype": "match",
+        "prompt": "Match each item to its 50/30/20 bucket.",
+        "pairs": [
+          ["Rent", "Needs (50%)"],
+          ["Concert tickets", "Wants (30%)"],
+          ["Emergency fund deposit", "Savings (20%)"]
+        ],
+        "hint": "Needs keep you housed and fed; savings build your future.",
+        "explanation": "Rent is a need, a concert is a want, and building an emergency fund counts as savings.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l4-g-4",
+        "concept": "zero-based-budget",
+        "qtype": "blank",
+        "prompt": "Fill the gap.",
+        "sentence": "In a zero-based budget, income minus everything you plan to spend, save and repay equals ___.",
+        "options": ["$0", "20% of income", "your salary"],
+        "answer": 0,
+        "explanation": "Every dollar is assigned a job, so nothing is left unplanned: the total comes to $0.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l4-i-1",
+        "concept": "zero-based-budget",
+        "qtype": "numeric",
+        "prompt": "Lena's zero-based plan for $4,200: rent $1,550, groceries $520, transport $210, bills $240, fun $700 and savings $600. How much still needs a job?",
+        "answer": 380,
+        "prefix": "$",
+        "calc": "4200 - (1550 + 520 + 210 + 240 + 700 + 600)",
+        "explanation": "She's planned $3,820, so $380 still needs a job, like extra savings or paying debt.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l4-i-2",
+        "concept": "budget-50-30-20",
+        "qtype": "numeric",
+        "prompt": "Omar is paid fortnightly and takes home $2,600. Under 50/30/20, how much should he aim to save each fortnight?",
+        "answer": 520,
+        "prefix": "$",
+        "calc": "2600 * 0.2",
+        "explanation": "20% of $2,600 = $520 a fortnight. The rule works for any pay cycle.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l4-i-3",
+        "concept": "what-a-budget-is",
+        "qtype": "order",
+        "prompt": "Put the steps for building a budget in order.",
+        "items": ["Find your take-home pay", "List your needs", "Set your savings amount", "Plan wants with what's left", "Track and adjust each month"],
+        "explanation": "Start from what actually lands, cover needs, pay yourself first, then plan wants, and adjust as you learn.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "apply",
+      "step": "apply",
+      "title": "Try it on your pay",
+      "body": "Open your last payslip or banking app. Find your take-home pay for one pay period, then work out 20% of it. Could you set that aside?",
+      "action": "Find your take-home pay and work out your **20% savings** figure."
+    },
+    {
+      "kind": "recap",
+      "step": "recap",
+      "bullets": [
+        "Budget from take-home pay, not salary.",
+        "50/30/20: needs, wants, then savings and extra debt.",
+        "Zero-based: give every dollar a job until $0 is left."
+      ]
+    }
+  ],
+  "reviewBank": [
+    {
+      "id": "u1l4-r-1",
+      "concept": "budget-50-30-20",
+      "qtype": "numeric",
+      "prompt": "Take-home pay is $3,500 a month. Under 50/30/20, how much is for **needs**?",
+      "answer": 1750,
+      "prefix": "$",
+      "calc": "3500 * 0.5",
+      "explanation": "50% of $3,500 = $1,750 for needs.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l4-r-2",
+      "concept": "zero-based-budget",
+      "qtype": "numeric",
+      "prompt": "Income $3,000. Planned: rent $1,200, food $450, bills $300, fun $400, savings $500. How much is still unassigned?",
+      "answer": 150,
+      "prefix": "$",
+      "calc": "3000 - (1200 + 450 + 300 + 400 + 500)",
+      "explanation": "$3,000 − $2,850 = $150 still needs a job.",
+      "difficulty": 2
+    },
+    {
+      "id": "u1l4-r-3",
+      "concept": "take-home-pay",
+      "qtype": "truefalse",
+      "prompt": "You should build your budget from your salary before tax.",
+      "answer": false,
+      "explanation": "Budget from take-home pay: the amount that actually lands in your account after tax.",
+      "difficulty": 1
+    }
+  ]
+}

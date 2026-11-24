@@ -1,0 +1,239 @@
+{
+  "id": "1.8",
+  "unit": 1,
+  "title": "Setting money goals",
+  "objective": "Turn a vague goal into a dated, costed SMART goal with a weekly saving target",
+  "minutes": 5,
+  "sources": [
+    { "name": "ASIC Moneysmart: Saving", "url": "https://moneysmart.gov.au/saving" },
+    { "name": "ASIC Moneysmart: Savings goals calculator", "url": "https://moneysmart.gov.au/budgeting/savings-goals-calculator" }
+  ],
+  "screens": [
+    {
+      "kind": "question",
+      "step": "hook",
+      "q": {
+        "id": "u1l8-hook",
+        "concept": "smart-goals",
+        "qtype": "mcq",
+        "prompt": "Which goal is most likely to actually happen?",
+        "options": [
+          { "text": "Save $2,000 for a laptop by 1 March, putting $80 aside each payday" },
+          { "text": "Save more money this year", "why": "There's no amount, date or plan, so there's nothing to check progress against." },
+          { "text": "Be better with money", "why": "A good intention, but it isn't something you can measure." }
+        ],
+        "answer": 0,
+        "explanation": "A clear amount, a date and a regular step turn a wish into a plan you can track.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "try",
+      "q": {
+        "id": "u1l8-try-1",
+        "concept": "weekly-saving-target",
+        "qtype": "slider",
+        "prompt": "Guess: to save **$1,560** in a year, about how much do you need to put aside each week?",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "answer": 30,
+        "tolerance": 5,
+        "prefix": "$",
+        "calc": "1560 / 52",
+        "explanation": "$1,560 ÷ 52 weeks = $30 a week. Big goals shrink when you break them into weekly steps.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Make it SMART",
+      "body": "A good money goal is **Specific** (what exactly), **Measurable** (how many dollars), **Achievable** (fits your surplus), **Relevant** (matters to you) and **Time-bound** (by when). 'Travel more' becomes '$3,600 for Japan by 30 June'.",
+      "visual": {
+        "type": "steps",
+        "lines": ["S: Japan trip", "M: $3,600", "A: fits a $150 surplus", "R: seeing family", "T: by 30 June"]
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Turn it into a weekly number",
+      "body": "Divide the cost by the weeks until your date. That's your weekly target. Then make it automatic: a scheduled transfer to a separate savings account on payday, so saving happens before spending.",
+      "visual": { "type": "stat", "value": "Goal ÷ weeks left", "label": "= your weekly saving target" }
+    },
+    {
+      "kind": "teach",
+      "step": "example",
+      "title": "Worked example: Hana, Perth",
+      "body": "Hana wants to visit family in Japan.",
+      "visual": {
+        "type": "steps",
+        "lines": ["Flights, stay and spending: **$3,600**", "36 weeks until 30 June", "$3,600 ÷ 36 = **$100 a week**", "Her surplus is $150 a week, so it's achievable", "Auto-transfer $100 each payday to a savings account"]
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l8-g-1",
+        "concept": "smart-goals",
+        "qtype": "match",
+        "prompt": "Match each part of Hana's goal to its SMART letter.",
+        "pairs": [
+          ["A trip to Japan", "Specific"],
+          ["$3,600", "Measurable"],
+          ["By 30 June", "Time-bound"]
+        ],
+        "hint": "Which part says what, which says how much, and which says when?",
+        "explanation": "The trip is the specific what, $3,600 makes it measurable, and 30 June makes it time-bound.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l8-g-2",
+        "concept": "weekly-saving-target",
+        "qtype": "numeric",
+        "prompt": "Leo needs $2,400 for a used e-bike in 24 weeks. What's his weekly target?",
+        "answer": 100,
+        "prefix": "$",
+        "calc": "2400 / 24",
+        "hint": "Divide the cost by the number of weeks.",
+        "explanation": "$2,400 ÷ 24 = $100 a week.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l8-g-3",
+        "concept": "smart-goals",
+        "qtype": "mcq",
+        "prompt": "'Save $5,000 for a car.' Which SMART part is missing?",
+        "options": [
+          { "text": "Time-bound: there's no date" },
+          { "text": "Measurable: there's no amount", "why": "$5,000 is the measurable part." },
+          { "text": "Specific: it doesn't say what for", "why": "It says what: a car." }
+        ],
+        "answer": 0,
+        "hint": "Look for what, how much and when.",
+        "explanation": "Without a date you can't work out a weekly target, so the goal drifts.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l8-g-4",
+        "concept": "smart-goals",
+        "qtype": "order",
+        "prompt": "Put the steps for turning a vague goal into a plan in order.",
+        "items": ["Name the goal", "Put a price on it", "Set a date", "Divide by the weeks left", "Automate the transfer"],
+        "explanation": "What, how much, by when, then the weekly number, then make it automatic.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l8-i-1",
+        "concept": "weekly-saving-target",
+        "qtype": "numeric",
+        "prompt": "Tom is moving out in 30 weeks and needs $4,500 for bond, removalists and furniture. What's his weekly target?",
+        "answer": 150,
+        "prefix": "$",
+        "calc": "4500 / 30",
+        "explanation": "$4,500 ÷ 30 weeks = $150 a week.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l8-i-2",
+        "concept": "weekly-saving-target",
+        "qtype": "numeric",
+        "prompt": "Sophie is paid fortnightly and wants $1,300 for Christmas gifts, 26 fortnights away. How much per pay?",
+        "answer": 50,
+        "prefix": "$",
+        "calc": "1300 / 26",
+        "explanation": "$1,300 ÷ 26 pays = $50 a fortnight. Match your target to how often you're paid.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l8-i-3",
+        "concept": "why-emergency-fund",
+        "qtype": "mcq",
+        "prompt": "Sophie has no savings and two goals: a holiday and an emergency fund. What's a sensible order?",
+        "options": [
+          { "text": "Build a small emergency buffer first, then save for the holiday" },
+          { "text": "Holiday first: the emergency fund can wait", "why": "Without a buffer, one surprise bill could wipe out the holiday savings or create debt." },
+          { "text": "Neither until she earns more", "why": "Small, regular amounts work at any income." }
+        ],
+        "answer": 0,
+        "explanation": "A starter buffer protects every other goal from surprise bills turning into debt.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "apply",
+      "step": "apply",
+      "title": "Write your goal",
+      "body": "Pick one thing you'd love to save for. Give it a price and a date, then divide by the weeks left. Could you set up that transfer today?",
+      "action": "Write one **SMART goal** with its weekly saving target."
+    },
+    {
+      "kind": "recap",
+      "step": "recap",
+      "bullets": [
+        "SMART: specific, measurable, achievable, relevant, time-bound.",
+        "Weekly target = goal amount ÷ weeks until the date.",
+        "Automate the transfer on payday so saving comes first."
+      ]
+    }
+  ],
+  "reviewBank": [
+    {
+      "id": "u1l8-r-1",
+      "concept": "weekly-saving-target",
+      "qtype": "numeric",
+      "prompt": "A $1,800 goal, 20 weeks away. What's the weekly target?",
+      "answer": 90,
+      "prefix": "$",
+      "calc": "1800 / 20",
+      "explanation": "$1,800 ÷ 20 = $90 a week.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l8-r-2",
+      "concept": "smart-goals",
+      "qtype": "mcq",
+      "prompt": "Which goal is SMART?",
+      "options": [{ "text": "Save $900 for a new phone by 1 August" }, { "text": "Save heaps this year", "why": "No amount or date." }, { "text": "Stop wasting money", "why": "Not measurable, and no date." }],
+      "answer": 0,
+      "explanation": "It names what, how much and by when, so you can plan the weekly step.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l8-r-3",
+      "concept": "smart-goals",
+      "qtype": "truefalse",
+      "prompt": "Automating a transfer on payday makes a savings goal more likely to happen.",
+      "answer": true,
+      "explanation": "Saving before you spend removes the daily decision, so the goal doesn't rely on willpower.",
+      "difficulty": 1
+    }
+  ]
+}

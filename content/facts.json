@@ -1,0 +1,71 @@
+{
+  "updated": "2026-11-24",
+  "facts": {
+    "fcsLimit": {
+      "value": 250000,
+      "display": "$250,000",
+      "label": "Financial Claims Scheme guarantee, per account holder per ADI",
+      "fy": "2026-27",
+      "source": {
+        "name": "APRA: Financial Claims Scheme for banks, building societies and credit unions",
+        "url": "https://www.apra.gov.au/financial-claims-scheme-banks-building-societies-and-credit-unions"
+      },
+      "verified": "Read on apra.gov.au 2026-11-24: 'deposits are protected up to a limit of $250,000 for each account holder at each bank, building society and credit union'"
+    },
+    "fcsPayoutDays": {
+      "value": 7,
+      "display": "7 days",
+      "label": "APRA aims to pay FCS claims within this many calendar days",
+      "fy": "2026-27",
+      "source": {
+        "name": "APRA: Financial Claims Scheme for banks, building societies and credit unions",
+        "url": "https://www.apra.gov.au/financial-claims-scheme-banks-building-societies-and-credit-unions"
+      },
+      "verified": "Read on apra.gov.au 2026-11-24: 'APRA will endeavour to pay account holders within seven calendar days'"
+    },
+    "sgRate": {
+      "value": 12,
+      "display": "12%",
+      "label": "Super guarantee rate, paid by employers on top of ordinary pay",
+      "fy": "2026-27",
+      "source": {
+        "name": "ATO: Super guarantee",
+        "url": "https://www.ato.gov.au/tax-rates-and-codes/key-superannuation-rates-and-thresholds/super-guarantee"
+      },
+      "verified": "From docs/curriculum.md figures table (cites ATO). ato.gov.au blocks automated access from the build environment; re-confirm on the ATO page each 1 July."
+    },
+    "taxFreeThreshold": {
+      "value": 18200,
+      "display": "$18,200",
+      "label": "Resident tax-free threshold",
+      "fy": "2026-27",
+      "source": {
+        "name": "ATO: Tax rates \u2013 Australian residents",
+        "url": "https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents"
+      },
+      "verified": "From docs/curriculum.md figures table (cites ATO). Re-confirm on the ATO page each 1 July."
+    },
+    "payslip60kTaxMonthly": {
+      "value": 802,
+      "display": "$802",
+      "label": "Example: monthly tax withheld on a $60,000 salary (income tax at 2026-27 resident rates, minus low income tax offset, plus 2% Medicare levy), rounded",
+      "fy": "2026-27",
+      "source": {
+        "name": "ATO: Tax rates \u2013 Australian residents",
+        "url": "https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents"
+      },
+      "verified": "Computed 2026-11-24: 15% of $26,800 + 30% of $15,000 = $8,520; LITO $100; Medicare levy $1,200; total $9,620 a year = $801.67 a month. Rates from docs/curriculum.md (cites ATO). Actual PAYG withholding tables can differ by a few dollars."
+    },
+    "payslip60kSuperMonthly": {
+      "value": 600,
+      "display": "$600",
+      "label": "Example: monthly super guarantee on a $5,000 monthly salary at 12%",
+      "fy": "2026-27",
+      "source": {
+        "name": "ATO: Super guarantee",
+        "url": "https://www.ato.gov.au/tax-rates-and-codes/key-superannuation-rates-and-thresholds/super-guarantee"
+      },
+      "verified": "12% \u00d7 $5,000 = $600, using the sgRate fact."
+    }
+  }
+}

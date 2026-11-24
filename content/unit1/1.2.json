@@ -1,0 +1,258 @@
+{
+  "id": "1.2",
+  "unit": 1,
+  "title": "Income, spending and net worth",
+  "objective": "Calculate your net worth and monthly surplus from a list of assets, debts, income and bills",
+  "minutes": 5,
+  "sources": [
+    { "name": "ASIC Moneysmart: Budgeting", "url": "https://moneysmart.gov.au/budgeting" },
+    { "name": "Investopedia: Net worth (concept only)", "url": "https://www.investopedia.com/terms/n/networth.asp" }
+  ],
+  "screens": [
+    {
+      "kind": "question",
+      "step": "hook",
+      "q": {
+        "id": "u1l2-hook",
+        "concept": "net-worth",
+        "qtype": "mcq",
+        "prompt": "Zoe earns $95,000 but owes more than she owns. Tom earns $55,000, has $20,000 saved and no debts. Who is better off **right now**?",
+        "options": [
+          { "text": "Tom" },
+          { "text": "Zoe, because she earns more", "why": "Income is what flows in. What you're worth is what you own minus what you owe." },
+          { "text": "You can't compare them", "why": "You can, by comparing what each owns minus what each owes." }
+        ],
+        "answer": 0,
+        "explanation": "A high income doesn't mean wealth. Tom owns more than he owes; Zoe owes more than she owns.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "try",
+      "q": {
+        "id": "u1l2-try-1",
+        "concept": "assets-and-liabilities",
+        "qtype": "sort",
+        "prompt": "Have a guess: is each one something you **own** or something you **owe**?",
+        "buckets": ["Own", "Owe"],
+        "items": [
+          { "text": "Money in savings", "bucket": 0 },
+          { "text": "Credit card balance", "bucket": 1 },
+          { "text": "Your super balance", "bucket": 0 },
+          { "text": "Car loan", "bucket": 1 }
+        ],
+        "explanation": "Savings and super are things you own (assets). Card balances and loans are money you owe (liabilities).",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Net worth: own minus owe",
+      "body": "Add up what you own, your [[assets]]. Subtract what you owe, your [[liabilities]]. What's left is your [[net worth]]. It can be negative, and that's common early on, especially with study or car debt. What matters is which way it's heading.",
+      "visual": { "type": "stat", "value": "Assets − Liabilities", "label": "= Net worth" }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Surplus: in minus out",
+      "body": "Net worth is a snapshot. Your monthly [[surplus]] is the flow: [[take-home pay]] minus what you spend. A surplus can grow your savings or pay down debt. A deficit means debt is growing or savings are shrinking.",
+      "visual": { "type": "stat", "value": "Take-home − Spending", "label": "= Monthly surplus (or deficit)" }
+    },
+    {
+      "kind": "teach",
+      "step": "example",
+      "title": "Worked example: Aisha, 27, Brisbane",
+      "body": "Aisha lists everything she owns and owes.",
+      "visual": {
+        "type": "ledger",
+        "title": "Aisha's balance sheet",
+        "rows": [
+          { "label": "Savings account", "amount": 6500, "tone": "asset" },
+          { "label": "Car (sale value)", "amount": 9000, "tone": "asset" },
+          { "label": "Super", "amount": 14000, "tone": "asset" },
+          { "label": "Car loan", "amount": 5200, "tone": "debt" },
+          { "label": "Credit card", "amount": 1300, "tone": "debt" }
+        ],
+        "total": { "label": "Net worth", "amount": 23000 }
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "example",
+      "title": "Now her monthly flow",
+      "body": "She takes home **$4,200** a month.",
+      "visual": {
+        "type": "steps",
+        "lines": ["Rent $1,650 + groceries $600 + transport $250 + phone $120 + everything else $780 = **$3,400**", "$4,200 − $3,400 = **$800 surplus** a month", "That's $9,600 a year to save or clear debt"]
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l2-g-1",
+        "concept": "assets-and-liabilities",
+        "qtype": "tap",
+        "prompt": "Tap the **liability** on Ben's list.",
+        "visual": {
+          "type": "ledger",
+          "title": "Ben's list",
+          "rows": [
+            { "label": "Everyday account", "amount": 1800 },
+            { "label": "HECS-HELP debt", "amount": 18500 },
+            { "label": "Laptop (sale value)", "amount": 700 }
+          ]
+        },
+        "answer": 1,
+        "hint": "A liability is money you owe someone else.",
+        "explanation": "A HECS-HELP study loan is money owed, so it's a liability. The account and laptop are assets.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l2-g-2",
+        "concept": "net-worth",
+        "qtype": "numeric",
+        "prompt": "Ella has $2,400 in savings and a car worth $11,000. She owes $8,500 on a car loan and $900 on a card. What's her net worth?",
+        "answer": 4000,
+        "prefix": "$",
+        "calc": "2400 + 11000 - 8500 - 900",
+        "hint": "Add the two assets, then subtract both debts.",
+        "explanation": "$13,400 owned − $9,400 owed = $4,000 net worth.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l2-g-3",
+        "concept": "monthly-surplus",
+        "qtype": "blank",
+        "prompt": "Fill the gap.",
+        "sentence": "Take-home pay minus spending is your monthly ___.",
+        "options": ["surplus", "net worth", "salary"],
+        "answer": 0,
+        "hint": "Net worth is a snapshot; this is the monthly flow.",
+        "explanation": "Money left over each month is your surplus. If it's negative, it's a deficit.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l2-g-4",
+        "concept": "net-worth",
+        "qtype": "truefalse",
+        "prompt": "A negative net worth means you're bad with money.",
+        "answer": false,
+        "explanation": "Many people start negative because of study or car loans. The direction it's moving matters more than today's number.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l2-i-1",
+        "concept": "monthly-surplus",
+        "qtype": "numeric",
+        "prompt": "Josh takes home $3,600 a month. He spends $1,450 on rent, $520 on food, $180 on transport, $95 on his phone and $600 on everything else. What's his monthly surplus?",
+        "answer": 755,
+        "prefix": "$",
+        "calc": "3600 - (1450 + 520 + 180 + 95 + 600)",
+        "explanation": "Spending totals $2,845, so $3,600 − $2,845 = $755 left each month.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l2-i-2",
+        "concept": "small-decisions-add-up",
+        "qtype": "numeric",
+        "prompt": "If Josh saved his whole $755 surplus every month, how much would he save in a year?",
+        "answer": 9060,
+        "prefix": "$",
+        "calc": "755 * 12",
+        "explanation": "$755 × 12 = $9,060 a year. Monthly habits look small until you see the yearly total.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l2-i-3",
+        "concept": "net-worth",
+        "qtype": "mcq",
+        "prompt": "Kai pays $500 off his credit card using money from his savings account. What happens to his net worth?",
+        "options": [
+          { "text": "It stays the same" },
+          { "text": "It goes up by $500", "why": "His debt fell by $500, but his savings fell by $500 too." },
+          { "text": "It goes down by $500", "why": "He lost $500 of savings but also owes $500 less, so it cancels out." }
+        ],
+        "answer": 0,
+        "explanation": "Assets and liabilities both drop by $500, so net worth doesn't change. He does save on future card interest.",
+        "difficulty": 3
+      }
+    },
+    {
+      "kind": "apply",
+      "step": "apply",
+      "title": "Your snapshot",
+      "body": "Grab your banking app. Jot down roughly what you own and what you owe. No one sees this but you, and a rough number is fine.",
+      "action": "Write down your **net worth** today, and check it again in three months."
+    },
+    {
+      "kind": "recap",
+      "step": "recap",
+      "bullets": [
+        "Net worth = what you own minus what you owe.",
+        "Monthly surplus = take-home pay minus spending.",
+        "Watch the direction: a growing surplus lifts net worth over time."
+      ]
+    }
+  ],
+  "reviewBank": [
+    {
+      "id": "u1l2-r-1",
+      "concept": "net-worth",
+      "qtype": "numeric",
+      "prompt": "Assets: $3,000 savings and $15,000 super. Liabilities: a $4,500 personal loan. What's the net worth?",
+      "answer": 13500,
+      "prefix": "$",
+      "calc": "3000 + 15000 - 4500",
+      "explanation": "$18,000 owned − $4,500 owed = $13,500.",
+      "difficulty": 2
+    },
+    {
+      "id": "u1l2-r-2",
+      "concept": "monthly-surplus",
+      "qtype": "numeric",
+      "prompt": "Take-home pay is $5,000 a month and spending is $4,350. What's the monthly surplus?",
+      "answer": 650,
+      "prefix": "$",
+      "calc": "5000 - 4350",
+      "explanation": "$5,000 − $4,350 = $650 a month left over.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l2-r-3",
+      "concept": "assets-and-liabilities",
+      "qtype": "mcq",
+      "prompt": "Which of these is a liability?",
+      "options": [{ "text": "A buy now pay later balance" }, { "text": "A term deposit", "why": "That's money you own, so it's an asset." }, { "text": "Your super", "why": "Super belongs to you, so it's an asset." }],
+      "answer": 0,
+      "explanation": "Anything you still have to pay back, like a BNPL balance, is a liability.",
+      "difficulty": 1
+    }
+  ]
+}

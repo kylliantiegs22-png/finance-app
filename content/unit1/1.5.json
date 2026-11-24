@@ -1,0 +1,283 @@
+{
+  "id": "1.5",
+  "unit": 1,
+  "title": "Tracking spending",
+  "objective": "Choose a tracking method and categorise a month of transactions",
+  "minutes": 5,
+  "sources": [
+    { "name": "ASIC Moneysmart: Track your spending", "url": "https://moneysmart.gov.au/budgeting/track-your-spending" },
+    { "name": "ASIC Moneysmart: Budget planner", "url": "https://moneysmart.gov.au/budgeting/budget-planner" }
+  ],
+  "screens": [
+    {
+      "kind": "question",
+      "step": "hook",
+      "q": {
+        "id": "u1l5-hook",
+        "concept": "why-track",
+        "qtype": "mcq",
+        "prompt": "When people guess their monthly spending from memory, what do they most often leave out?",
+        "options": [
+          { "text": "Small, frequent buys and subscriptions" },
+          { "text": "Rent", "why": "Big fixed bills are easy to remember. It's the small stuff that slips through." },
+          { "text": "Their biggest purchase of the month", "why": "Big one-offs stick in memory. Little repeats don't." }
+        ],
+        "answer": 0,
+        "explanation": "Coffees, delivery fees and forgotten subscriptions are easy to miss, which is why tracking beats guessing.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "try",
+      "q": {
+        "id": "u1l5-try-1",
+        "concept": "tracking-methods",
+        "qtype": "truefalse",
+        "prompt": "True or false: you need a paid budgeting app to track your spending properly.",
+        "answer": false,
+        "explanation": "Your banking app, a free spreadsheet or a notebook all work. The best method is the one you'll keep using.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Pick a method you'll stick with",
+      "body": "Tracking means recording what you actually spend, then comparing it with your budget. Most Australian banking apps sort transactions into categories for you. A spreadsheet gives more control. Cash envelopes make limits physical. Consistency matters more than the tool.",
+      "visual": {
+        "type": "compare",
+        "items": [
+          { "title": "Banking app", "icon": "Bank", "points": ["Automatic", "Low effort"] },
+          { "title": "Spreadsheet", "icon": "ChartBar", "points": ["Your categories", "Flexible"] },
+          { "title": "Envelopes", "icon": "Wallet", "points": ["Cash limits", "Hands-on"] }
+        ]
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Use the same categories as your budget",
+      "body": "Pick 6 to 8 categories that match your budget lines: housing, groceries, transport, bills, eating out, fun, savings. Once a month, total each one and compare it with the plan. Overspending in one category is information, not failure.",
+      "visual": { "type": "icon", "name": "ListChecks", "caption": "Plan → track → compare → adjust" }
+    },
+    {
+      "kind": "teach",
+      "step": "example",
+      "title": "Worked example: Noah's first week",
+      "body": "Noah, 24, in Sydney, categorises a week from his statement.",
+      "visual": {
+        "type": "statement",
+        "title": "Everyday account · November",
+        "rows": [
+          { "date": "03 Nov", "desc": "Supermarket, Surry Hills", "amount": -86.4 },
+          { "date": "04 Nov", "desc": "Opal card top-up", "amount": -40 },
+          { "date": "05 Nov", "desc": "Food delivery", "amount": -41.9 },
+          { "date": "07 Nov", "desc": "Salary", "amount": 2100 },
+          { "date": "08 Nov", "desc": "Music streaming", "amount": -13.99 },
+          { "date": "09 Nov", "desc": "Supermarket, Newtown", "amount": -64.15 }
+        ]
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "example",
+      "title": "Noah's category totals",
+      "body": "He adds up each category for the week.",
+      "visual": {
+        "type": "steps",
+        "lines": ["Groceries: $86.40 + $64.15 = **$150.55**", "Transport: **$40.00** · Eating out: **$41.90**", "Subscriptions: **$13.99**, one he'd forgotten about"]
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l5-g-1",
+        "concept": "categorising-spending",
+        "qtype": "tap",
+        "prompt": "Tap the **subscription** on Noah's statement.",
+        "visual": {
+          "type": "statement",
+          "title": "Everyday account · November",
+          "rows": [
+            { "date": "03 Nov", "desc": "Supermarket, Surry Hills", "amount": -86.4 },
+            { "date": "04 Nov", "desc": "Opal card top-up", "amount": -40 },
+            { "date": "05 Nov", "desc": "Food delivery", "amount": -41.9 },
+            { "date": "08 Nov", "desc": "Music streaming", "amount": -13.99 }
+          ]
+        },
+        "answer": 3,
+        "hint": "A subscription charges the same amount on repeat, usually monthly.",
+        "explanation": "The streaming charge repeats each month, so it's a subscription. These are worth reviewing a few times a year.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l5-g-2",
+        "concept": "categorising-spending",
+        "qtype": "sort",
+        "prompt": "Sort Noah's next transactions into categories.",
+        "buckets": ["Bills", "Eating out"],
+        "items": [
+          { "text": "Electricity", "bucket": 0 },
+          { "text": "Café brunch", "bucket": 1 },
+          { "text": "Phone plan", "bucket": 0 },
+          { "text": "Food delivery", "bucket": 1 }
+        ],
+        "hint": "Bills arrive whether you choose them or not. Eating out is a choice each time.",
+        "explanation": "Power and phone are regular bills; brunch and delivery belong in eating out.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l5-g-3",
+        "concept": "categorising-spending",
+        "qtype": "numeric",
+        "prompt": "Noah also had a $18.50 café brunch. With the $41.90 food delivery, what did he spend on **eating out** this week?",
+        "answer": 60.4,
+        "tolerance": 0.01,
+        "prefix": "$",
+        "calc": "41.90 + 18.50",
+        "hint": "Add the two eating-out amounts.",
+        "explanation": "$41.90 + $18.50 = $60.40 on eating out.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l5-g-4",
+        "concept": "tracking-methods",
+        "qtype": "match",
+        "prompt": "Match each tracking method to what it's best at.",
+        "pairs": [
+          ["Banking app categories", "Automatic, little effort"],
+          ["Spreadsheet", "Custom categories and charts"],
+          ["Cash envelopes", "Hard spending limits"]
+        ],
+        "explanation": "Apps save effort, spreadsheets give control, and envelopes stop you spending past a limit.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l5-i-1",
+        "concept": "plan-vs-actual",
+        "qtype": "numeric",
+        "prompt": "Noah budgeted $400 for eating out this month. His tracking shows he spent $530. By how much did he go over?",
+        "answer": 130,
+        "prefix": "$",
+        "calc": "530 - 400",
+        "explanation": "$530 − $400 = $130 over. He can trim next month or move money from another category.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l5-i-2",
+        "concept": "categorising-spending",
+        "qtype": "numeric",
+        "prompt": "Four weekly grocery shops: $92.30, $88.10, $105.60 and $79.00. What's the monthly grocery total?",
+        "answer": 365,
+        "tolerance": 0.01,
+        "prefix": "$",
+        "calc": "92.30 + 88.10 + 105.60 + 79.00",
+        "explanation": "The four shops add up to $365.00 for the month.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l5-i-3",
+        "concept": "plan-vs-actual",
+        "qtype": "mcq",
+        "prompt": "Noah's groceries come in $60 under budget but eating out is $130 over. Using his zero-based budget, what's the best next step?",
+        "options": [
+          { "text": "Move the $60 to eating out and plan to trim the other $70 next month" },
+          { "text": "Stop tracking, since budgets don't work for him", "why": "Going over once is normal. Tracking is what showed him where to adjust." },
+          { "text": "Ignore it: it all evens out", "why": "Overspends that aren't noticed tend to repeat." }
+        ],
+        "answer": 0,
+        "explanation": "Budgets are meant to be adjusted. Moving money between categories keeps every dollar assigned.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "apply",
+      "step": "apply",
+      "title": "Your 10-minute audit",
+      "body": "Open your banking app and scroll through last month. Total two categories: eating out and subscriptions. Anything surprising?",
+      "action": "Total last month's **eating out** and **subscriptions** from your bank app."
+    },
+    {
+      "kind": "recap",
+      "step": "recap",
+      "bullets": [
+        "Tracking shows what you really spend; it beats guessing.",
+        "Use 6 to 8 categories that match your budget.",
+        "Compare plan with actual monthly and adjust, without guilt."
+      ]
+    }
+  ],
+  "reviewBank": [
+    {
+      "id": "u1l5-r-1",
+      "concept": "plan-vs-actual",
+      "qtype": "numeric",
+      "prompt": "You budgeted $250 for transport and spent $210. How much under budget are you?",
+      "answer": 40,
+      "prefix": "$",
+      "calc": "250 - 210",
+      "explanation": "$250 − $210 = $40 under budget.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l5-r-2",
+      "concept": "tracking-methods",
+      "qtype": "mcq",
+      "prompt": "Which tracking method is best?",
+      "options": [{ "text": "The one you'll keep using" }, { "text": "Always a spreadsheet", "why": "Spreadsheets suit some people; others never open them." }, { "text": "The most expensive app", "why": "Free tools like your banking app work fine." }],
+      "answer": 0,
+      "explanation": "Consistency beats features. A simple method you keep up with wins.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l5-r-3",
+      "concept": "categorising-spending",
+      "qtype": "sort",
+      "prompt": "Sort into categories.",
+      "buckets": ["Transport", "Groceries"],
+      "items": [
+        { "text": "Fuel", "bucket": 0 },
+        { "text": "Supermarket shop", "bucket": 1 },
+        { "text": "Train fare", "bucket": 0 },
+        { "text": "Fruit and veg market", "bucket": 1 }
+      ],
+      "explanation": "Fuel and fares are transport; supermarket and market trips are groceries.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l5-r-4",
+      "concept": "why-track",
+      "qtype": "truefalse",
+      "prompt": "Small, repeated purchases are the easiest spending to forget.",
+      "answer": true,
+      "explanation": "Big bills stick in memory; little repeats slip by. Tracking catches them.",
+      "difficulty": 1
+    }
+  ]
+}

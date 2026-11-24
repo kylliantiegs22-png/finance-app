@@ -1,0 +1,119 @@
+/* Design tokens: the only place colours, gradients, type, radii and motion are defined.
+   Values follow docs/design-system.md. */
+:root {
+  /* Brand */
+  --indigo: #4f46e5;
+  --indigo-pressed: #4338ca;
+  --indigo-base: #3730a3;
+  --indigo-tint: #eef2ff;
+  --violet: #7c3aed;
+  /* Meaning */
+  --emerald: #10b981;
+  --emerald-text: #047857;
+  --emerald-strong: #065f46;
+  --emerald-tint: #ecfdf5;
+  --rose: #e11d48;
+  --rose-text: #be123c;
+  --rose-strong: #9f1239;
+  --rose-tint: #fff1f2;
+  --gold: #fbbf24;
+  --gold-deep: #f59e0b;
+  --gold-tint: #fef3c7;
+  --gold-text: #92400e;
+  --orange: #f97316;
+  --ice: #0ea5e9;
+  /* Neutrals */
+  --text: #0f172a;
+  --muted: #475569;
+  --faint: #64748b;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --surface: #ffffff;
+  --bg: #f8fafc;
+  --sunken: #f1f5f9;
+  --disabled-bg: #e2e8f0;
+  --disabled-text: #475569;
+  --link: var(--indigo);
+  --primary-tint: var(--indigo-tint);
+  --success-tint: var(--emerald-tint);
+  --success-text: var(--emerald-strong);
+  --error-tint: var(--rose-tint);
+  --error-text: var(--rose-strong);
+  --reward-tint: var(--gold-tint);
+
+  /* Gradients (135deg family) */
+  --grad-brand: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --grad-growth: linear-gradient(90deg, #10b981 0%, #06b6d4 100%);
+  --grad-reward: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
+  --grad-night: linear-gradient(180deg, #1e1b4b 0%, #0b1120 100%);
+  --glow-brand: 0 8px 24px rgba(79, 70, 229, 0.25);
+
+  /* Elevation */
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-raised: 0 8px 24px rgba(15, 23, 42, 0.12);
+
+  /* Shape and space */
+  --r-input: 8px;
+  --r-card: 16px;
+  --r-sheet: 24px;
+  --r-pill: 999px;
+  --pad: 20px;
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+  --touch: 48px;
+
+  /* Type */
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Motion: three durations, one ease-out, one spring. Transform/opacity only. */
+  --t-fast: 150ms;
+  --t-base: 250ms;
+  --t-slow: 400ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --spring: linear(0, 0.009, 0.035 2.1%, 0.141 4.4%, 0.723 12.9%, 0.938 16.7%, 1.017 19.4%, 1.067, 1.099 24.3%, 1.108 26%, 1.100, 1.078 30.1%, 1.002 36.3%, 0.979 40.1%, 0.97 43.8%, 0.976 49.7%, 0.999 61.5%, 1.003 71.4%, 1);
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --indigo-tint: #1e1b4b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --faint: #94a3b8;
+  --border: #1e293b;
+  --border-strong: #334155;
+  --surface: #111827;
+  --bg: #0b1120;
+  --sunken: #172033;
+  --disabled-bg: #1e293b;
+  --disabled-text: #94a3b8;
+  --link: #818cf8;
+  --primary-tint: #1e1b4b;
+  --emerald-text: #34d399;
+  --success-tint: #064e3b;
+  --success-text: #a7f3d0;
+  --rose-text: #fb7185;
+  --error-tint: #4c0519;
+  --error-text: #fecdd3;
+  --reward-tint: #422006;
+  --gold-text: #fbbf24;
+  --orange: #fb923c;
+  --violet: #a78bfa;
+  --shadow-card: none;
+  --shadow-raised: 0 0 0 1px #1e293b;
+  --glow-brand: 0 8px 24px rgba(79, 70, 229, 0.18);
+  color-scheme: dark;
+}
+
+[data-motion='reduced'] {
+  --t-fast: 1ms;
+  --t-base: 120ms;
+  --t-slow: 160ms;
+  --spring: linear;
+}

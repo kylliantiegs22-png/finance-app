@@ -1,0 +1,269 @@
+{
+  "id": "1.1",
+  "unit": 1,
+  "title": "What finance is",
+  "objective": "Name the three areas of finance (personal, corporate, markets) and why money decisions compound over a lifetime",
+  "minutes": 5,
+  "sources": [
+    { "name": "ASIC Moneysmart", "url": "https://moneysmart.gov.au/" },
+    { "name": "CFA Institute Investment Foundations curriculum", "url": "https://www.cfainstitute.org/sites/default/files/docs/programs/investment-foundations-certificate/investment-foundations-certificate-curriculum.pdf" }
+  ],
+  "screens": [
+    {
+      "kind": "question",
+      "step": "hook",
+      "q": {
+        "id": "u1l1-hook",
+        "concept": "small-decisions-add-up",
+        "qtype": "slider",
+        "prompt": "Mia puts aside **$10 a week** from age 25 to 65 and never touches it. Guess: how much has she put away? (Ignore interest for now.)",
+        "min": 0,
+        "max": 40000,
+        "step": 400,
+        "answer": 20800,
+        "tolerance": 4000,
+        "prefix": "$",
+        "calc": "10 * 52 * 40",
+        "explanation": "$10 × 52 weeks × 40 years = $20,800. A tiny weekly habit becomes a big number because it repeats for decades.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "try",
+      "q": {
+        "id": "u1l1-try-1",
+        "concept": "finance-areas",
+        "qtype": "mcq",
+        "prompt": "Which of these is a **finance** question?",
+        "options": [
+          { "text": "Should I keep my savings in a bank or pay down my car loan?" },
+          { "text": "Which train gets me to work fastest?", "why": "That's about time and transport, not managing money." },
+          { "text": "What's the best way to cook rice?", "why": "Cooking isn't finance, even if rice is cheap!" }
+        ],
+        "answer": 0,
+        "explanation": "Finance is about how money is earned, saved, borrowed, invested and spent, and the choices between them.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "try",
+      "q": {
+        "id": "u1l1-try-2",
+        "concept": "interest-on-interest",
+        "qtype": "truefalse",
+        "prompt": "True or false: $1,000 earning 5% interest a year grows by exactly $50 every year.",
+        "answer": false,
+        "explanation": "Year 1 adds $50. Year 2 adds 5% of $1,050, which is $52.50. You earn interest on your interest, so growth speeds up.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Finance has three big areas",
+      "body": "**Personal finance** is your money: pay, spending, saving, debt, tax and [[super]]. **Corporate finance** is how businesses raise and spend money. **Financial markets** are where money is traded, like the [[ASX]]. This course starts with you, then works outwards.",
+      "visual": {
+        "type": "compare",
+        "items": [
+          { "title": "Personal", "icon": "Wallet", "points": ["Budgets", "Savings", "Super"] },
+          { "title": "Corporate", "icon": "Buildings", "points": ["Funding", "Projects", "Profit"] },
+          { "title": "Markets", "icon": "ChartLineUp", "points": ["Shares", "Bonds", "Prices"] }
+        ]
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Money decisions compound",
+      "body": "A choice you repeat every week is really thousands of choices. And money left to grow earns returns on its past returns. That's [[compounding]]: small, early, steady decisions end up mattering more than big, late ones.",
+      "visual": { "type": "stat", "value": "$1,000 → $1,102.50", "label": "after 2 years at 5% a year: the extra $2.50 is interest on interest" }
+    },
+    {
+      "kind": "teach",
+      "step": "example",
+      "title": "Worked example: Jack's coffee",
+      "body": "Jack buys a $5 coffee every day. Is that a problem? Finance doesn't judge; it just makes the trade-off visible.",
+      "visual": {
+        "type": "steps",
+        "lines": ["$5 a day × 365 days = **$1,825 a year**", "Over 10 years: $18,250, before any interest", "The question isn't 'is coffee bad?' but 'is it worth that to me?'"]
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l1-g-1",
+        "concept": "finance-areas",
+        "qtype": "match",
+        "prompt": "Match each decision to its area of finance.",
+        "pairs": [
+          ["Choosing a super fund", "Personal finance"],
+          ["A company borrowing to build a factory", "Corporate finance"],
+          ["Shares changing price on the ASX", "Financial markets"]
+        ],
+        "hint": "Ask: whose money is it, and where is the decision made: a household, a business, or a market?",
+        "explanation": "Super is your money (personal). A firm's funding is corporate. Prices set by buyers and sellers are markets.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l1-g-2",
+        "concept": "small-decisions-add-up",
+        "qtype": "numeric",
+        "prompt": "Priya spends $15 a week on food delivery fees. How much is that over a year (52 weeks)?",
+        "answer": 780,
+        "prefix": "$",
+        "calc": "15 * 52",
+        "hint": "Multiply the weekly amount by 52.",
+        "explanation": "$15 × 52 = $780 a year. Seeing the yearly total makes it easier to decide if it's worth it.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l1-g-3",
+        "concept": "interest-on-interest",
+        "qtype": "numeric",
+        "prompt": "$1,000 earns 5% a year and you leave the interest in. What is it worth after 2 years?",
+        "answer": 1102.5,
+        "tolerance": 0.01,
+        "prefix": "$",
+        "calc": "1000 * 1.05 * 1.05",
+        "hint": "After year 1 it's $1,050. Now add 5% of $1,050.",
+        "explanation": "$1,050 + 5% of $1,050 ($52.50) = $1,102.50. The second year earns more because the balance is bigger.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l1-g-4",
+        "concept": "finance-areas",
+        "qtype": "blank",
+        "sentence": "Working out your own pay, bills and savings is called ___ finance.",
+        "prompt": "Fill the gap.",
+        "options": ["personal", "corporate", "public"],
+        "answer": 0,
+        "explanation": "Personal finance covers your own money decisions, which is where this course begins.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l1-i-1",
+        "concept": "small-decisions-add-up",
+        "qtype": "numeric",
+        "prompt": "Sam cancels a $12-a-month streaming service he never watches. How much does he keep over 5 years?",
+        "answer": 720,
+        "prefix": "$",
+        "calc": "12 * 12 * 5",
+        "explanation": "$12 × 12 months × 5 years = $720, from one five-minute decision.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l1-i-2",
+        "concept": "compounding-early",
+        "qtype": "mcq",
+        "prompt": "Two friends save the same amount each year at the same interest rate. Ana starts at 25, Ben at 35. Both stop at 65. Who ends up with more?",
+        "options": [
+          { "text": "Ana, because her money has ten extra years to compound" },
+          { "text": "They end up about the same", "why": "Ana's money grows for longer, and growth builds on growth." },
+          { "text": "Ben, because he saves when he earns more", "why": "Here they save the same amount, so only time differs, and time favours Ana." }
+        ],
+        "answer": 0,
+        "explanation": "Ana saves for 40 years, Ben for 30, and Ana's early savings also earn interest on interest for longer.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l1-i-3",
+        "concept": "finance-areas",
+        "qtype": "sort",
+        "prompt": "Sort each one: is it about your own money, or about businesses and markets?",
+        "buckets": ["Personal", "Business & markets"],
+        "items": [
+          { "text": "Paying off a credit card", "bucket": 0 },
+          { "text": "A fund manager trading shares on the ASX", "bucket": 1 },
+          { "text": "Saving for a holiday", "bucket": 0 },
+          { "text": "A company issuing new shares", "bucket": 1 }
+        ],
+        "explanation": "Cards and holiday savings are household decisions; share issues and trading belong to companies and markets.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "apply",
+      "step": "apply",
+      "title": "Your turn",
+      "body": "Pick one small thing you pay for every week. Multiply it by 52. Is the yearly number worth it to you? No right answer; just notice it.",
+      "action": "Find one weekly spend and work out its **yearly cost**."
+    },
+    {
+      "kind": "recap",
+      "step": "recap",
+      "bullets": [
+        "Finance has three areas: personal, corporate and markets.",
+        "Small repeated choices add up to big yearly and lifetime totals.",
+        "Interest earns interest, so starting early beats starting big."
+      ]
+    }
+  ],
+  "reviewBank": [
+    {
+      "id": "u1l1-r-1",
+      "concept": "finance-areas",
+      "qtype": "mcq",
+      "prompt": "A business deciding whether to borrow money for a new warehouse is an example of…",
+      "options": [{ "text": "Corporate finance" }, { "text": "Personal finance", "why": "It's the business's money, not a household's." }, { "text": "Financial markets", "why": "Markets are where things are traded; this is a company's own funding choice." }],
+      "answer": 0,
+      "explanation": "How a business raises and spends money is corporate finance.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l1-r-2",
+      "concept": "small-decisions-add-up",
+      "qtype": "numeric",
+      "prompt": "A $4 snack every workday (5 days a week, 48 working weeks). What's the yearly total?",
+      "answer": 960,
+      "prefix": "$",
+      "calc": "4 * 5 * 48",
+      "explanation": "$4 × 5 × 48 = $960 a year.",
+      "difficulty": 2
+    },
+    {
+      "id": "u1l1-r-3",
+      "concept": "interest-on-interest",
+      "qtype": "truefalse",
+      "prompt": "With compound interest, the dollar amount of interest you earn each year gets bigger over time (if the rate stays the same).",
+      "answer": true,
+      "explanation": "Each year's interest is calculated on a larger balance, so it grows.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l1-r-4",
+      "concept": "compounding-early",
+      "qtype": "truefalse",
+      "prompt": "Starting to save ten years earlier usually matters more than saving a little more each year later.",
+      "answer": true,
+      "explanation": "Extra years give compounding more time to work, which often beats bigger but later contributions.",
+      "difficulty": 2
+    }
+  ]
+}

@@ -1,0 +1,381 @@
+{
+  "id": "1.7",
+  "unit": 1,
+  "title": "Australian bank accounts",
+  "objective": "Compare transaction, savings and offset accounts, bonus-interest conditions, and the Financial Claims Scheme guarantee",
+  "minutes": 6,
+  "sources": [
+    {
+      "name": "APRA: Financial Claims Scheme for banks, building societies and credit unions",
+      "url": "https://www.apra.gov.au/financial-claims-scheme-banks-building-societies-and-credit-unions"
+    },
+    {
+      "name": "ASIC Moneysmart: Savings accounts",
+      "url": "https://moneysmart.gov.au/banking/savings-accounts"
+    },
+    {
+      "name": "ASIC Moneysmart: Offset accounts",
+      "url": "https://moneysmart.gov.au/home-loans/offset-accounts"
+    }
+  ],
+  "screens": [
+    {
+      "kind": "question",
+      "step": "hook",
+      "q": {
+        "id": "u1l7-hook",
+        "concept": "fcs-guarantee",
+        "qtype": "truefalse",
+        "prompt": "True or false: if an Australian bank collapsed, you could lose every dollar in your savings account.",
+        "answer": false,
+        "explanation": "The Government's Financial Claims Scheme protects deposits up to {{fcsLimit}} per person at each authorised Australian bank.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "try",
+      "q": {
+        "id": "u1l7-try-1",
+        "concept": "account-types",
+        "qtype": "mcq",
+        "prompt": "Which account usually pays the **least** interest?",
+        "options": [
+          {
+            "text": "An everyday transaction account"
+          },
+          {
+            "text": "A high-interest savings account",
+            "why": "Savings accounts are designed to pay more, often with conditions."
+          },
+          {
+            "text": "A term deposit",
+            "why": "Term deposits usually pay more in return for locking money away."
+          }
+        ],
+        "answer": 0,
+        "explanation": "Transaction accounts are built for spending, with a debit card and easy access, so they pay little or no interest.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Three accounts, three jobs",
+      "body": "A **transaction account** is for daily spending, with a debit card and little interest. A **savings account** pays more but may have conditions. An [[offset account]] is a transaction account linked to a home loan: its balance reduces the loan balance you're charged interest on.",
+      "visual": {
+        "type": "compare",
+        "items": [
+          {
+            "title": "Transaction",
+            "icon": "CreditCard",
+            "points": [
+              "Daily spending",
+              "Low interest"
+            ]
+          },
+          {
+            "title": "Savings",
+            "icon": "PiggyBank",
+            "points": [
+              "Higher interest",
+              "Often conditions"
+            ]
+          },
+          {
+            "title": "Offset",
+            "icon": "House",
+            "points": [
+              "Linked to a home loan",
+              "Cuts loan interest"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "Bonus interest has conditions",
+      "body": "Many savings accounts pay a low **base rate**, plus a **bonus rate** only in months you meet every condition. Miss one and you get the base rate. Read the conditions, not just the headline.",
+      "visual": {
+        "type": "steps",
+        "lines": [
+          "Example base rate: 0.50% p.a., always",
+          "Bonus: +4.00% p.a. if you deposit $1,000+ and don't withdraw",
+          "Meet both: **4.50%** · Miss one: **0.50%**"
+        ]
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "core",
+      "title": "The government guarantee",
+      "body": "The [[Financial Claims Scheme]] protects deposits up to **{{fcsLimit}} per account holder, per bank**, at banks, building societies and credit unions authorised by APRA. It covers transaction, savings and term deposit accounts and separate offset accounts. APRA aims to pay within {{fcsPayoutDays}}.",
+      "visual": {
+        "type": "stat",
+        "value": "{{fcsLimit}}",
+        "label": "per account holder, per bank"
+      }
+    },
+    {
+      "kind": "teach",
+      "step": "example",
+      "title": "Worked example: Dan's offset",
+      "body": "Dan has a home loan and keeps his savings in the linked offset account. Assume a 6% p.a. loan rate.",
+      "visual": {
+        "type": "steps",
+        "lines": [
+          "Loan $500,000 − offset $30,000 = interest charged on **$470,000**",
+          "Interest saved ≈ $30,000 × 6% = **$1,800 a year**",
+          "Unlike savings interest, that saving isn't taxed as income"
+        ]
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l7-g-1",
+        "concept": "account-types",
+        "qtype": "match",
+        "prompt": "Match each account to its main job.",
+        "pairs": [
+          [
+            "Transaction account",
+            "Paying for daily spending"
+          ],
+          [
+            "Savings account",
+            "Earning interest on money set aside"
+          ],
+          [
+            "Offset account",
+            "Reducing home loan interest"
+          ]
+        ],
+        "hint": "Think about what each account is designed to do best.",
+        "explanation": "Transaction accounts are for spending, savings accounts earn interest, and offsets cut what your loan costs.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l7-g-2",
+        "concept": "bonus-interest",
+        "qtype": "mcq",
+        "prompt": "Kim's account pays the bonus rate if she deposits $1,000+ and makes no withdrawals that month. She deposits $1,200 but withdraws $50 for a gift. What rate does she earn?",
+        "options": [
+          {
+            "text": "Only the base rate"
+          },
+          {
+            "text": "Base plus bonus, since she deposited enough",
+            "why": "She has to meet every condition. One withdrawal loses the bonus."
+          },
+          {
+            "text": "Half the bonus",
+            "why": "Bonus rates are usually all or nothing for the month."
+          }
+        ],
+        "answer": 0,
+        "hint": "Check both conditions, not just one.",
+        "explanation": "The $50 withdrawal broke a condition, so only the base rate applies. Keeping spending money elsewhere helps.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l7-g-3",
+        "concept": "fcs-guarantee",
+        "qtype": "numeric",
+        "prompt": "Grace has $300,000 in savings, all at one Australian bank. How much is **not** covered by the Financial Claims Scheme?",
+        "answer": 50000,
+        "prefix": "$",
+        "calc": "300000 - 250000",
+        "hint": "The limit is {{fcsLimit}} per person, per bank.",
+        "explanation": "$300,000 − {{fcsLimit}} = $50,000 above the limit at that bank.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "guided",
+      "q": {
+        "id": "u1l7-g-4",
+        "concept": "offset-account",
+        "qtype": "tap",
+        "prompt": "Dan wants his savings to cut his home loan interest. Tap the account they should sit in.",
+        "visual": {
+          "type": "ledger",
+          "title": "Dan's accounts",
+          "rows": [
+            {
+              "label": "Everyday account",
+              "amount": 2400
+            },
+            {
+              "label": "Bonus saver",
+              "amount": 5000
+            },
+            {
+              "label": "Offset (linked to home loan)",
+              "amount": 30000
+            }
+          ]
+        },
+        "answer": 2,
+        "explanation": "Money in the offset reduces the loan balance used to calculate interest, so it works hardest there.",
+        "difficulty": 1
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l7-i-1",
+        "concept": "offset-account",
+        "qtype": "numeric",
+        "prompt": "Priya's home loan is $520,000 and her offset holds $25,000. Interest is charged on what balance?",
+        "answer": 495000,
+        "prefix": "$",
+        "calc": "520000 - 25000",
+        "explanation": "$520,000 − $25,000 = $495,000. Every dollar in the offset lowers the balance interest is charged on.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l7-i-2",
+        "concept": "fcs-guarantee",
+        "qtype": "truefalse",
+        "prompt": "Max has $200,000 at one bank and $200,000 at a different, unrelated bank. All $400,000 is within the Financial Claims Scheme limit.",
+        "answer": true,
+        "explanation": "The limit applies per account holder at each bank, so $200,000 at each of two separate banks is all within it.",
+        "difficulty": 3
+      }
+    },
+    {
+      "kind": "question",
+      "step": "independent",
+      "q": {
+        "id": "u1l7-i-3",
+        "concept": "where-to-hold",
+        "qtype": "sort",
+        "prompt": "Where should each pot of money live?",
+        "buckets": [
+          "Transaction",
+          "Savings"
+        ],
+        "items": [
+          {
+            "text": "This fortnight's grocery money",
+            "bucket": 0
+          },
+          {
+            "text": "Emergency fund",
+            "bucket": 1
+          },
+          {
+            "text": "Bills due this week",
+            "bucket": 0
+          },
+          {
+            "text": "House deposit you're building",
+            "bucket": 1
+          }
+        ],
+        "explanation": "Money you'll spend soon sits in transaction; money you're building up sits in savings, where withdrawals don't cost you the bonus.",
+        "difficulty": 2
+      }
+    },
+    {
+      "kind": "apply",
+      "step": "apply",
+      "title": "Check your setup",
+      "body": "Look at your accounts. Is your savings money earning the best rate your bank offers, and do you meet the bonus conditions each month?",
+      "action": "Check your savings account's **bonus conditions** and whether you met them last month."
+    },
+    {
+      "kind": "recap",
+      "step": "recap",
+      "bullets": [
+        "Transaction for spending, savings for interest, offset to cut loan interest.",
+        "Bonus rates need every condition met each month.",
+        "Deposits are guaranteed up to {{fcsLimit}} per person, per bank."
+      ]
+    }
+  ],
+  "reviewBank": [
+    {
+      "id": "u1l7-r-1",
+      "concept": "fcs-guarantee",
+      "qtype": "mcq",
+      "prompt": "The Financial Claims Scheme limit applies…",
+      "options": [
+        {
+          "text": "Per account holder, per bank"
+        },
+        {
+          "text": "Per account",
+          "why": "Several accounts at the same bank share one limit per person."
+        },
+        {
+          "text": "Per household, across all banks",
+          "why": "It's per person at each bank, not per household."
+        }
+      ],
+      "answer": 0,
+      "explanation": "It's {{fcsLimit}} for each account holder at each authorised bank, building society or credit union.",
+      "difficulty": 2
+    },
+    {
+      "id": "u1l7-r-2",
+      "concept": "offset-account",
+      "qtype": "numeric",
+      "prompt": "Loan balance $400,000, offset balance $40,000. On what balance is interest charged?",
+      "answer": 360000,
+      "prefix": "$",
+      "calc": "400000 - 40000",
+      "explanation": "$400,000 − $40,000 = $360,000.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l7-r-3",
+      "concept": "bonus-interest",
+      "qtype": "truefalse",
+      "prompt": "If you miss one bonus condition, most accounts still pay part of the bonus rate.",
+      "answer": false,
+      "explanation": "Bonus rates are usually all or nothing each month: miss a condition and you get the base rate.",
+      "difficulty": 1
+    },
+    {
+      "id": "u1l7-r-4",
+      "concept": "account-types",
+      "qtype": "mcq",
+      "prompt": "Which account is linked to a home loan to reduce its interest?",
+      "options": [
+        {
+          "text": "Offset account"
+        },
+        {
+          "text": "Term deposit",
+          "why": "A term deposit locks money away for a fixed rate; it isn't linked to a loan."
+        },
+        {
+          "text": "Transaction account",
+          "why": "A plain transaction account isn't linked to any loan."
+        }
+      ],
+      "answer": 0,
+      "explanation": "An offset account's balance is subtracted from the loan balance when interest is worked out.",
+      "difficulty": 1
+    }
+  ]
+}
