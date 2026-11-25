@@ -11,3 +11,9 @@ Claude Code loads every folder here automatically when it is started inside this
 | `diagnose` + `verify` | Root-cause fixing, then proof before saying "fixed" | github.com/takleb3rry/claude-global-appbuilding-skills (e234f4e) | MIT |
 
 To update one, copy the newer folder from its source repo over the old one.
+
+## Project skills
+
+| Skill | Use |
+| --- | --- |
+| `build-quality-app` | Build any web or mobile-web app to a shippable standard: design foundation, a visual sweep (`scripts/visual-sweep.mjs`), a data-resilience probe (`scripts/resilience.mjs`), five validation passes, and persona playtests with a scorecard. App-agnostic: copy the folder to `~/.claude/skills/` to use it on every project. |
